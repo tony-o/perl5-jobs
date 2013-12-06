@@ -1,7 +1,0 @@
-<postgres>
-  host = localhost
-  user = tony
-  pass = 
-  db   = jobs 
-</postgres> 
-
