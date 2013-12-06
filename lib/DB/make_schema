@@ -1,0 +1,18 @@
+#!/usr/bin/env perl
+use DBIx::Class::Schema::Loader qw<make_schema_at>;
+
+# quickly generate schema from database
+# also updates schemas to any changes made to database
+
+make_schema_at(
+    'DB::Schema',
+    { 
+      debug => 1,
+      dump_directory => '..',
+    },
+    [ 
+      'dbi:Pg:dbname="jobs"', 
+      'tony', 
+      '',
+    ],
+);
