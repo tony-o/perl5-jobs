@@ -18,7 +18,7 @@ sub start {
         qx<killall plackup>;
         say '{Pulling changes}';
         qx<git pull>;
-        wait 10;
+        sleep 10;
         start();
       }
     };
