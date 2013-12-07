@@ -6,14 +6,14 @@ use EV;
 my $pid;
 defined($pid = fork) or die 'unable to fork: ' . $!;
 
-if ($pid) { #git check
+if ( $pid > 0 ) { #git check
   my $checker = EV::timer 0, 30, sub {
     my $status = qx<git pull>; 
     chomp $status; 
     say "{Status: $status}";
     if ( $status ne 'Already up-to-date.' ) {
       say '{Killing childe}';
-      kill $pid;
+      kill 'KILL', $pid;
       waitpid $pid, 0;
       say '{Pulling changes}';
       qx<git pull>;
@@ -21,7 +21,7 @@ if ($pid) { #git check
     }
   };
   EV::run;
-} else {
+} elsif ( $pid == 0 ) {
   say '{Starting server..}';
   system('./start.sh'); 
 }
