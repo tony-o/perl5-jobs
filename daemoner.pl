@@ -14,7 +14,7 @@ sub start {
       if ( $status ne '' ) {
         say '{Killing childe}';
         kill 'KILL', $pid;
-        waitpid $pid, 0;
+        waitpid -1, 0;
         say '{Pulling changes}';
         qx<git pull>;
         start();
