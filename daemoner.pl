@@ -12,7 +12,7 @@ if ($pid) { #git check
     chomp $status; 
     if ( $status ne 'Already up-to-date.' ) {
       kill $pid;
-      waitpid $pid;
+      waitpid $pid, 0;
       qx<git pull>;
       defined($pid = fork) or die 'unable to fork: ' . $!;
     }
