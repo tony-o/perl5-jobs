@@ -8,7 +8,7 @@ sub start {
   defined($pid = fork) or die 'unable to fork: ' . $!;
   if ( $pid > 0 ) { #git check
     my $checker = EV::timer 0, 30, sub {
-      my $status = qx<git fetch origin>; 
+      my $status = qx{git fetch origin 2>&1}; 
       say "{Status: $status}";
       if ( $status ne '' ) {
         say '{Killing childe}';
