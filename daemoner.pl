@@ -2,7 +2,7 @@
 
 use v5.16; 
 use EV;
-use POSIX ":sys_wait_h";
+use POSIX;
 
 my $pid;
 sub start {
@@ -13,8 +13,8 @@ sub start {
       say "{Status: $status}";
       if ( $status ne '' ) {
         say '{Killing childe}';
-        kill 'SIGINT', $pid;
-        while (waitpid(-1, 0) > 0) { }
+        kill SIGTERM, $pid;
+        while (waitpid(-1, 0) != 0) { }
         say '{Pulling changes}';
         qx<git pull>;
         start();
