@@ -24,7 +24,7 @@ sub start {
   } elsif ( $pid == 0 ) {
     setpgrp($pid, -9);
     say '{Starting server..}';
-    system('./start.sh &'); 
+    system('./start.sh '); 
   }
 }
 start();
