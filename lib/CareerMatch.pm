@@ -1,18 +1,16 @@
 package CareerMatch;
 
 use Mojo::Base qw<Mojolicious>;
-use Mojolicious::Plugin::DefaultHelpers;
+use CareerMatch::Auth;
+use CareerMatch::Plugins;
+use CareerMatch::Routing;
 
 sub startup {
   my $self = shift;
   my $r    = $self->routes;
-  
-  $self->secret("secr3t");
 
-  $r->route('/')->to(
-    controller => 'Main',
-    action     => 'main',
-  );
+  CareerMatch::Plugins->setup($self);  
+  CareerMatch::Routing->setup($self);
 };
 
 1;
