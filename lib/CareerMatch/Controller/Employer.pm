@@ -1,4 +1,4 @@
-package CareerMatch::Controller::Vendor;
+package CareerMatch::Controller::Employer;
 use Mojo::Base qw<Mojolicious::Controller>;
 
 sub dashboard {
@@ -7,7 +7,7 @@ sub dashboard {
   my $user = $self->current_user;
   $self->stash(
     container => {
-      vendors => [$user->uid, $user->domain, $user->username, $user->pass],
+      employers => [$user->uid, $user->domain, $user->username, $user->pass],
     }
   );
 };
@@ -15,7 +15,7 @@ sub dashboard {
 
 sub emptyroute {
   my $self = shift;
-  $self->redirect_to('/vendor/dashboard');
+  $self->redirect_to('/employer/dashboard');
   return 0;
 };
 
