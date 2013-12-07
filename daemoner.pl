@@ -24,9 +24,7 @@ sub start {
   } elsif ( $pid == 0 ) {
     $SIG{INT} = sub { die 'got kill sig'; };
     say '{Starting server..}';
-    system('./start.sh'); 
-    exit;
-    say '{Exit didn\'t work}';
+    system('./start.sh &'); 
   }
 }
 start();
