@@ -2,7 +2,7 @@
 
 use v5.16; 
 use EV;
-use POSIX ":sys_wait_h"
+use POSIX ":sys_wait_h";
 
 my $pid;
 sub start {
