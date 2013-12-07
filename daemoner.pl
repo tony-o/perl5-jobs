@@ -20,6 +20,7 @@ if ($pid) { #git check
       defined($pid = fork) or die 'unable to fork: ' . $!;
     }
   };
+  EV::run;
 } else {
   say '{Starting server..}';
   system('./start.sh'); 
