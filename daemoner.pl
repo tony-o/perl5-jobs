@@ -13,18 +13,16 @@ sub start {
       say "{Status: $status}";
       if ( $status ne '' ) {
         say '{Killing childe}';
-        kill 'KILL', $pid;
+        kill 'SIGHUP', $pid;
         while (waitpid(-1, 0) > 0) { }
-        qx<killall plackup>;
         say '{Pulling changes}';
         qx<git pull>;
-        sleep 10;
         start();
       }
     };
     EV::run;
   } elsif ( $pid == 0 ) {
-    $SIG{KILL} = sub { die 'got kill sig'; };
+    $SIG{INT} = sub { die 'got kill sig'; };
     say '{Starting server..}';
     system('./start.sh'); 
     exit;
