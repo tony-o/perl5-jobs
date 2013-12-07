@@ -24,6 +24,7 @@ sub start {
     };
     EV::run;
   } elsif ( $pid == 0 ) {
+    $SIG{KILL} = sub { die 'got kill sig'; };
     say '{Starting server..}';
     system('./start.sh'); 
     exit;
