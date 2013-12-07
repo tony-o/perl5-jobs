@@ -14,7 +14,7 @@ sub start {
       if ( $status ne '' ) {
         say '{Killing childe}';
         kill SIGTERM, $pid;
-        while (waitpid(-1, 0) != 0) { }
+        while (waitpid($pid, 0) != 0) { }
         say '{Pulling changes}';
         qx<git pull>;
         start();
@@ -22,7 +22,6 @@ sub start {
     };
     EV::run;
   } elsif ( $pid == 0 ) {
-    $SIG{INT} = sub { die 'got kill sig'; };
     say '{Starting server..}';
     system('./start.sh &'); 
   }
