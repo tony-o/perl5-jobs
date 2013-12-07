@@ -13,7 +13,7 @@ sub start {
       say "{Status: $status}";
       if ( $status ne '' ) {
         say '{Killing childe}';
-        kill 'SIGHUP', $pid;
+        kill 'SIGINT', $pid;
         while (waitpid(-1, 0) > 0) { }
         say '{Pulling changes}';
         qx<git pull>;
