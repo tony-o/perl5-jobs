@@ -15,6 +15,7 @@ sub start {
         say '{Killing childe}';
         kill 'KILL', $pid;
         while (waitpid(-1, 0) > 0) { }
+        qx<killall plackup>;
         say '{Pulling changes}';
         qx<git pull>;
         start();
