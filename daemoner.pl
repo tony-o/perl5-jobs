@@ -17,7 +17,7 @@ sub start {
         waitpid $pid, 0;
         say '{Pulling changes}';
         qx<git pull>;
-        start;
+        start();
       }
     };
     EV::run;
@@ -26,4 +26,4 @@ sub start {
     system('./start.sh'); 
   }
 }
-start;
+start();
