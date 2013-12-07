@@ -24,6 +24,8 @@ sub start {
   } elsif ( $pid == 0 ) {
     say '{Starting server..}';
     system('./start.sh'); 
+    exit;
+    say '{Exit didn\'t work}';
   }
 }
 start();
