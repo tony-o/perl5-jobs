@@ -1,12 +1,12 @@
 package CareerMatch::Controller::Main;
 use Mojo::Base qw<Mojolicious::Controller>;
 use DB::PKG;
-
-my $vendors = $DB::PKG::db->resultset('User');
+use CareerMatch::Auth;
 
 sub main {
-  glob $vendors;
   my $self = shift;
+  my $vendors = $DB::PKG::db->resultset('User');
+  my $user = $self->current_user;
   my @vendors = $vendors->all;
   my @vendor_list;
   foreach my $vendor (@vendors) {
@@ -14,13 +14,13 @@ sub main {
   }
   $self->stash(
     container => {
+      uid  => $user->uid,
       data => { vendors => [@vendor_list] },
     }
   );
 };
 
 sub login {
-  glob $vendors;
   my $self = shift;
   $self->logout;
   my $return = $self->authenticate($self->param('username'), $self->param('password')) if $self->param('username') && $self->param('password');
@@ -31,5 +31,35 @@ sub login {
     }
   );
 };
+
+sub register {
+  my $self = shift;
+  #my $return = $self->authenticate($self->param('username'), $self->param('password')) if $self->param('username') && $self->param('password');
+
+  my $data = {
+    u => $self->param('username'),
+    p => $self->param('password'),
+    t => (defined($self->param('isemployer')) && defined($self->param('isjobseeker')) && $self->param('isemployer') eq '1' && $self->param('isjobseeker') eq '1') ? 'JE' : (defined($self->param('isemployer')) && $self->param('isemployer') eq '1') ? 'EM' : 'JS',
+  };
+
+  my $user_exists = &CareerMatch::Auth::check_user($data->{u}); 
+  my $rval;
+  if (!defined($user_exists)) { 
+    $rval = &CareerMatch::Auth::register_user($data);
+    if (defined($rval)) {
+      #successful registration
+      $self->redirect_to('/clients') if $data->{t} eq 'JS' || $data->{t} eq 'JE';
+      $self->redirect_to('/employer') if $data->{t} eq 'EM';
+    }
+  }
+  $self->stash(
+    container => {
+      errors => ['USEREXISTS'],
+      rval   => $rval,
+      data   => $data,
+    }
+  );
+};
+
 
 1;

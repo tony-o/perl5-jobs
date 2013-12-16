@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+% my $stash = $self->stash->{container};
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -11,10 +12,10 @@
     <title>Starter Template for Jobs</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/starter-template.css" rel="stylesheet">
+    <link href="/css/starter-template.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -27,6 +28,33 @@
   </head>
 
   <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-link"></span> career match</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/employer">Employers</a></li>
+            <li><a href="/clients">Clients</a></li>
+            <% if ( defined($stash) && defined($stash->{uid}) && $stash->{uid} > 0 ) { %>
+              <li><a href="/login">Logout</a></li>
+            <% } else { %>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Register</a></li>
+            <% } %>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
 
 %= content
 
@@ -34,7 +62,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
   </body>
 </html>
 

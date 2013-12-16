@@ -16,7 +16,7 @@ sub dashboard {
 
 sub emptyroute {
   my $self = shift;
-  $self->redirect_to('/employer/dashboard');
+  $self->redirect_to('/client/dashboard');
   return 0;
 };
 
