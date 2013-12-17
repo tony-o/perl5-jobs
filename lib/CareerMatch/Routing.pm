@@ -10,6 +10,7 @@ sub setup {
   my $employers = $r->bridge('/employer')->to('Auth#check');
   $employers->route('/')->to('Controller::Employer#emptyroute');
   $employers->route('/dashboard')->to('Controller::Employer#dashboard');
+  $employers->route('/joblist')->to('Controller::Employer#joblist');
 
   #CLIENT ROUTING
   my $clients = $r->bridge('/client')->to('Auth#check');

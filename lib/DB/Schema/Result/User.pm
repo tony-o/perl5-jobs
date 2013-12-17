@@ -55,6 +55,13 @@ __PACKAGE__->table("users");
   is_nullable: 1
   size: 2
 
+=head2 datecreated
+
+  data_type: 'timestamp'
+  default_value: current_timestamp
+  is_nullable: 1
+  original: {default_value => \"now()"}
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -73,6 +80,13 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 0, size => 128 },
   "usertype",
   { data_type => "varchar", default_value => "JS", is_nullable => 1, size => 2 },
+  "datecreated",
+  {
+    data_type     => "timestamp",
+    default_value => \"current_timestamp",
+    is_nullable   => 1,
+    original      => { default_value => \"now()" },
+  },
 );
 
 =head1 PRIMARY KEY
@@ -88,8 +102,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("uid");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-06 09:08:41
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2lCgMEKQs4PPpM5/Ybpp0g
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-17 12:58:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gPlCI+z2QNyWB8hIHyZ/ww
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

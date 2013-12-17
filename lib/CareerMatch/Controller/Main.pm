@@ -10,7 +10,7 @@ sub main {
   my @vendors = $vendors->all;
   my @vendor_list;
   foreach my $vendor (@vendors) {
-    push @vendor_list, "${\$vendor->id} :: ${\$vendor->username}\@${\$vendor->domain}";
+    push @vendor_list, $vendor->datecreated; 
   }
   $self->stash(
     container => {
