@@ -14,8 +14,9 @@ sub main {
   }
   $self->stash(
     container => {
-      uid  => $user->uid,
+      uid  => $user,
       data => { vendors => [@vendor_list] },
+      path => 'home',
     }
   );
 };
@@ -27,7 +28,8 @@ sub login {
   $self->redirect_to($self->session->{'eventually'}) if $return;
   $self->stash(
     container => {
-      user => [$return]
+      user => [$return],
+      path => 'login',
     }
   );
 };
@@ -46,10 +48,10 @@ sub register {
   my $rval;
   if (!defined($user_exists)) { 
     $rval = &CareerMatch::Auth::register_user($data);
-    if (defined($rval)) {
+    if (defined($rval) && $rval > 0) {
       #successful registration
-      $self->redirect_to('/clients') if $data->{t} eq 'JS' || $data->{t} eq 'JE';
       $self->redirect_to('/employer') if $data->{t} eq 'EM';
+      $self->redirect_to('/client') if $data->{t} eq 'JS' || $data->{t} eq 'JE';
     }
   }
   $self->stash(
@@ -57,9 +59,9 @@ sub register {
       errors => ['USEREXISTS'],
       rval   => $rval,
       data   => $data,
+      path   => 'register',
     }
   );
 };
-
 
 1;

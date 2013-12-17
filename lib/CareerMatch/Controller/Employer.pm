@@ -9,6 +9,7 @@ sub dashboard {
     container => {
       uid       => $user->uid,
       employers => [$user->uid, $user->domain, $user->username, $user->pass],
+      path      => 'employer',
     }
   );
 };

@@ -45,6 +45,7 @@ sub register_user {
   my $data    = shift;
   my $users   = $DB::PKG::db->resultset('User');
   my ($email) = Email::Address->parse($data->{u});
+  return -1 if (!defined($email));
   my $user    = $users->new({
     domain   => $email->host,
     username => $data->{u},

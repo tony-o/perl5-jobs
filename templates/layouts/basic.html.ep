@@ -41,14 +41,15 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/employer">Employers</a></li>
-            <li><a href="/clients">Clients</a></li>
+% my $class = $stash->{path} or 'home';
+            <li <% if ($class eq 'home') { %>class="active"<% } %>><a href="/">Home</a></li>
+            <li <% if ($class eq 'employer') { %>class="active"<% } %>><a href="/employer">Employers</a></li>
+            <li <% if ($class eq 'client') { %>class="active"<% } %>><a href="/client">Clients</a></li>
             <% if ( defined($stash) && defined($stash->{uid}) && $stash->{uid} > 0 ) { %>
-              <li><a href="/login">Logout</a></li>
+              <li <% if ($class eq 'login') { %>class="active"<% } %>><a href="/login">Logout</a></li>
             <% } else { %>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/register">Register</a></li>
+              <li <% if ($class eq 'login') { %>class="active"<% } %>><a href="/login">Login</a></li>
+              <li <% if ($class eq 'register') { %>class="active"<% } %>><a href="/register">Register</a></li>
             <% } %>
           </ul>
         </div><!--/.nav-collapse -->

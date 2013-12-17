@@ -1,4 +1,4 @@
-package CareerMatch::Controller::Employer;
+package CareerMatch::Controller::Client;
 use Mojo::Base qw<Mojolicious::Controller>;
 
 sub dashboard {
@@ -9,6 +9,7 @@ sub dashboard {
     container => {
       uid       => $user->uid,
       employers => [$user->uid, $user->domain, $user->username, $user->pass],
+      path      => 'client',
     }
   );
 };

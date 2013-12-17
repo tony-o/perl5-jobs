@@ -27,7 +27,7 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
           <div class="jumbotron">
-            <h1>Employer Dashboard</h1>
+            <h1>Client Dashboard</h1>
             <p>this is the employer dashboard for <b><%= $stash->{employers}->[1] %></b>!</p>
           </div>
           <div class="row">
