@@ -1,0 +1,30 @@
+% my $stash = $self->stash->{container};
+% layout 'basic', stash => $stash;
+
+    <div class="container">
+      <!--<%= 
+        dumper($stash);
+      %>
+!-->
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        %= include 'partials/employermenu';
+ 
+        <div class="col-xs-12 col-sm-9">
+         %foreach my $job (@{$stash->{jobs}}) {
+          <div class="row">
+            <div class="col-md-8">
+              %$job->title
+            </div>
+            <div class="col-md-4">
+              %use Data::Dumper; 
+              %= Dumper($job)
+              %$job->dateposted
+              date posted/who posted
+            </div>
+          </div>
+         %}
+        </div>
+
+    </div> <!-- /container -->
+
