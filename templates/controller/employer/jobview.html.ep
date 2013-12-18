@@ -1,0 +1,23 @@
+% layout 'basic';
+% my $stash = $self->stash->{container};
+
+    <div class="container">
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        %= include 'partials/employermenu', stash => $stash;
+ 
+        <div class="col-xs-12 col-sm-9">
+ 
+          <h3>
+            %= $stash->{job}->title
+          </h3>
+          <h4>
+            %= $stash->{job}->dateposted
+          </h4>
+          <p>
+            %= $stash->{job}->description
+          </p>
+
+        </div>
+      </div>
+    </div> <!-- /container -->
