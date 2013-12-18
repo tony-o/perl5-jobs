@@ -5,8 +5,7 @@
 % push $stash->{scripts}, '/js/tinymce.jobpost.js';
 
     <div class="container">
-    %use Data::Dumper;
-    %= Dumper($stash);
+
       <div class="row row-offcanvas row-offcanvas-right">
 
         %= include 'partials/employermenu', stash => $stash;

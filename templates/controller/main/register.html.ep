@@ -1,7 +1,6 @@
 % layout 'basic';
 % my $stash = $self->stash->{container};
 
-%= dumper($stash)
     <div class="container">
       <form class="form-signin" role="form" method="POST" action="/register">
         <h2 class="form-signin-heading">Please sign in</h2>
