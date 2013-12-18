@@ -2,6 +2,7 @@
           <div class="list-group">
             <a href="/employer/dashboard" class="list-group-item <% if ($stash->{path} eq 'employer'        ) { %>active<% } %>">Dashboard</a>
             <a href="/employer/joblist"   class="list-group-item <% if ($stash->{path} eq 'employer/joblist') { %>active<% } %>">Our Listings</a>
+            <a href="/employer/jobpost"   class="list-group-item <% if ($stash->{path} eq 'employer/jobpost') { %>active<% } %>">Post an Opening</a>
             
             <!--
             <a href="#" class="list-group-item <% if ($stash->{path} eq '') { %>active<% } %>">Link</a>

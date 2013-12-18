@@ -14,13 +14,13 @@
          %foreach my $job (@{$stash->{jobs}}) {
           <div class="row">
             <div class="col-md-8">
-              %$job->title
+              <a href="/employer/jobview/<%= $job->jid %>">
+              %= $job->title
+              </a>
             </div>
             <div class="col-md-4">
               %use Data::Dumper; 
-              %= Dumper($job)
-              %$job->dateposted
-              date posted/who posted
+              %= $job->dateposted
             </div>
           </div>
          %}
