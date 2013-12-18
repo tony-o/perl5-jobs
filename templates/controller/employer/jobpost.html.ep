@@ -1,7 +1,7 @@
 % layout 'basic';
 % my $stash = $self->stash->{container};
 % $stash->{scripts} = [] if !defined($stash->{scripts});
-% push $stash->{scripts}, 'http://tinymce.cachefly.net/4.0/tinymce.min.js';
+% push $stash->{scripts}, '/js/tinymce/tinymce.min.js';
 % push $stash->{scripts}, '/js/tinymce.jobpost.js';
 
     <div class="container">
