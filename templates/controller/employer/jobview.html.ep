@@ -15,7 +15,7 @@
             %= $stash->{job}->dateposted
           </h4>
           <p>
-            %= $stash->{job}->description
+            %== $stash->{job}->description
           </p>
 
         </div>
