@@ -1,30 +1,12 @@
 #!/usr/bin/env perl 
 
 use v5.16; 
-use EV;
-use POSIX;
+use Mojo::Server::Morbo;
 
-my $pid;
-sub start {
-  defined($pid = fork) or die 'unable to fork: ' . $!;
-  if ( $pid > 0 ) { #git check
-    my $checker = EV::timer 0, 30, sub {
-      my $status = qx{git fetch origin 2>&1}; 
-      say "{Status: $status}";
-      if ( $status ne '' ) {
-        say '{Killing childe}';
-        kill -9, $pid;
-        waitpid($pid, 0);
-        say '{Pulling changes}';
-        qx<git pull>;
-        start();
-      }
-    };
-    EV::run;
-  } elsif ( $pid == 0 ) {
-    setpgrp($pid, -9);
-    say '{Starting server..}';
-    system('./start.sh '); 
-  }
-}
-start();
+my $morbo = Mojo::Server::Morbo->new;
+my $watch = $morbo->watch([
+  './templates',
+  './lib',
+]);
+
+$morbo->run('script/app');
