@@ -18,6 +18,8 @@ sub setup {
   my $clients = $r->bridge('/client')->to('Auth#check');
   $clients->route('/')->to('Controller::Client#emptyroute');
   $clients->route('/dashboard')->to('Controller::Client#dashboard');
+  $clients->route('/profile')->to('Controller::Client#profile');
+  $clients->route('/traits')->to('Controller::Client#traits');
 
   #MAIN ROUTES
   $r->route('/login')->to('Controller::Main#login');

@@ -29,3 +29,26 @@ body {
 //  background-color: rgba(86,61,124,.15);
 //  border: 1px solid rgba(86,61,124,.2);
 }
+
+
+@media (min-width: 992px)
+.bs-sidebar.affix-bottom .bs-sidenav, .bs-sidebar.affix .bs-sidenav {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.bs-sidenav {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-shadow: 0 1px 0 #fff;
+  background-color: #f7f5fa;
+  border-radius: 5px;
+}
+
+.nav > li > .nav > li > a {
+  padding: 7px 25px;
+  font-size: .9em;
+}
+

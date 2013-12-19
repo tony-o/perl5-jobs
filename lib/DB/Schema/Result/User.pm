@@ -101,9 +101,71 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("uid");
 
+=head1 RELATIONS
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-17 12:58:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gPlCI+z2QNyWB8hIHyZ/ww
+=head2 educations
+
+Type: has_many
+
+Related object: L<DB::Schema::Result::Education>
+
+=cut
+
+__PACKAGE__->has_many(
+  "educations",
+  "DB::Schema::Result::Education",
+  { "foreign.uid" => "self.uid" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 employers
+
+Type: has_many
+
+Related object: L<DB::Schema::Result::Employer>
+
+=cut
+
+__PACKAGE__->has_many(
+  "employers",
+  "DB::Schema::Result::Employer",
+  { "foreign.uid" => "self.uid" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 personalitytraits
+
+Type: has_many
+
+Related object: L<DB::Schema::Result::Personalitytrait>
+
+=cut
+
+__PACKAGE__->has_many(
+  "personalitytraits",
+  "DB::Schema::Result::Personalitytrait",
+  { "foreign.uid" => "self.uid" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 profile
+
+Type: might_have
+
+Related object: L<DB::Schema::Result::Profile>
+
+=cut
+
+__PACKAGE__->might_have(
+  "profile",
+  "DB::Schema::Result::Profile",
+  { "foreign.uid" => "self.uid" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-18 17:00:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RiFcnJD1kDAE7vao2+SusQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

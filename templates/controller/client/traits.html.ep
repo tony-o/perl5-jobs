@@ -1,0 +1,56 @@
+% layout 'basic';
+% my $stash = $self->stash->{container};
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        %= include 'partials/clientmenu', stash => $stash;
+ 
+        <div class="col-xs-12 col-sm-9">
+  
+          <form method="POST" action="/client/traits"> 
+          <table class="table table-striped">
+            <tr>
+              <th>
+                I see myself as:
+              </th>
+              %foreach my $r (@{$stash->{trs}}) {
+                <th class="text-center">
+                %=$r->response
+                </th>
+              %}
+            </tr>
+            %foreach my $q (@{$stash->{tqs}}) {
+              <tr>
+                <td>
+                  %=$q->question
+                </td>
+                %foreach my $r (@{$stash->{trs}}) {
+                  <td class="text-center">
+                    <input type="radio" name="q<%=$q->id%>" value="<%=$r->id%>" />
+                  </td>
+                %}
+              </tr>
+            %}
+            <tr>
+              <td colspan="<%=+@{$stash->{trs}} + 1%>" class="text-right">
+                <input type="submit" class="btn btn-primary btn-block btn-lg" />
+              </td>
+            </tr>
+        </table>
+        </form>
+ <!--
+          <form class="form-signin" role="form" method="POST" action="/employer/jobpost">
+            <h2 class="form-signin-heading">Create a Job Listing</h2>
+            <input type="text"     name="title" class="form-control" placeholder="Job Title" required autofocus>
+            <h3>Job Description</h3>
+            <textarea class="form-control" name="description"></textarea>
+            <br/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Create Listing</button>
+          </form>
+!-->
+
+        </div>
+      </div>
+    </div> <!-- /container -->
