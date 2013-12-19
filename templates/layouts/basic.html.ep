@@ -41,7 +41,7 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-% my $class = $stash->{path} or 'home';
+% my $class = $stash->{path} || 'home';
             <li <% if ($class eq 'home') { %>class="active"<% } %>><a href="/">Home</a></li>
             <li <% if ($class =~ qr{^employer}) { %>class="active"<% } %>><a href="/employer">Employers</a></li>
             <li <% if ($class eq 'client') { %>class="active"<% } %>><a href="/client">Clients</a></li>
