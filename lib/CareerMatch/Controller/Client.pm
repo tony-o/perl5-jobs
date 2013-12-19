@@ -37,13 +37,23 @@ sub traits {
   my $trs  = $DB::PKG::db->resultset('Personalityresponse');
 
 #do processing here for saving/updating DB
-
   my @q = $tqs->all;
   my @r = $trs->all;
+  my $unanswered = 0;
+  foreach my $q (@q) {
+    ++$unanswered && last if !defined($self->param("q$q->id"));
+  }
+
+  if (!$unanswered) {
+    #save these q's
+
+  }
+
   $self->stash(
     container => {
       uid  => $user->uid,
       path => 'client/traits',
+      a    => $unanswered,
       tqs  => [@q],
       trs  => [@r],
     }

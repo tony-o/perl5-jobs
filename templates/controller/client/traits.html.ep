@@ -8,6 +8,7 @@
         %= include 'partials/clientmenu', stash => $stash;
  
         <div class="col-xs-12 col-sm-9">
+          %=dumper($stash->{a})
   
           <form method="POST" action="/client/traits"> 
           <table class="table table-striped">
