@@ -18,5 +18,6 @@ create table if not exists personalitytraits (
   uid integer references users ( uid ),
   qid integer references personalityquestions ( id ),
   rid integer references personalityresponses ( id ),
-  constraint p_personalitytraits primary key (id)
+  constraint p_personalitytraits primary key (id),
+  constraint p_personalitytraits_uid_qid unique (uid,qid)
 );

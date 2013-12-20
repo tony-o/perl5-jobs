@@ -35,17 +35,38 @@ sub traits {
   my $user = $self->current_user;
   my $tqs  = $DB::PKG::db->resultset('Personalityquestion');
   my $trs  = $DB::PKG::db->resultset('Personalityresponse');
+  my $trr  = $DB::PKG::db->resultset('Personalitytrait');
+
+  my $tanswers = $trr->search({uid => $user->id});
+
+  my @answers;
+  while (my $a = $tanswers->next) {
+    push @answers, {qid => $a->qid->id, rid => $a->rid->id};
+  }
 
 #do processing here for saving/updating DB
   my @q = $tqs->all;
   my @r = $trs->all;
-  my $unanswered = 0;
-  foreach my $q (@q) {
-    ++$unanswered && last if !defined($self->param("q$q->id"));
+  my $answered = 0;
+  if (+@q ne +@answers) {
+    foreach my $qq (@q) {
+      last if !defined($self->param('q'.$qq->id));
+      $answered++;
+    }
   }
-
-  if (!$unanswered) {
+  if ($answered == +@q && !+@answers) {
     #save these q's
+    foreach my $qq (@q) {
+      my ($id) = ($qq->id =~ /(\d+)/);
+      $trr->update_or_create({
+        uid => $user->uid,
+        qid => $id,
+        rid => $self->param("q$id"), 
+      },{
+        key => 'p_personalitytraits_uid_qid', 
+      });
+      push @answers, { qid => $id, rid => $self->param("q$id") };
+    }
 
   }
 
@@ -53,9 +74,10 @@ sub traits {
     container => {
       uid  => $user->uid,
       path => 'client/traits',
-      a    => $unanswered,
+      a    => $answered,
       tqs  => [@q],
       trs  => [@r],
+      trr  => [@answers],
     }
   );
 };
