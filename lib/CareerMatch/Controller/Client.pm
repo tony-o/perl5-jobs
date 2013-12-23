@@ -82,6 +82,71 @@ sub traits {
   );
 };
 
+sub employers {
+  my $self = shift;
+  my $user = $self->current_user;
+  my $emrs = $DB::PKG::db->resultset('Employer');
+  my @stts = $DB::PKG::db->resultset('State')->all;
+  my @jcs  = $DB::PKG::db->resultset('Jobclass')->search(undef, { 
+    order_by => { -asc => [qw<jid>] },    
+  })->all;
+  my $ems  = $emrs->search({uid => $user->uid},{
+    columns  => [qw<eid employer jobtitle city state jobclass startdt enddt>],
+  });
+  my @employers;
+  my @states;
+  my @jobclasses;
+
+  if (defined($self->param('employer'))) {
+    $emrs->create({
+      uid      => $user->uid,
+      employer => $self->param('employer'),
+      jobtitle => $self->param('jobtitle'),
+      city     => $self->param('city'),
+      state    => $self->param('state'),
+      jobclass => $self->param('jobclass'),
+      startdt  => $self->param('startdt'),
+      enddt    => $self->param('enddt'),
+    });
+  }
+
+  while (my $e = $ems->next) {
+    push @employers, {
+      eid      => $e->eid,
+      employer => $e->employer,
+      jobtitle => $e->jobtitle,
+      city     => $e->city,
+      state    => $e->state->name,
+      jobclass => $e->jobclass->name,
+      startdt  => $e->startdt,
+      enddt    => $e->enddt, 
+    };
+  }
+  foreach my $s (@jcs) {
+    push @jobclasses, {
+      jid => $s->jid,
+      name => $s->name,
+      hdr => $s->isheader,
+    };
+  }
+  foreach my $s (@stts) {
+    push @states, {
+      id => $s->id,
+      name => $s->name,
+    };
+  }
+
+  $self->stash(
+    container => {
+      uid  => $user->uid,
+      path => 'client/employers',
+      employers => [@employers],
+      states => [@states],
+      jobclasses => [@jobclasses],
+    }
+  );
+};
+
 sub profile {
   my $self = shift;
   my $user = $self->current_user;

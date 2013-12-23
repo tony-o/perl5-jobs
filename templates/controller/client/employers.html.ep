@@ -1,0 +1,108 @@
+% layout 'basic';
+% my $stash = $self->stash->{container};
+% $stash->{scripts} = [] if !defined($stash->{scripts});
+% push $stash->{scripts}, '/js/custom.js';
+
+    <div class="container">
+
+      <div class="row row-offcanvas row-offcanvas-right">
+
+        %= include 'partials/clientmenu', stash => $stash;
+ 
+        <div class="col-xs-12 col-sm-9">
+          <h3>Previous Employers</h3>
+          <table class="table table-striped">
+            <tr>
+              <th style="width:15%;">
+                Employer
+              </th>
+              <th style="width:15%;">
+                Title
+              </th>
+              <th style="width:25%;">
+                City/State
+              </th>
+              <th style="width:20%;">
+                Classified As
+              </th>
+              <th>
+                Dates Employed
+              </th>
+            </tr>
+            %foreach my $e (@{$stash->{employers}}) {
+              <tr>
+                <td>
+                  %= $e->{employer}
+                </td>
+                <td>
+                  %= $e->{jobtitle}
+                </td>
+                <td>
+                  %= $e->{city} . ', ' . $e->{state}
+                </td>
+                <td>
+                  %= $e->{jobclass}
+                </td>
+                <td>
+                  %= human_date($e->{startdt}) . ' - ' . human_date($e->{enddt})
+                </td>
+              </tr>
+            %}
+        </table>
+        <h3>Add Employer</h3>
+        <form method="POST" action="/jobseeker/employers">
+          <div>
+            <div class="form-group">
+              <label for="employer">Employer Name</label>
+              <input type="text" name="employer" placeholder="Employer" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="jobtitle">Position Title</label>
+              <input type="text" name="jobtitle" placeholder="Job Title" class="form-control" />
+            </div>
+            <label for="city">City / State</label>
+            <input type="hidden" name="state" id="state" />
+            <div class="form-group input-group">
+              <input type="text" name="city" placeholder="City" class="form-control" />
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">State<span class="caret"></span></button>
+                <ul class="dropdown-menu pull-right">
+                  %foreach my $t (@{$stash->{states}}) {
+                    <li><a href="#" __val="<%=$t->{id}%>" onclick="setform('state','<%=$t->{id}%>');"><%=$t->{name}%></a></li>
+                  %}
+                </ul>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="city">Job Class</label>
+              <select class="form-control" name="jobclass" id="jobclass">
+                %my $isingroup = 0;
+                %foreach my $s (@{$stash->{jobclasses}}) {
+                  %if ($s->{hdr}) {
+                    %if ($isingroup) {
+                      </optgroup>
+                    %}
+                    <optgroup label="<%=$s->{name}%>">
+                    %$isingroup = 1;
+                  %} else {
+                  <option value="<%=$s->{jid}%>"><%=$s->{name}%></option>
+                  %}
+                %}
+                </optgroup>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="startdt">Start Date</label>
+              <input type="date" name="startdt" placeholder="Start Date" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="startdt">End Date</label>
+              <input type="date" name="enddt" placeholder="End Date" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
+          </div>
+        </form>
+
+        </div>
+      </div>
+    </div> <!-- /container -->

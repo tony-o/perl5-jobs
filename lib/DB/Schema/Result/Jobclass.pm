@@ -34,7 +34,13 @@ __PACKAGE__->table("jobclasses");
 
   data_type: 'varchar'
   is_nullable: 1
-  size: 40
+  size: 60
+
+=head2 isheader
+
+  data_type: 'boolean'
+  default_value: false
+  is_nullable: 1
 
 =cut
 
@@ -47,7 +53,9 @@ __PACKAGE__->add_columns(
     sequence          => "jobclasses_jid_seq",
   },
   "name",
-  { data_type => "varchar", is_nullable => 1, size => 40 },
+  { data_type => "varchar", is_nullable => 1, size => 60 },
+  "isheader",
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -80,8 +88,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-18 17:00:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Rnqof7rv6uz8Ue1CcP+nLQ
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-23 15:14:40
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1W/WyOZ31Xg2ezuFcXDRHA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
