@@ -44,7 +44,7 @@
 % my $class = $stash->{path} || 'home';
             <li <% if ($class eq 'home') { %>class="active"<% } %>><a href="/">Home</a></li>
             <li <% if ($class =~ qr{^employer}) { %>class="active"<% } %>><a href="/employer">Employers</a></li>
-            <li <% if ($class eq 'client') { %>class="active"<% } %>><a href="/client">Clients</a></li>
+            <li <% if ($class eq 'client') { %>class="active"<% } %>><a href="/jobseekers">Job Seekers</a></li>
             <% if ( defined($stash) && defined($stash->{uid}) && $stash->{uid} > 0 ) { %>
               <li <% if ($class eq 'login') { %>class="active"<% } %>><a href="/login">Logout</a></li>
             <% } else { %>
