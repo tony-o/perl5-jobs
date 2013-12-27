@@ -166,7 +166,7 @@ sub profile {
 
 sub emptyroute {
   my $self = shift;
-  $self->redirect_to('/client/dashboard');
+  $self->redirect_to('/jobseeker/dashboard');
   return 0;
 };
 
