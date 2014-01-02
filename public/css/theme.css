@@ -3,15 +3,15 @@
   src:         url(../fonts/BEBAS.ttf);
 }
 .navbar-inverse .navbar-nav > li > a, .navbar > .container .navbar-brand {
-  line-height: 100px;
-  height : 95px;
-  vertical-align:  bottom;
-  font-size:   1.15em;
-  color:       #FFF;
+  color: #FFF;
 }
-.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-  line-height: 1.5;
-  height:      inherit;
+@media (min-width: 980px) {
+  .navbar-inverse .navbar-nav > li > a, .navbar > .container .navbar-brand {
+    line-height: 100px;
+    height : 95px;
+    vertical-align:  bottom;
+    font-size:   1.15em;
+  }
 }
 .navbar-toggle {
   padding: 29px 10px;
