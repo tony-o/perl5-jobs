@@ -1,27 +1,13 @@
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
           <div class="bs-sidebar hidden-print affix-top">
-            <ul class="nav bs-sidenav">
-              <li>
-                <a href="/jobseeker/dashboard"  class=" <% if ($stash->{path} eq 'client'           ) { %>active<% } %>">Dashboard</a>
-              </li>
-              <li>
-                <a href="/jobseeker/jobmatches" class=" <% if ($stash->{path} eq 'client/jobmatches') { %>active<% } %>">My Job Matches</a>
-              </li>
-              <li>
-                <a href="/jobseeker/profile"    class=" <% if ($stash->{path} eq 'client/profile'   ) { %>active<% } %>">View my Profile</a>
-                <ul class="nav">
-                  <li>
-                    <a href="/jobseeker/traits"    class=" <% if ($stash->{path} eq 'client/traits'   ) { %>active<% } %>">Personality Traits</a>
-                  </li>
-                  <li>
-                    <a href="/jobseeker/employers"    class=" <% if ($stash->{path} eq 'client/employers'   ) { %>active<% } %>">Add/View Employers</a>
-                  </li>
-                  <li>
-                    <a href="/jobseeker/education"    class=" <% if ($stash->{path} eq 'client/education'   ) { %>active<% } %>">Add/View Education</a>
-                  </li>
-                </ul> 
-              </li>
-            </ul>
+            <div class="list-group">
+              <a href="/jobseeker/dashboard"  class="list-group-item  <% if ($stash->{path} eq 'client'           ) { %>active<% } %>">Dashboard</a>
+              <a href="/jobseeker/jobmatches" class="list-group-item  <% if ($stash->{path} eq 'client/jobmatches') { %>active<% } %>">My Job Matches</a>
+              <a href="/jobseeker/profile"    class="list-group-item  <% if ($stash->{path} eq 'client/profile'   ) { %>active<% } %>">View my Profile</a>
+              <a href="/jobseeker/traits"    class="list-group-item  <% if ($stash->{path} eq 'client/traits'   ) { %>active<% } %>">Personality Traits</a>
+              <a href="/jobseeker/employers"    class="list-group-item  <% if ($stash->{path} eq 'client/employers'   ) { %>active<% } %>">Add/View Employers</a>
+              <a href="/jobseeker/education"    class="list-group-item  <% if ($stash->{path} eq 'client/education'   ) { %>active<% } %>">Add/View Education</a>
+            </div>
           </div>
             <!--
             <a href="#" class=" <% if ($stash->{path} eq '') { %>active<% } %>">Link</a>

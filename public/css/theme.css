@@ -2,15 +2,17 @@
   font-family: bebas;
   src:         url(../fonts/BEBAS.ttf);
 }
-
 .navbar-inverse .navbar-nav > li > a, .navbar > .container .navbar-brand {
   line-height: 95px;
+  height : 95px;
+  vertical-align:  bottom;
   font-size:   1.45em;
-  color:       #3F322E;
+  color:       #FFF;
 }
 .navbar-inverse {
-  background: #E76153;
-  color:      #3F322E;
+  background: #3F322E;
+  color:      #FFF;
+  border-bottom: 2px solid #848076;
 }
 body {
   padding-top: 120px;
@@ -22,6 +24,7 @@ body {
 .navbar-brand .hn_logo {
   height:   2em;
   position: relative;
+  left:     -.2em;
 }
 .btn-lg {
   border-radius: 2px;
@@ -32,4 +35,17 @@ body {
 }
 .btn-primary:hover {
   background: #35A3CB;
+}
+.sidebar-offcanvas {
+  margin-top: 0;
+}
+
+a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
+  background:   #1EE4FF;
+  border-color: #1EE4FF;
+  color:        #3F322E;
+}
+.form-control {
+  padding:       24px 12px;
+  border-radius: 0;
 }
