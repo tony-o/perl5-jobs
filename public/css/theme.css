@@ -3,10 +3,10 @@
   src:         url(../fonts/BEBAS.ttf);
 }
 .navbar-inverse .navbar-nav > li > a, .navbar > .container .navbar-brand {
-  line-height: 95px;
+  line-height: 100px;
   height : 95px;
   vertical-align:  bottom;
-  font-size:   1.45em;
+  font-size:   1.15em;
   color:       #FFF;
 }
 .navbar-inverse {
@@ -19,6 +19,7 @@ body {
 }
 .navbar > .container .navbar-brand {
   font-size:   1.9em;
+  margin-top:  -5px;
   font-family: bebas;
 }
 .navbar-brand .hn_logo {
