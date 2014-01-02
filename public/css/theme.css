@@ -1,0 +1,20 @@
+.navbar-inverse .navbar-nav > li > a, .navbar > .container .navbar-brand {
+  line-height: 95px;
+  font-size:   1.45em;
+  color:       #3F322E;
+}
+.navbar-inverse {
+  background: #E76153;
+  color:      #3F322E;
+}
+body {
+  padding-top: 120px;
+}
+.navbar > .container .navbar-brand {
+  font-size: 1.6em;
+}
+.navbar-brand .hn_logo {
+  height:   2em;
+  position: relative;
+  top:      -.6em;
+}

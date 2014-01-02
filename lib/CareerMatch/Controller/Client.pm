@@ -82,6 +82,71 @@ sub traits {
   );
 };
 
+sub education {
+  my $self = shift;
+  my $user = $self->current_user;
+  my $emrs = $DB::PKG::db->resultset('Education');
+  my @stts = $DB::PKG::db->resultset('State')->all;
+  my @dtyp = $DB::PKG::db->resultset('Degreetype')->search(undef, {
+    order_by => { -asc => [qw<did>] },
+  })->all;
+  my $eds  = $emrs->search({uid => $user->uid},{
+    columns  => [qw<eid institution city state degreetype degdt>],
+    order_by => { -asc => [qw<degdt eid>], }
+  });
+  my @education;
+  my @states;
+  my @degreetypes;
+
+  if (defined($self->param('institution'))) {
+    $emrs->create({
+      uid         => $user->uid,
+      institution => $self->param('institution'),
+      degree      => $self->param('jobtitle'),
+      city        => $self->param('city'),
+      state       => $self->param('state'),
+      degreetype  => $self->param('jobclass'),
+      degdt       => $self->param('dtobtained'),
+    });
+  }
+
+  while (my $e = $eds->next) {
+    push @education, {
+      eid         => $e->eid,
+      institution => $e->institution,
+      city        => $e->city,
+      state       => $e->state->name,
+      degreetype  => $e->degreetype->name,
+      degree      => $e->degree,
+      degdt       => $e->degdt,
+    };
+  }
+  foreach my $s (@dtyp) {
+    push @degreetypes, {
+      did => $s->did,
+      name => $s->name,
+    };
+  }
+  foreach my $s (@stts) {
+    push @states, {
+      id => $s->id,
+      name => $s->name,
+    };
+  }
+
+  $self->stash(
+    container => {
+      uid         => $user->uid,
+      path        => 'client/employers',
+      education   => [@education],
+      states      => [@states],
+      degreetypes => [@degreetypes],
+    }
+  );
+};
+
+
+
 sub employers {
   my $self = shift;
   my $user = $self->current_user;
@@ -92,6 +157,7 @@ sub employers {
   })->all;
   my $ems  = $emrs->search({uid => $user->uid},{
     columns  => [qw<eid employer jobtitle city state jobclass startdt enddt>],
+    order_by => { -asc => [qw<startdt>], },
   });
   my @employers;
   my @states;

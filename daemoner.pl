@@ -8,5 +8,4 @@ my $watch = $morbo->watch([
   './templates',
   './lib',
 ]);
-
 $morbo->run('script/app');

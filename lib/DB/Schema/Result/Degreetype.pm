@@ -34,7 +34,7 @@ __PACKAGE__->table("degreetypes");
 
   data_type: 'varchar'
   is_nullable: 1
-  size: 5
+  size: 40
 
 =cut
 
@@ -47,7 +47,7 @@ __PACKAGE__->add_columns(
     sequence          => "degreetypes_did_seq",
   },
   "name",
-  { data_type => "varchar", is_nullable => 1, size => 5 },
+  { data_type => "varchar", is_nullable => 1, size => 40 },
 );
 
 =head1 PRIMARY KEY
@@ -80,8 +80,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-18 17:00:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pW86aDCLVwkoKYsIi3l2fw
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-02 10:52:37
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LMLNj8ch1kuYqIlM06QBPA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

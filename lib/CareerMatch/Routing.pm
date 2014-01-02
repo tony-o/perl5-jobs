@@ -21,6 +21,7 @@ sub setup {
   $clients->route('/profile')->to('Controller::Client#profile');
   $clients->route('/traits')->to('Controller::Client#traits');
   $clients->route('/employers')->to('Controller::Client#employers');
+  $clients->route('/education')->to('Controller::Client#education');
 
   #MAIN ROUTES
   $r->route('/login')->to('Controller::Main#login');

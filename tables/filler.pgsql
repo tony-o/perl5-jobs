@@ -273,3 +273,16 @@ insert into jobclasses (isheader,name) values ('F', 'Mathematical and Statistica
 insert into jobclasses (isheader,name) values ('F', 'New Product R&D');
 insert into jobclasses (isheader,name) values ('F', 'Pharmaceutical Research');
 insert into jobclasses (isheader,name) values ('F', 'Other');
+
+
+insert into degreetypes (name) values ('Professional Certification');
+insert into degreetypes (name) values ('Associate Degree');
+insert into degreetypes (name) values ('Bachelor of Arts');
+insert into degreetypes (name) values ('Bachelor of Science');
+insert into degreetypes (name) values ('Bachelor of Business Administration');
+insert into degreetypes (name) values ('Master of Arts');
+insert into degreetypes (name) values ('Master of Science');
+insert into degreetypes (name) values ('Master of Business Administration');
+insert into degreetypes (name) values ('Doctor of Philosophy');
+insert into degreetypes (name) values ('Doctor of Education');
+insert into degreetypes (name) values ('Juris Doctor');

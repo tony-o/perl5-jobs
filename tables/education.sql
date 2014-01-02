@@ -10,5 +10,6 @@ create table if not exists education (
   phone       varchar(10),
   degreetype  integer references degreetypes ( did ),
   degree      varchar(128),
+  degdt       timestamp default now(),
   constraint p_education primary key (eid)
 );
