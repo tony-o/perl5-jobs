@@ -23,3 +23,13 @@ body {
   height:   2em;
   position: relative;
 }
+.btn-lg {
+  border-radius: 2px;
+}
+.btn-primary {
+  background:   #46B4DC;
+  border-color: rgba(0,0,0,.25);
+}
+.btn-primary:hover {
+  background: #35A3CB;
+}
