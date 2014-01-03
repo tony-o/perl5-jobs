@@ -84,6 +84,7 @@ a.list-group-item:hover {
 }
 div[class^="col-"] > .row {
   margin-left: 0;
+  margin-right: 0;
 }
 .affix { 
   width: 24%; 
