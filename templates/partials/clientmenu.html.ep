@@ -1,5 +1,5 @@
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-          <div class="bs-sidebar hidden-print affix-top">
+          <div class="bs-sidebar hidden-print affix">
             <div class="list-group">
               <a href="/jobseeker/dashboard"  class="list-group-item  <% if ($stash->{path} eq 'client'           ) { %>active<% } %>">Dashboard</a>
               <a href="/jobseeker/jobmatches" class="list-group-item  <% if ($stash->{path} eq 'client/jobmatches') { %>active<% } %>">My Job Matches</a>

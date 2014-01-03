@@ -137,7 +137,7 @@ sub education {
   $self->stash(
     container => {
       uid         => $user->uid,
-      path        => 'client/employers',
+      path        => 'client/education',
       education   => [@education],
       states      => [@states],
       degreetypes => [@degreetypes],
