@@ -10,7 +10,7 @@
         %= include 'partials/clientmenu', stash => $stash;
  
         <div class="col-xs-12 col-sm-9">
-          <h3>Previous Employers</h3>
+          <h3>Education History</h3>
           <table class="table table-striped">
             <tr>
               <th style="width:25%;">
