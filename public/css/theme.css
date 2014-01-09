@@ -61,35 +61,38 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 
 
 /* EXPERIMENTING WITH 100% WIDE */
-.container { 
-  width: 100%; 
-}
-.row > div[class^="col-"] {
-  padding: 0 10px 0 0;
-}
-.list-group > * , .list-group-item:first-child, .list-group-item:last-child { 
-  border:        0;
-  border-radius: 0;
-}
-a.list-group-item {
-  background: inherit;
-  color:      #FFF;
-}
-a.list-group-item:hover {
-  background: rgba(200,200,200,.25);
-  border-right: 10px solid #E76153;
-}
-.affix > .list-group {
-  padding: 0 10px 0 0;
-  height:  100%;
-  background: #0F0F0F;
-}
-div[class^="col-"] > .row {
-  margin-left: 0;
-  margin-right: 0;
-}
-.affix { 
-  width: 24%; 
-  height: 100%;
-  margin-top: -24px;
+
+@media (min-width: 980px) {
+  .container { 
+    width: 100%; 
+  }
+  .row > div[class^="col-"] {
+    padding: 0 10px 0 0;
+  }
+  .list-group > * , .list-group-item:first-child, .list-group-item:last-child { 
+    border:        0;
+    border-radius: 0;
+  }
+  a.list-group-item {
+    background: inherit;
+    color:      #FFF;
+  }
+  a.list-group-item:hover {
+    background: rgba(200,200,200,.25);
+    border-right: 10px solid #E76153;
+  }
+  .affix > .list-group {
+    padding: 0 10px 0 0;
+    height:  100%;
+    background: #0F0F0F;
+  }
+  div[class^="col-"] > .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .affix { 
+    width: 24%; 
+    height: 100%;
+    margin-top: -24px;
+  }
 }

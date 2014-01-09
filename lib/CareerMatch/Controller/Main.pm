@@ -51,7 +51,7 @@ sub register {
     if (defined($rval) && $rval > 0) {
       #successful registration
       $self->redirect_to('/employer') if $data->{t} eq 'EM';
-      $self->redirect_to('/client') if $data->{t} eq 'JS' || $data->{t} eq 'JE';
+      $self->redirect_to('/jobseeker') if $data->{t} eq 'JS' || $data->{t} eq 'JE';
     }
   }
   $self->stash(

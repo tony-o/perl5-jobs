@@ -77,7 +77,11 @@ __PACKAGE__->add_columns(
   "username",
   { data_type => "varchar", is_nullable => 0, size => 128 },
   "pass",
-  { data_type => "varchar", is_nullable => 0, size => 128 },
+  { 
+    "data_type" => "varchar",
+    "is_nullable" => 0,
+    "size" => 128,
+  },
   "usertype",
   { data_type => "varchar", default_value => "JS", is_nullable => 1, size => 2 },
   "datecreated",
@@ -167,6 +171,18 @@ __PACKAGE__->might_have(
 # Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-18 17:00:53
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RiFcnJD1kDAE7vao2+SusQ
 
-
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
+
+__PACKAGE__->add_columns(
+  "pass", {
+    "passphrase"       => 'rfc2307',
+    "passphrase_class" => 'SaltedDigest',
+      "passphrase_args"  => {
+      "algorithm"   => 'SHA-1',
+      "salt_random" => 20.
+    },
+    "passphrase_check_method" => 'check_password',
+  },
+);
+
 1;
