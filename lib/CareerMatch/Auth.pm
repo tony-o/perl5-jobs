@@ -35,7 +35,7 @@ sub validate_user {
 
 sub chk_pass {
   my $pass = shift;
-  return sha256_base64($pass);
+  return sha256_base64($pass . 'P3LgjMxsqGpA0nn/GKkzHVG/jMsb4y+DOwv22OPEmTc');
 }
 
 sub check_user {
