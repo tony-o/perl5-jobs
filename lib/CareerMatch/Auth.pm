@@ -2,7 +2,7 @@ package CareerMatch::Auth;
 use Mojo::Base qw<Mojolicious::Controller>;
 use Email::Address;
 use DB::PKG;
-use Digest::SHA qw{sha256_base64};
+use Digest::SHA qw{sha256_hex};
 
 sub check {
   my ($self) = @_;
@@ -24,24 +24,25 @@ sub load_user {
 
 sub validate_user {
   my ($self, $user, $pass) = @_;
-  $pass = chk_pass($pass);
   my $users = $DB::PKG::db->resultset('User');
-  my $ss    = $users->search({username => $user, pass => $pass}, { columns => qw<uid> });
+  my $ss    = $users->search({username => $user,}, { columns => [qw<uid pass>] });
   while (my $s = $ss->next) {
-    return $s->uid;
+    my ($dpass, $salt) = split '\|', $s->pass;
+    return $s->uid if chk_pass("$pass$salt") eq "$dpass";
   }
   return undef;
 };
 
 sub chk_pass {
   my $pass = shift;
-  return sha256_base64($pass . 'P3LgjMxsqGpA0nn/GKkzHVG/jMsb4y+DOwv22OPEmTc');
+  my $app  = 'P3LgjMxsqGpA0nn/GKkzHVG/jMsb4y+DOwv22OPEmTc';
+  return sha256_hex("$app$pass");
 }
 
 sub check_user {
   my $user  = shift;
   my $users = $DB::PKG::db->resultset('User');
-  my $ss    = $users->search({username => $user}, { columns => qw<uid> });
+  my $ss    = $users->search({username => $user}, { columns => [qw<uid>] });
   while (my $s = $ss->next) {
     return $s->uid;
   }
@@ -53,7 +54,8 @@ sub register_user {
   my $users   = $DB::PKG::db->resultset('User');
   my ($email) = Email::Address->parse($data->{u});
   return -1 if (!defined($email));
-  $data->{p} = chk_pass($data->{p});
+  my $usalt = sha256_hex(time);
+  $data->{p} = chk_pass($data->{p} . $usalt) . "|$usalt";
   my $user    = $users->new({
     domain   => $email->host,
     username => $data->{u},
