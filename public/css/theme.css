@@ -96,3 +96,8 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
     margin-top: -24px;
   }
 }
+
+svg { 
+  width: 100%;
+  height: 100%;
+}

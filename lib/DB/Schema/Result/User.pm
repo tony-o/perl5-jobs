@@ -80,7 +80,7 @@ __PACKAGE__->add_columns(
   { 
     "data_type" => "varchar",
     "is_nullable" => 0,
-    "size" => 128,
+    "size" => 130,
   },
   "usertype",
   { data_type => "varchar", default_value => "JS", is_nullable => 1, size => 2 },
