@@ -11,7 +11,7 @@ make_schema_at(
       dump_directory => '..',
     },
     [ 
-      'dbi:Pg:dbname="jobs"', 
+      'dbi:Pg:dbname="jobs";host="localhost"', 
       'tony', 
       '',
     ],

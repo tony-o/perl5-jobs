@@ -28,25 +28,25 @@ __PACKAGE__->table("users");
   data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
-  sequence: 'vendors_id_seq'
+  sequence: 'users_uid_seq'
 
 =head2 domain
 
   data_type: 'varchar'
-  is_nullable: 0
+  is_nullable: 1
   size: 128
 
 =head2 username
 
   data_type: 'varchar'
-  is_nullable: 0
+  is_nullable: 1
   size: 128
 
 =head2 pass
 
   data_type: 'varchar'
-  is_nullable: 0
-  size: 128
+  is_nullable: 1
+  size: 130
 
 =head2 usertype
 
@@ -70,18 +70,14 @@ __PACKAGE__->add_columns(
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
-    sequence          => "vendors_id_seq",
+    sequence          => "users_uid_seq",
   },
   "domain",
-  { data_type => "varchar", is_nullable => 0, size => 128 },
+  { data_type => "varchar", is_nullable => 1, size => 128 },
   "username",
-  { data_type => "varchar", is_nullable => 0, size => 128 },
+  { data_type => "varchar", is_nullable => 1, size => 128 },
   "pass",
-  { 
-    "data_type" => "varchar",
-    "is_nullable" => 0,
-    "size" => 130,
-  },
+  { data_type => "varchar", is_nullable => 1, size => 130 },
   "usertype",
   { data_type => "varchar", default_value => "JS", is_nullable => 1, size => 2 },
   "datecreated",
@@ -137,6 +133,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 jobmatches
+
+Type: has_many
+
+Related object: L<DB::Schema::Result::Jobmatch>
+
+=cut
+
+__PACKAGE__->has_many(
+  "jobmatches",
+  "DB::Schema::Result::Jobmatch",
+  { "foreign.uid" => "self.uid" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 personalitytraits
 
 Type: has_many
@@ -167,22 +178,25 @@ __PACKAGE__->might_have(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 trait_results
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-18 17:00:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RiFcnJD1kDAE7vao2+SusQ
+Type: has_many
 
-# You can replace this text with custom code or comments, and it will be preserved on regeneration
+Related object: L<DB::Schema::Result::TraitResult>
 
-__PACKAGE__->add_columns(
-  "pass", {
-    "passphrase"       => 'rfc2307',
-    "passphrase_class" => 'SaltedDigest',
-      "passphrase_args"  => {
-      "algorithm"   => 'SHA-1',
-      "salt_random" => 20.
-    },
-    "passphrase_check_method" => 'check_password',
-  },
+=cut
+
+__PACKAGE__->has_many(
+  "trait_results",
+  "DB::Schema::Result::TraitResult",
+  { "foreign.uid" => "self.uid" },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
+
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-13 14:09:03
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Fj64qGkRRjt15F8IqmK6IQ
+
+
+# You can replace this text with custom code or comments, and it will be preserved on regeneration
 1;

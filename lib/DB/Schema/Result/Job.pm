@@ -79,9 +79,53 @@ __PACKAGE__->add_columns(
   },
 );
 
+=head1 PRIMARY KEY
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-17 12:58:22
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tAUReSSN5g0bmFFnkvqhpQ
+=over 4
+
+=item * L</jid>
+
+=back
+
+=cut
+
+__PACKAGE__->set_primary_key("jid");
+
+=head1 RELATIONS
+
+=head2 job_reqs
+
+Type: has_many
+
+Related object: L<DB::Schema::Result::JobReq>
+
+=cut
+
+__PACKAGE__->has_many(
+  "job_reqs",
+  "DB::Schema::Result::JobReq",
+  { "foreign.jobid" => "self.jid" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 jobmatches
+
+Type: has_many
+
+Related object: L<DB::Schema::Result::Jobmatch>
+
+=cut
+
+__PACKAGE__->has_many(
+  "jobmatches",
+  "DB::Schema::Result::Jobmatch",
+  { "foreign.jid" => "self.jid" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-13 14:09:03
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nhEHZU89bKD/2CCLorihwQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

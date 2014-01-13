@@ -18,6 +18,17 @@
             %== $stash->{job}->description
           </p>
 
+          <table width="100%">
+            <tr><th>record id</th><th>job id</th><th>username</th><th>score (lower = better)</th></tr>
+            %for my $m (@{$stash->{matches}}) {
+              <tr>
+                <td><%= $m->id %></td>
+                <td><%= $m->jid->jid %></td>
+                <td><%= $m->uid->username %></td>
+                <td><%= $m->fval %></td>
+              </tr>
+            %}
+          </table>
         </div>
       </div>
     </div> <!-- /container -->

@@ -6,4 +6,5 @@ psql -d jobs <profiles.sql
 psql -d jobs <education.sql
 psql -d jobs <employers.sql
 psql -d jobs <personality.pgsql
+psql -d jobs <jobs.pgsql
 #psql -d jobs <filler.pgsql
