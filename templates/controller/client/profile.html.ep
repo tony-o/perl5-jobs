@@ -1,15 +1,12 @@
 % my $stash = $self->stash->{container};
 % layout 'basic', stash => $stash;
 
-    <div class="container">
-      <!--<%= 
-        dumper($stash);
-      %>!-->
-
-  <div class="row row-offcanvas row-offcanvas-right">
- 
-%= include 'partials/clientmenu', stash => $stash;
-        <div class="col-xs-12 col-sm-9">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        %= include 'partials/clientmenu', stash => $stash;
+      </div>
+      <div class="col-md-9">
           <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
@@ -17,11 +14,7 @@
             <h1>Complete your profile!</h1>
             <p>Your profile is only <b><%= $stash->{perc} %>%</b> complete!</p>
           </div>
-
-
-
-
-
-     </div><!--/row-->
-    </div> <!-- /container -->
+      </div>
+    </div>
+  </div>
 

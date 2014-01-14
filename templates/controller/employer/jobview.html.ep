@@ -1,13 +1,12 @@
 % layout 'basic';
 % my $stash = $self->stash->{container};
 
-    <div class="container">
-      <div class="row row-offcanvas row-offcanvas-right">
-
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
         %= include 'partials/employermenu', stash => $stash;
- 
-        <div class="col-xs-12 col-sm-9">
- 
+      </div>
+      <div class="col-md-9">
           <h3>
             %= $stash->{job}->title
           </h3>
@@ -29,6 +28,6 @@
               </tr>
             %}
           </table>
-        </div>
       </div>
-    </div> <!-- /container -->
+    </div>
+  </div> <!-- /container -->

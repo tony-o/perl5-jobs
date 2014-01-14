@@ -1,16 +1,12 @@
 % my $stash = $self->stash->{container};
 % layout 'basic', stash => $stash;
 
-    <div class="container">
-      <!--<%= 
-        dumper($stash);
-      %>
-!-->
-      <div class="row row-offcanvas row-offcanvas-right">
-
-        %= include 'partials/employermenu';
- 
-        <div class="col-xs-12 col-sm-9">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        %= include 'partials/employermenu', stash => $stash;
+      </div>
+      <div class="col-md-9">
          %foreach my $job (@{$stash->{jobs}}) {
           <div class="row">
             <div class="col-md-8">
@@ -25,6 +21,7 @@
           </div>
          %}
         </div>
-
-    </div> <!-- /container -->
+      </div>
+    </div>
+  </div> <!-- /container -->
 
