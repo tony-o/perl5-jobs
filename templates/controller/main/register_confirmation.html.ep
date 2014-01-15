@@ -1,0 +1,16 @@
+% my $stash = $self->stash->{container};
+% layout 'basic', stash => $stash;
+
+    <meta http-equiv="refresh" content="5; url=/login">
+    <div class="container">
+
+      <div class="starter-template">
+        <div class="alert alert-success">
+          <h1>Registration successful!</h1>
+          <h3>You'll be redirected to the login screen to use your new username and password in 5 seconds</h3>
+        </div>
+      </div>
+
+    </div><!-- /.container -->
+
+

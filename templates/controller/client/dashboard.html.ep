@@ -14,8 +14,8 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
           <div class="jumbotron">
-            <h1>Client Dashboard</h1>
-            <p>this is the employer dashboard for <b><%= $stash->{employers}->[1] %></b>!</p>
+            <h1>Job Seeker's Dashboard</h1>
+            <p>this is the job seeker dashboard for <b><%= $stash->{employers}->[1] %></b>!</p>
           </div>
           <div class="row">
             <div class="col-8 col-lg-8">

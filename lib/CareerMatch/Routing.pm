@@ -26,6 +26,7 @@ sub setup {
   #MAIN ROUTES
   $r->route('/login')->to('Controller::Main#login');
   $r->route('/register')->to('Controller::Main#register');
+  $r->route('/register_confirmation')->to('Controller::Main#register_confirmation');
   $r->route('/')->to('Controller::Main#main');
 };
 

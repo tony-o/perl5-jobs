@@ -23,11 +23,15 @@ sub main {
 
 sub login {
   my $self = shift;
+  my @errors;
   $self->logout;
   my $return = $self->authenticate($self->param('username'), $self->param('password')) if $self->param('username') && $self->param('password');
+  $self->redirect_to('/') if $return && $self->session->{'eventually'} eq '/login';
   $self->redirect_to($self->session->{'eventually'}) if $return;
+  push @errors, 'INVALIDUSERPASS' if defined($self->param('username'));
   $self->stash(
     container => {
+      errors => [@errors],
       user => [$return],
       path => 'login',
     }
@@ -36,6 +40,7 @@ sub login {
 
 sub register {
   my $self = shift;
+  my @errors;
   #my $return = $self->authenticate($self->param('username'), $self->param('password')) if $self->param('username') && $self->param('password');
 
   my $data = {
@@ -50,13 +55,15 @@ sub register {
     $rval = &CareerMatch::Auth::register_user($data);
     if (defined($rval) && $rval > 0) {
       #successful registration
-      $self->redirect_to('/employer') if $data->{t} eq 'EM';
-      $self->redirect_to('/jobseeker') if $data->{t} eq 'JS' || $data->{t} eq 'JE';
+      #$self->redirect_to('/employer') if $data->{t} eq 'EM';
+      #$self->redirect_to('/jobseeker') if $data->{t} eq 'JS' || $data->{t} eq 'JE';
+      $self->redirect_to('/register_confirmation');
     }
   }
+  push @errors, 'USEREXISTS' if defined($self->param('username'));
   $self->stash(
     container => {
-      errors => ['USEREXISTS'],
+      errors => [@errors],
       rval   => $rval,
       data   => $data,
       path   => 'register',
