@@ -1,74 +1,5 @@
 /* put default values into tables , DO NOT USE IN PRODUCTION */
 
-/* default personality responses */
-insert into personalityresponses (response, weight) values ('Disagree Strongly', '1');
-insert into personalityresponses (response, weight) values ('Disagree Moderately', '2');
-insert into personalityresponses (response, weight) values ('Disagree a Little', '3');
-insert into personalityresponses (response, weight) values ('Neither Agree nor Disagree', '4');
-insert into personalityresponses (response, weight) values ('Agree a Little', '5');
-insert into personalityresponses (response, weight) values ('Agree Moderately', '6');
-insert into personalityresponses (response, weight) values ('Agree Strongly', '7');
-
-/* default personality questions */
-insert into personalityquestions (weight, question, testname) values (1, 'It is OK to break the law as long as nobody knows about it', 'personality');
-insert into personalityquestions (weight, question, testname) values (2, 'I believe stealing is wrong', 'personality');
-insert into personalityquestions (weight, question, testname) values (3, 'I have stolen small amounts of money in my last job', 'personality');
-insert into personalityquestions (weight, question, testname) values (4, 'I am trusted to keep secrets', 'personality');
-insert into personalityquestions (weight, question, testname) values (5, 'If I were sent an extra item with an order by mistake, I would  send it back.', 'personality');
-insert into personalityquestions (weight, question, testname) values (6, 'I believe that honesty is the basis for trust', 'personality');
-insert into personalityquestions (weight, question, testname) values (7, 'I keep my promises', 'personality');
-insert into personalityquestions (weight, question, testname) values (8, 'I am true to my own values', 'personality');
-insert into personalityquestions (weight, question, testname) values (9, 'I would lie to get myself out of trouble', 'personality');
-insert into personalityquestions (weight, question, testname) values (10, 'I am hard to understand', 'personality');
-insert into personalityquestions (weight, question, testname) values (11, 'I feel like an imposter', 'personality');
-insert into personalityquestions (weight, question, testname) values (12, 'I like to eggagerate my troubles', 'personality');
-insert into personalityquestions (weight, question, testname) values (13, 'I always behave in a way that is socially appropriate.', 'personality');
-insert into personalityquestions (weight, question, testname) values (14, 'I have never hurt anyone's feelings.', 'personality');
-insert into personalityquestions (weight, question, testname) values (15, 'I read the  newspapers every single day.', 'personality');
-insert into personalityquestions (weight, question, testname) values (16, 'I have never been late to a work meeting.', 'personality');
-insert into personalityquestions (weight, question, testname) values (17, 'I have never thought about taking money at work when I had the chance.', 'personality');
-insert into personalityquestions (weight, question, testname) values (18, 'I am the life of the party', 'personality');
-insert into personalityquestions (weight, question, testname) values (19, 'I don't talk a lot', 'personality');
-insert into personalityquestions (weight, question, testname) values (20, 'I keep in the background', 'personality');
-insert into personalityquestions (weight, question, testname) values (21, 'I talk to a lot of different people at parties', 'personality');
-insert into personalityquestions (weight, question, testname) values (22, 'I feel comfortable around people', 'personality');
-insert into personalityquestions (weight, question, testname) values (23, 'I make friends easily', 'personality');
-insert into personalityquestions (weight, question, testname) values (24, 'I am skilled at handling social situations', 'personality');
-insert into personalityquestions (weight, question, testname) values (25, 'I am hard to get to know', 'personality');
-insert into personalityquestions (weight, question, testname) values (26, 'I find it difficult to appropach others.', 'personality');
-insert into personalityquestions (weight, question, testname) values (27, 'I have frequent mood swings', 'personality');
-insert into personalityquestions (weight, question, testname) values (28, 'I am relaxed most of the time', 'personality');
-insert into personalityquestions (weight, question, testname) values (29, 'I get upset easily', 'personality');
-insert into personalityquestions (weight, question, testname) values (30, 'I seldom feel blue', 'personality');
-insert into personalityquestions (weight, question, testname) values (31, 'I am not easily bothered by things', 'personality');
-insert into personalityquestions (weight, question, testname) values (32, 'I panic easily', 'personality');
-insert into personalityquestions (weight, question, testname) values (33, 'I feel threatened easily', 'personality');
-insert into personalityquestions (weight, question, testname) values (34, 'I fear for the worst', 'personality');
-insert into personalityquestions (weight, question, testname) values (35, 'I rarely get irritated', 'personality');
-insert into personalityquestions (weight, question, testname) values (36, 'I sympathize with others\' feelings.', 'personality');
-insert into personalityquestions (weight, question, testname) values (37, 'I feel others\' emotions', 'personality');
-insert into personalityquestions (weight, question, testname) values (38, 'I am not really interested in others', 'personality');
-insert into personalityquestions (weight, question, testname) values (39, 'I am not interested in other people\'s problems', 'personality');
-insert into personalityquestions (weight, question, testname) values (40, 'I insult people', 'personality');
-insert into personalityquestions (weight, question, testname) values (41, 'I feel little concern for others.', 'personality');
-insert into personalityquestions (weight, question, testname) values (42, 'I make people feel at ease.', 'personality');
-insert into personalityquestions (weight, question, testname) values (43, 'I inquire about others\' well-being', 'personality');
-insert into personalityquestions (weight, question, testname) values (44, 'I get chores done right away.', 'personality');
-insert into personalityquestions (weight, question, testname) values (45, 'I often forget to put things back in their proper place', 'personality');
-insert into personalityquestions (weight, question, testname) values (46, 'I like order', 'personality');
-insert into personalityquestions (weight, question, testname) values (47, 'I make a mess of things', 'personality');
-insert into personalityquestions (weight, question, testname) values (48, 'I am always prepared', 'personality');
-insert into personalityquestions (weight, question, testname) values (49, 'I am exacting in my work', 'personality');
-insert into personalityquestions (weight, question, testname) values (50, 'Find it difficult to get down to work', 'personality');
-insert into personalityquestions (weight, question, testname) values (51, 'I neglect my duties.', 'personality');
-insert into personalityquestions (weight, question, testname) values (52, 'I have a vivid imagination', 'personality');
-insert into personalityquestions (weight, question, testname) values (53, 'I am not interested in abstract ideas', 'personality');
-insert into personalityquestions (weight, question, testname) values (54, 'I have difficulty understanding abstract ideas', 'personality');
-insert into personalityquestions (weight, question, testname) values (55, 'I do not have a good imagination', 'personality');
-insert into personalityquestions (weight, question, testname) values (56, 'I enjoy hearing new ideas', 'personality');
-insert into personalityquestions (weight, question, testname) values (57, 'I can carry the conversation to a higher level', 'personality');
-insert into personalityquestions (weight, question, testname) values (58, 'I avoid philosophical discussions', 'personality');
-
 /* default states */
 insert into states (name) values ('Alabama');
 insert into states (name) values ('Alaska');
@@ -333,3 +264,251 @@ insert into degreetypes (name) values ('Master of Business Administration');
 insert into degreetypes (name) values ('Doctor of Philosophy');
 insert into degreetypes (name) values ('Doctor of Education');
 insert into degreetypes (name) values ('Juris Doctor');
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: personalityquestions; Type: TABLE; Schema: public; Owner: tony; Tablespace: 
+--
+
+CREATE TABLE personalityquestions (
+    id integer NOT NULL,
+    question character varying(128),
+    weight integer,
+    testname character varying(20),
+    flags character varying(20),
+    set integer
+);
+
+
+ALTER TABLE public.personalityquestions OWNER TO tony;
+
+--
+-- Name: personalityquestions_id_seq; Type: SEQUENCE; Schema: public; Owner: tony
+--
+
+CREATE SEQUENCE personalityquestions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.personalityquestions_id_seq OWNER TO tony;
+
+--
+-- Name: personalityquestions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tony
+--
+
+ALTER SEQUENCE personalityquestions_id_seq OWNED BY personalityquestions.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: tony
+--
+
+ALTER TABLE ONLY personalityquestions ALTER COLUMN id SET DEFAULT nextval('personalityquestions_id_seq'::regclass);
+
+
+--
+-- Data for Name: personalityquestions; Type: TABLE DATA; Schema: public; Owner: tony
+--
+
+COPY personalityquestions (id, question, weight, testname, flags, set) FROM stdin;
+238	It is OK to break the law as long as nobody knows about it	1	personality	\N	2
+239	I believe stealing is wrong	2	personality	\N	1
+240	I have stolen small amounts of money in my last job	3	personality	\N	2
+241	I am trusted to keep secrets	4	personality	\N	1
+242	If I were sent an extra item with an order by mistake, I would  send it back.	5	personality	\N	1
+243	I believe that honesty is the basis for trust	6	personality	\N	1
+244	I keep my promises	7	personality	\N	1
+245	I am true to my own values	8	personality	\N	1
+246	I would lie to get myself out of trouble	9	personality	\N	2
+247	I am hard to understand	10	personality	\N	2
+248	I feel like an imposter	11	personality	\N	2
+250	I always behave in a way that is socially appropriate.	13	personality	\N	1
+251	I have never hurt anyone's feelings.	14	personality	\N	1
+252	I read the  newspapers every single day.	15	personality	\N	1
+253	I have never been late to a work meeting.	16	personality	\N	1
+254	I have never thought about taking money at work when I had the chance.	17	personality	\N	1
+255	I am the life of the party	18	personality	\N	1
+256	I don't talk a lot	19	personality	\N	2
+257	I keep in the background	20	personality	\N	2
+258	I talk to a lot of different people at parties	21	personality	\N	1
+259	I feel comfortable around people	22	personality	\N	1
+260	I make friends easily	23	personality	\N	1
+261	I am skilled at handling social situations	24	personality	\N	1
+262	I am hard to get to know	25	personality	\N	2
+263	I find it difficult to appropach others.	26	personality	\N	2
+264	I have frequent mood swings	27	personality	\N	1
+265	I am relaxed most of the time	28	personality	\N	2
+266	I get upset easily	29	personality	\N	1
+267	I seldom feel blue	30	personality	\N	2
+268	I am not easily bothered by things	31	personality	\N	2
+269	I panic easily	32	personality	\N	1
+270	I feel threatened easily	33	personality	\N	1
+271	I fear for the worst	34	personality	\N	1
+272	I rarely get irritated	35	personality	\N	2
+273	I sympathize with others' feelings.	36	personality	\N	1
+274	I feel others' emotions	37	personality	\N	1
+275	I am not really interested in others	38	personality	\N	2
+276	I am not interested in other people's problems	39	personality	\N	2
+277	I insult people	40	personality	\N	2
+278	I feel little concern for others.	41	personality	\N	2
+279	I make people feel at ease.	42	personality	\N	1
+280	I inquire about others' well-being	43	personality	\N	1
+281	I get chores done right away.	44	personality	\N	1
+282	I often forget to put things back in their proper place	45	personality	\N	2
+283	I like order	46	personality	\N	1
+284	I make a mess of things	47	personality	\N	2
+285	I am always prepared	48	personality	\N	1
+286	I am exacting in my work	49	personality	\N	1
+287	Find it difficult to get down to work	50	personality	\N	2
+288	I neglect my duties.	51	personality	\N	2
+289	I have a vivid imagination	52	personality	\N	1
+290	I am not interested in abstract ideas	53	personality	\N	2
+291	I have difficulty understanding abstract ideas	54	personality	\N	1
+292	I do not have a good imagination	55	personality	\N	2
+293	I enjoy hearing new ideas	56	personality	\N	1
+294	I can carry the conversation to a higher level	57	personality	\N	1
+295	I avoid philosophical discussions	58	personality	\N	2
+249	I like to exaggerate my troubles	12	personality	\N	2
+\.
+
+
+--
+-- Name: personalityquestions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tony
+--
+
+SELECT pg_catalog.setval('personalityquestions_id_seq', 295, true);
+
+
+--
+-- Name: p_personalityquestions; Type: CONSTRAINT; Schema: public; Owner: tony; Tablespace: 
+--
+
+ALTER TABLE ONLY personalityquestions
+    ADD CONSTRAINT p_personalityquestions PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: personalityresponses; Type: TABLE; Schema: public; Owner: tony; Tablespace: 
+--
+
+CREATE TABLE personalityresponses (
+    id integer NOT NULL,
+    response character varying(128),
+    weight integer,
+    testname character varying(20),
+    set integer,
+    fval double precision
+);
+
+
+ALTER TABLE public.personalityresponses OWNER TO tony;
+
+--
+-- Name: personalityresponses_id_seq; Type: SEQUENCE; Schema: public; Owner: tony
+--
+
+CREATE SEQUENCE personalityresponses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.personalityresponses_id_seq OWNER TO tony;
+
+--
+-- Name: personalityresponses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tony
+--
+
+ALTER SEQUENCE personalityresponses_id_seq OWNED BY personalityresponses.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: tony
+--
+
+ALTER TABLE ONLY personalityresponses ALTER COLUMN id SET DEFAULT nextval('personalityresponses_id_seq'::regclass);
+
+
+--
+-- Data for Name: personalityresponses; Type: TABLE DATA; Schema: public; Owner: tony
+--
+
+COPY personalityresponses (id, response, weight, testname, set, fval) FROM stdin;
+23	Disagree Strongly	1	personality	1	1
+24	Disagree Moderately	2	personality	1	2
+25	Disagree a Little	3	personality	1	3
+26	Neither Agree nor Disagree	4	personality	1	4
+27	Agree a Little	5	personality	1	5
+28	Agree Moderately	6	personality	1	6
+29	Agree Strongly	7	personality	1	7
+30	Disagree Strongly	1	personality	2	7
+31	Disagree Moderately	2	personality	2	6
+32	Disagree a Little	3	personality	2	5
+33	Neither Agree nor Disagree	4	personality	2	4
+34	Agree a Little	5	personality	2	3
+35	Agree Moderately	6	personality	2	2
+36	Agree Strongly	7	personality	2	1
+\.
+
+
+--
+-- Name: personalityresponses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tony
+--
+
+SELECT pg_catalog.setval('personalityresponses_id_seq', 36, true);
+
+
+--
+-- Name: p_personalityresponses; Type: CONSTRAINT; Schema: public; Owner: tony; Tablespace: 
+--
+
+ALTER TABLE ONLY personalityresponses
+    ADD CONSTRAINT p_personalityresponses PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
