@@ -11,23 +11,29 @@
             %= $stash->{job}->title
           </h3>
           <h4>
-            %= $stash->{job}->dateposted
+            Posted on: <b>
+            %= human_date($stash->{job}->dateposted)
+            </b>
           </h4>
           <p>
             %== $stash->{job}->description
           </p>
 
-          <table width="100%">
-            <tr><th>record id</th><th>job id</th><th>username</th><th>score (lower = better)</th></tr>
-            %for my $m (@{$stash->{matches}}) {
-              <tr>
-                <td><%= $m->id %></td>
-                <td><%= $m->jid->jid %></td>
-                <td><%= $m->uid->username %></td>
-                <td><%= $m->fval %></td>
-              </tr>
-            %}
-          </table>
+          <div class="panel panel-default">
+            <div class="panel-heading">Matches for Job: <b><%= $stash->{job}->title %></b></div>
+
+            <table class="table table-striped table-bordered table-hover">
+              <tr><th>Name</th><th>Member Since</th><th>Match %</th></tr>
+              %for my $m (@{$stash->{matches}}) {
+                % my $l = '/employer/viewprofile?id=' . $m->id;
+                <tr>
+                  <td><a href="<%=$l%>"><%= $m->uid->username %></a></td>
+                  <td><a href="<%=$l%>"><%= human_date($m->uid->datecreated) %></a></td>
+                  <td><a href="<%=$l%>"><%= sprintf("%.1f",100/$m->fval) %> %</a></td>
+                </tr>
+              %}
+            </table>
+          </div>
       </div>
     </div>
   </div> <!-- /container -->

@@ -41,6 +41,23 @@ __PACKAGE__->table("personalityquestions");
   data_type: 'integer'
   is_nullable: 1
 
+=head2 testname
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 20
+
+=head2 flags
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 20
+
+=head2 set
+
+  data_type: 'integer'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -54,6 +71,12 @@ __PACKAGE__->add_columns(
   "question",
   { data_type => "varchar", is_nullable => 1, size => 128 },
   "weight",
+  { data_type => "integer", is_nullable => 1 },
+  "testname",
+  { data_type => "varchar", is_nullable => 1, size => 20 },
+  "flags",
+  { data_type => "varchar", is_nullable => 1, size => 20 },
+  "set",
   { data_type => "integer", is_nullable => 1 },
 );
 
@@ -87,8 +110,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-18 17:00:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IYkQcd7Jm05DE4deK8IrfA
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-17 12:43:29
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:F8V9Z+U9BFgzUj5rTJ2M0A
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

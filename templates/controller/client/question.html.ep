@@ -1,0 +1,46 @@
+% my $stash = $self->stash->{container};
+% layout 'basic', stash => $stash;
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        %= include 'partials/clientmenu', stash => $stash;
+      </div>
+      <div class="col-md-9">
+        % if (scalar(@{$stash->{responses}}) > 0) {
+          <h2>
+            %= $stash->{question}->question
+          </h2>
+        % }
+        % for my $e (@{$stash->{errors}}) {
+          <div class="alert alert-dismissable alert-danger">
+            % given ($e) {
+            %   when ('INVALIDRESPONSE') {
+                  Couldn't process that answer, please try again
+            %   }
+            %   when ('ALREADYANSWERED') {
+                  You can't reanswer the question, sorry.  Go to next unanswered question <a href="/jobseeker/question?test=<%=$stash->{test}%>">here</a>
+            %   }
+            % }
+          </div>
+        % }
+        % if (scalar(@{$stash->{responses}}) > 0) { #we have another question
+          <form method="GET" action="/jobseeker/question" class="form-horizontal">
+            <input type="hidden" name="q" value="<%=$stash->{q}%>" />
+            <input type="hidden" name="test" value="<%=$stash->{test}%>" />
+            <input type="hidden" name="response" id="response" value="" />
+            % for my $r (@{$stash->{responses}}) {
+              <button class="btn btn-default btn-block btn-lg" onclick="$('#response').val('<%=$r->fval%>');$('form')[0].submit();"><%=$r->response%></button>
+            % }
+          </form>
+        % } else { #end of the test!!!
+          <div class="alert alert-success">
+            % my $title = $stash->{test}; $title =~ s/(\w+)/\u\L$1/g;
+            <h2>You have successfully completed the <b><%= $title %></b> test!</h2>
+            <h3>Check out how your profile is doing <a href="/jobseeker/">here</a> while we generate some employer matches</h3>
+          </div> 
+        % }
+      </div>
+    </div>
+  </div>
+

@@ -3,13 +3,20 @@
 
     <div class="container">
 
-      <div class="starter-template">
-        <h1>
-% foreach my $d (@{$stash->{data}->{vendors}}) {
- <%= $d %><br/>
-% }
-        </h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="page-header">
+            <h1>hirenetics.com</h1>
+            <p>cut to the chase and land that job!</p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="page-header">
+            <p>
+              Hirenetics takes the guesswork and "meat" market feel out of the job seeking and employee finding process.  
+              Hirenetics uses data driven job seeker and employer matching so you can enjoy your career! 
+            </p>
+        </div>
       </div>
 
     </div><!-- /.container -->

@@ -7,55 +7,12 @@
         %= include 'partials/clientmenu', stash => $stash;
       </div>
       <div class="col-md-9">
-%if (+@{$stash->{trr}} == 0) {
-        <form method="POST" action="/client/traits">
-%}
-          <table class="table table-striped">
-            <tr>
-              <th>
-                I see myself as:
-              </th>
-              %foreach my $r (@{$stash->{trs}}) {
-                <th class="text-center">
-                %=$r->response
-                </th>
-              %}
-            </tr>
-            %foreach my $q (@{$stash->{tqs}}) {
-              <tr>
-                <td>
-                  %=$q->question
-                </td>
-                %foreach my $r (@{$stash->{trs}}) {
-                  <td class="text-center">
-                    %if (+@{$stash->{trr}}) {
-                      %my $f = 0;
-                      %foreach my $a (@{$stash->{trr}}) {
-                        %if ($a->{qid} eq $q->id && $a->{rid} eq $r->id) {
-                          X
-                          %$f++;
-                          %last;
-                        %} 
-                      %}
-                      %=$f ? '' : ' '
-                    %} else {
-                      <input type="radio" name="q<%=$q->id%>" value="<%=$r->id%>" />
-                    %}
-                  </td>
-                %}
-              </tr>
-            %}
-            %if (+@{$stash->{trr}} == 0) {
-              <tr>
-                <td colspan="<%=+@{$stash->{trs}} + 1%>" class="text-right">
-                  <input type="submit" class="btn btn-primary btn-block btn-lg" />
-                </td>
-              </tr>
-            %}
-        </table>
-%if (+@{$stash->{trr}} == 0) {
-        </form>
-%}
+        % if (scalar(@{$stash->{trr}}) == 0) {
+          <h3>You need to take the test!</h3>
+          <a href="/jobseeker/question?q=0&test=personality" class="btn btn-primary btn-block btn-lg">Take the test</a>
+        %} else {
+          <h3>You've already taken the test, thank you!</h3>
+        %}
       </div>
     </div>
   </div> <!-- /container -->

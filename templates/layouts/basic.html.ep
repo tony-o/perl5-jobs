@@ -29,7 +29,7 @@
   </head>
 
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -45,18 +45,20 @@
 % my $class = $stash->{path} || 'home';
             <li <% if ($class eq 'home') { %>class="active"<% } %>><a href="/">Home</a></li>
             <li <% if ($class =~ qr{^employer}) { %>class="active"<% } %>><a href="/employer">Employers</a></li>
-            <li <% if ($class eq 'client') { %>class="active"<% } %>><a href="/jobseeker">Job Seekers</a></li>
+            <li <% if ($class =~ qr{^client}) { %>class="active"<% } %>><a href="/jobseeker">Job Seekers</a></li>
             <% if ( defined($stash) && defined($stash->{uid}) && $stash->{uid} > 0 ) { %>
               <li <% if ($class eq 'login') { %>class="active"<% } %>><a href="/login">Logout</a></li>
             <% } else { %>
               <li <% if ($class eq 'login') { %>class="active"<% } %>><a href="/login">Login</a></li>
               <li <% if ($class eq 'register') { %>class="active"<% } %>><a href="/register">Register</a></li>
             <% } %>
+            % if (defined($stash->{utype}) && $stash->{utype} eq 'AD') {
+              <li <% if ($class eq 'admin') { %>class="active"<% } %>><a href="/">[ Admin Tools ]</a></li>
+            % }
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
-
 
 %= content
 

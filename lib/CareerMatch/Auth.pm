@@ -14,7 +14,7 @@ sub check {
 sub load_user {
   my ($self, $uid) = @_;
   my $users = $DB::PKG::db->resultset('User');
-  my $ss    = $users->search({uid => $uid}, { columns => [qw<uid username domain>] });
+  my $ss    = $users->search({uid => $uid}, { columns => [qw<uid username usertype>] });
   while (my $s = $ss->next) {
     return $s;
   }

@@ -1,5 +1,6 @@
 package CareerMatch::Controller::Client;
 use Mojo::Base qw<Mojolicious::Controller>;
+use Try::Tiny;
 use DB::PKG;
 
 sub dashboard {
@@ -7,9 +8,9 @@ sub dashboard {
   my $user = $self->current_user;
   $self->stash(
     container => {
-      uid       => $user->uid,
+      uid  => $user->uid,
       employers => [$user->uid, $user->domain, $user->username, $user->pass],
-      path      => 'client',
+      path => 'client',
     }
   );
 };
@@ -229,6 +230,61 @@ sub profile {
     }
   );
 };
+
+sub question {
+  my $self = shift;
+  my $user = $self->current_user;
+  my $questions = $DB::PKG::db->resultset('Personalityquestion');
+  my $responses = $DB::PKG::db->resultset('Personalityresponse');
+  my $traits    = $DB::PKG::db->resultset('Personalitytrait');
+
+  my $qno = 0;
+
+  if (!defined($self->param('q'))) {
+    my @q = $questions->search({testname => $self->param('test')}, {order_by => { -asc => [qw{weight}]}})->all;
+    for (@q) {
+      if ($traits->search({ uid => $user->uid, qid => $_->id })->count > 0) {
+        $qno++;
+      } else {
+        last;
+      }
+    }
+  }
+
+  my @errors;
+  if (defined($self->param('response')) && defined($self->param('q'))) {
+    # save response - 
+    my ($q)    = $questions->search({testname => $self->param('test')}, {order_by => { -asc => [qw{weight}] } })->slice($self->param('q'));
+    my ($rid)  = $responses->search({testname => $self->param('test'), set => $q->set, fval => $self->param('response')})->all;
+    push @errors, 'INVALIDRESPONSE' if not(defined($user->uid) && defined($q) && defined($rid));
+    try { 
+      $traits->create({
+        uid => $user->uid,
+        qid => $q->id,
+        rid => $rid->id, 
+      }) if scalar(@errors) == 0;
+    } catch {
+      push @errors, 'ALREADYANSWERED';
+    };
+    $qno = $self->param('q') + 1 if scalar(@errors) == 0;
+    say $qno;
+  }
+
+  my ($q) = $questions->search({testname => $self->param('test')}, {order_by => { -asc => [qw{weight}] } })->slice($qno);
+  my @r;
+  if (defined($q) && scalar(@errors) == 0) {
+    @r   = $responses->search({testname => $self->param('test'), set => $q->set}, {order_by => { -asc => [qw{weight}] }})->all; 
+  }
+  $self->stash(container => {
+    uid => $user->uid,
+    errors => [@errors],
+    path => 'client/question',
+    question  => $q,
+    responses => [@r],
+    q => $qno,
+    test => $self->param('test'),
+  });
+}
 
 sub emptyroute {
   my $self = shift;

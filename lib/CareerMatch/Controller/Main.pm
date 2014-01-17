@@ -5,17 +5,11 @@ use CareerMatch::Auth;
 
 sub main {
   my $self = shift;
-  my $vendors = $DB::PKG::db->resultset('User');
   my $user = $self->current_user;
-  my @vendors = $vendors->all;
-  my @vendor_list;
-  foreach my $vendor (@vendors) {
-    push @vendor_list, $vendor->datecreated; 
-  }
   $self->stash(
     container => {
       uid  => $user,
-      data => { vendors => [@vendor_list] },
+      utype => $user ? $user->usertype : '',
       path => 'home',
     }
   );
