@@ -7,9 +7,9 @@
         %= include 'partials/clientmenu', stash => $stash;
       </div>
       <div class="col-md-9">
-        % if (scalar(@{$stash->{trr}}) == 0) {
-          <h3>You need to take the test!</h3>
-          <a href="/jobseeker/question?q=0&test=personality" class="btn btn-primary btn-block btn-lg">Take the test</a>
+        % if ($stash->{answered} != scalar(@{$stash->{questions}})) {
+          <h3>You need to <%= $stash->{answered} ? 'complete' : 'take' %> the test!</h3>
+          <a href="/jobseeker/question?q=0&test=personality" class="btn btn-primary btn-block btn-lg"><%= $stash->{answered} ? 'Finish' : 'Take' %> the test</a>
         %} else {
           <h3>You've already taken the test, thank you!</h3>
         %}

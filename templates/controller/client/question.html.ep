@@ -11,6 +11,9 @@
           <h2>
             %= $stash->{question}->question
           </h2>
+          <h3>
+            Question <%= $stash->{answered} + 1 %> of <%= $stash->{tquestions} %>
+          </h3>
         % }
         % for my $e (@{$stash->{errors}}) {
           <div class="alert alert-dismissable alert-danger">

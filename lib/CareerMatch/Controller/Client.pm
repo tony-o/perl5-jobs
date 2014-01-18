@@ -38,47 +38,18 @@ sub traits {
   my $trs  = $DB::PKG::db->resultset('Personalityresponse');
   my $trr  = $DB::PKG::db->resultset('Personalitytrait');
 
-  my $tanswers = $trr->search({uid => $user->id});
+  my @questions = $tqs->search({testname => 'personality'})->all;
+  my @qids;
+  for (@questions) { push @qids, $_->id; };
+  my $answered = $trr->search({uid => $user->id, qid => [@qids]})->count;
 
-  my @answers;
-  while (my $a = $tanswers->next) {
-    push @answers, {qid => $a->qid->id, rid => $a->rid->id};
-  }
-
-#do processing here for saving/updating DB
-  my @q = $tqs->all;
-  my @r = $trs->all;
-  my $answered = 0;
-  if (+@q ne +@answers) {
-    foreach my $qq (@q) {
-      last if !defined($self->param('q'.$qq->id));
-      $answered++;
-    }
-  }
-  if ($answered == +@q && !+@answers) {
-    #save these q's
-    foreach my $qq (@q) {
-      my ($id) = ($qq->id =~ /(\d+)/);
-      $trr->update_or_create({
-        uid => $user->uid,
-        qid => $id,
-        rid => $self->param("q$id"), 
-      },{
-        key => 'p_personalitytraits_uid_qid', 
-      });
-      push @answers, { qid => $id, rid => $self->param("q$id") };
-    }
-
-  }
 
   $self->stash(
     container => {
       uid  => $user->uid,
       path => 'client/traits',
-      a    => $answered,
-      tqs  => [@q],
-      trs  => [@r],
-      trr  => [@answers],
+      answered => $answered,
+      questions => [@questions],
     }
   );
 };
@@ -240,17 +211,6 @@ sub question {
 
   my $qno = 0;
 
-  if (!defined($self->param('q'))) {
-    my @q = $questions->search({testname => $self->param('test')}, {order_by => { -asc => [qw{weight}]}})->all;
-    for (@q) {
-      if ($traits->search({ uid => $user->uid, qid => $_->id })->count > 0) {
-        $qno++;
-      } else {
-        last;
-      }
-    }
-  }
-
   my @errors;
   if (defined($self->param('response')) && defined($self->param('q'))) {
     # save response - 
@@ -270,11 +230,29 @@ sub question {
     say $qno;
   }
 
+  {
+    my @q = $questions->search({testname => $self->param('test')}, {order_by => { -asc => [qw{weight}]}})->all;
+    for (@q) {
+      if ($traits->search({ uid => $user->uid, qid => $_->id })->count > 0) {
+        $qno++;
+      } else {
+        last;
+      }
+    }
+  }
+  
   my ($q) = $questions->search({testname => $self->param('test')}, {order_by => { -asc => [qw{weight}] } })->slice($qno);
   my @r;
   if (defined($q) && scalar(@errors) == 0) {
     @r   = $responses->search({testname => $self->param('test'), set => $q->set}, {order_by => { -asc => [qw{weight}] }})->all; 
   }
+
+
+  my @questions = $questions->search({testname => 'personality'})->all;
+  my @qids;
+  for (@questions) { push @qids, $_->id; };
+  my $answered = $traits->search({uid => $user->id, qid => [@qids]})->count;
+ 
   $self->stash(container => {
     uid => $user->uid,
     errors => [@errors],
@@ -283,6 +261,8 @@ sub question {
     responses => [@r],
     q => $qno,
     test => $self->param('test'),
+    answered => $answered,
+    tquestions => scalar(@questions),
   });
 }
 
