@@ -103,6 +103,21 @@ __PACKAGE__->set_primary_key("uid");
 
 =head1 RELATIONS
 
+=head2 bioanswers
+
+Type: has_many
+
+Related object: L<DB::Schema::Result::Bioanswer>
+
+=cut
+
+__PACKAGE__->has_many(
+  "bioanswers",
+  "DB::Schema::Result::Bioanswer",
+  { "foreign.uid" => "self.uid" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 educations
 
 Type: has_many
@@ -194,8 +209,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-13 14:09:03
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Fj64qGkRRjt15F8IqmK6IQ
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-19 14:02:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:W1tqY4+XdqGOmj8/1J/Vjg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

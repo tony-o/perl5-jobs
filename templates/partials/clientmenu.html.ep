@@ -10,6 +10,9 @@
       <a href="/jobseeker/profile"    class="list-group-item  <% if ($stash->{path} eq 'client/profile'   ) { %>active<% } %>">View my Profile</a>
     </li>
     <li>
+      <a href="/jobseeker/bio"    class="list-group-item  <% if ($stash->{path} eq 'client/bio'   ) { %>active<% } %>">My Bio</a>
+    </li>
+    <li>
       <a href="/jobseeker/traits"    class="list-group-item  <% if ($stash->{path} eq 'client/traits'   ) { %>active<% } %>">Personality Traits</a>
     </li>
     <li>

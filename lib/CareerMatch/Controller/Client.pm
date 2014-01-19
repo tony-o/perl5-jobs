@@ -266,6 +266,17 @@ sub question {
   });
 }
 
+sub bio {
+  my $self = shift;
+  my $user = $self->current_user;
+
+  my $bio = $DB::PKG::db->result_set('Bio');
+
+  $self->stash(container => {
+    
+  });
+}
+
 sub emptyroute {
   my $self = shift;
   $self->redirect_to('/jobseeker/dashboard');

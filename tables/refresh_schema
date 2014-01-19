@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd ../lib/DB
+./make_schema
+cd ../../tables

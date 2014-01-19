@@ -9,3 +9,4 @@ psql -d jobs <personality.pgsql
 psql -d jobs <jobs.pgsql
 psql -d jobs <job_reqs.pgsql
 psql -d jobs <filler.pgsql
+psql -d jobs <bios.pgsql
