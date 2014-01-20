@@ -66,5 +66,17 @@
           </h4>
         </div>
       </div>
+      % if ($e->contactok) {
+        <div class="row">
+          <div class="col-lg-4">
+            <h4>Contact OK!</h4>
+          </div>
+          <div class="col-lg-8">
+            <h4>
+              %= human_phones($e->phonenumber)
+            </h4>
+          </div>
+        </div>
+      % }
     </div>
   % }

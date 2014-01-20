@@ -76,6 +76,18 @@ __PACKAGE__->table("employers");
   data_type: 'date'
   is_nullable: 1
 
+=head2 contactok
+
+  data_type: 'boolean'
+  default_value: false
+  is_nullable: 1
+
+=head2 phonenumber
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 20
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -102,6 +114,10 @@ __PACKAGE__->add_columns(
   { data_type => "date", is_nullable => 1 },
   "enddt",
   { data_type => "date", is_nullable => 1 },
+  "contactok",
+  { data_type => "boolean", default_value => \"false", is_nullable => 1 },
+  "phonenumber",
+  { data_type => "varchar", is_nullable => 1, size => 20 },
 );
 
 =head1 PRIMARY KEY
@@ -179,8 +195,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-18 17:00:53
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Y04NUoSCntnQ0tJYMgE5LQ
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-20 15:18:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ymUd077s6fiDQaV2HkxnNw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -8,5 +8,7 @@ create table if not exists employers (
   jobclass integer references jobclasses ( jid ),
   startdt  date,
   enddt    date,
+  contactok boolean default false,
+  phonenumber varchar(20),
   constraint p_employers primary key (eid)
 );

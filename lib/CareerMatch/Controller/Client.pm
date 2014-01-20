@@ -137,14 +137,16 @@ sub employers {
 
   if (defined($self->param('employer'))) {
     $emrs->create({
-      uid      => $user->uid,
-      employer => $self->param('employer'),
-      jobtitle => $self->param('jobtitle'),
-      city     => $self->param('city'),
-      state    => $self->param('state'),
-      jobclass => $self->param('jobclass'),
-      startdt  => $self->param('startdt'),
-      enddt    => $self->param('enddt') || undef,
+      uid         => $user->uid,
+      employer    => $self->param('employer'),
+      jobtitle    => $self->param('jobtitle'),
+      city        => $self->param('city'),
+      state       => $self->param('state'),
+      jobclass    => $self->param('jobclass'),
+      startdt     => $self->param('startdt'),
+      enddt       => $self->param('enddt') || undef,
+      contactok   => $self->param('contactok') || 0,
+      phonenumber => $self->param('phonenumber') || undef,
     });
   }
 
@@ -331,8 +333,8 @@ sub biopreview {
     $answers{$_->qid->question} = $_->val;
   }
 
-  my @employers = $emp->search({uid => $self->param('uid')}, { order_by => { -asc => [qw{startdt}] }})->all;
-  my @education = $edu->search({uid => $self->param('uid')}, { order_by => { -asc => [qw{degdt}] }})->all;
+  my @employers = $emp->search({uid => $user->uid}, { order_by => { -asc => [qw{startdt}] }})->all;
+  my @education = $edu->search({uid => $user->uid}, { order_by => { -asc => [qw{degdt}] }})->all;
 
   $self->stash(container => {
     questions => [@questions],

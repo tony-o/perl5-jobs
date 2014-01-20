@@ -26,7 +26,9 @@ __PACKAGE__->table("aroles");
 =head2 id
 
   data_type: 'integer'
+  is_auto_increment: 1
   is_nullable: 0
+  sequence: 'aroles_id_seq'
 
 =head2 rid
 
@@ -44,7 +46,12 @@ __PACKAGE__->table("aroles");
 
 __PACKAGE__->add_columns(
   "id",
-  { data_type => "integer", is_nullable => 0 },
+  {
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+    sequence          => "aroles_id_seq",
+  },
   "rid",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "uid",
@@ -122,8 +129,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-20 13:44:57
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Mowjv6VHDbo0/2O2PybK5A
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-20 15:18:46
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Ngxw+11l3GZboywxLDrpNw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
