@@ -13,6 +13,7 @@ sub setup {
   $employers->route('/joblist')->to('Controller::Employer#joblist');
   $employers->route('/jobpost')->to('Controller::Employer#jobpost');
   $employers->route('/jobview/:id')->to('Controller::Employer#jobview');
+  $employers->route('/viewprofile/:id')->to('Controller::Employer#viewprofile');
 
   #CLIENT ROUTING
   my $clients = $r->bridge('/jobseeker')->to('Auth#check');
@@ -24,6 +25,7 @@ sub setup {
   $clients->route('/education')->to('Controller::Client#education');
   $clients->route('/question')->to('Controller::Client#question');
   $clients->route('/bio')->to('Controller::Client#bio');
+  $clients->route('/biopreview')->to('Controller::Client#biopreview');
 
   #MAIN ROUTES
   $r->route('/login')->to('Controller::Main#login');

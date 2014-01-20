@@ -1,0 +1,11 @@
+insert into degreetypes (name) values ('Professional Certification');
+insert into degreetypes (name) values ('Associate Degree');
+insert into degreetypes (name) values ('Bachelor of Arts');
+insert into degreetypes (name) values ('Bachelor of Science');
+insert into degreetypes (name) values ('Bachelor of Business Administration');
+insert into degreetypes (name) values ('Master of Arts');
+insert into degreetypes (name) values ('Master of Science');
+insert into degreetypes (name) values ('Master of Business Administration');
+insert into degreetypes (name) values ('Doctor of Philosophy');
+insert into degreetypes (name) values ('Doctor of Education');
+insert into degreetypes (name) values ('Juris Doctor');

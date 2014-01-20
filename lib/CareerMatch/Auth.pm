@@ -14,7 +14,7 @@ sub check {
 sub load_user {
   my ($self, $uid) = @_;
   my $users = $DB::PKG::db->resultset('User');
-  my $ss    = $users->search({uid => $uid}, { columns => [qw<uid username usertype>] });
+  my $ss    = $users->search({uid => $uid}, { columns => [qw<uid username usertype domain>] });
   while (my $s = $ss->next) {
     return $s;
   }
@@ -68,6 +68,12 @@ sub register_user {
   return $user->uid;
 };
 
-
+sub role {
+  my $uid   = shift;
+  my $crole = shift;
+  my $roles = $DB::PKG::db->resultset('Arole');
+  my $result = $roles->search({uid => $uid, "rid.name" => $crole}, { join => 'rid' })->count;
+  return $result;
+}
 
 1;

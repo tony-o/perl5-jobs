@@ -7,6 +7,7 @@
         %= include 'partials/employermenu', stash => $stash;
       </div>
       <div class="col-md-9">
+        <h3>Job listing for <%= $stash->{uid}->domain %></h3>
          %foreach my $job (@{$stash->{jobs}}) {
           <div class="row">
             <div class="col-md-8">

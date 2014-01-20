@@ -1,12 +1,12 @@
 use utf8;
-package DB::Schema::Result::Bioanswer;
+package DB::Schema::Result::Arole;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-DB::Schema::Result::Bioanswer
+DB::Schema::Result::Arole
 
 =cut
 
@@ -15,20 +15,24 @@ use warnings;
 
 use base 'DBIx::Class::Core';
 
-=head1 TABLE: C<bioanswers>
+=head1 TABLE: C<aroles>
 
 =cut
 
-__PACKAGE__->table("bioanswers");
+__PACKAGE__->table("aroles");
 
 =head1 ACCESSORS
 
 =head2 id
 
   data_type: 'integer'
-  is_auto_increment: 1
   is_nullable: 0
-  sequence: 'bioanswers_id_seq'
+
+=head2 rid
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
 
 =head2 uid
 
@@ -36,33 +40,15 @@ __PACKAGE__->table("bioanswers");
   is_foreign_key: 1
   is_nullable: 1
 
-=head2 qid
-
-  data_type: 'integer'
-  is_foreign_key: 1
-  is_nullable: 1
-
-=head2 val
-
-  data_type: 'text'
-  is_nullable: 1
-
 =cut
 
 __PACKAGE__->add_columns(
   "id",
-  {
-    data_type         => "integer",
-    is_auto_increment => 1,
-    is_nullable       => 0,
-    sequence          => "bioanswers_id_seq",
-  },
+  { data_type => "integer", is_nullable => 0 },
+  "rid",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "uid",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "qid",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "val",
-  { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -79,34 +65,34 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 UNIQUE CONSTRAINTS
 
-=head2 C<p_bioanswers_uid_qid>
+=head2 C<p_aroles_rid_uid>
 
 =over 4
 
-=item * L</uid>
+=item * L</rid>
 
-=item * L</qid>
+=item * L</uid>
 
 =back
 
 =cut
 
-__PACKAGE__->add_unique_constraint("p_bioanswers_uid_qid", ["uid", "qid"]);
+__PACKAGE__->add_unique_constraint("p_aroles_rid_uid", ["rid", "uid"]);
 
 =head1 RELATIONS
 
-=head2 qid
+=head2 rid
 
 Type: belongs_to
 
-Related object: L<DB::Schema::Result::Bioquestion>
+Related object: L<DB::Schema::Result::Role>
 
 =cut
 
 __PACKAGE__->belongs_to(
-  "qid",
-  "DB::Schema::Result::Bioquestion",
-  { id => "qid" },
+  "rid",
+  "DB::Schema::Result::Role",
+  { id => "rid" },
   {
     is_deferrable => 0,
     join_type     => "LEFT",
@@ -136,8 +122,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-20 10:30:45
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VbBb8tbh6zG1Ldzg+R54ig
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-20 13:44:57
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Mowjv6VHDbo0/2O2PybK5A
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -1,12 +1,12 @@
 use utf8;
-package DB::Schema::Result::Bioquestion;
+package DB::Schema::Result::Role;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 =head1 NAME
 
-DB::Schema::Result::Bioquestion
+DB::Schema::Result::Role
 
 =cut
 
@@ -15,11 +15,11 @@ use warnings;
 
 use base 'DBIx::Class::Core';
 
-=head1 TABLE: C<bioquestions>
+=head1 TABLE: C<roles>
 
 =cut
 
-__PACKAGE__->table("bioquestions");
+__PACKAGE__->table("roles");
 
 =head1 ACCESSORS
 
@@ -28,18 +28,13 @@ __PACKAGE__->table("bioquestions");
   data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
-  sequence: 'bioquestions_id_seq'
+  sequence: 'roles_id_seq'
 
-=head2 question
+=head2 name
 
   data_type: 'varchar'
   is_nullable: 1
-  size: 40
-
-=head2 weight
-
-  data_type: 'integer'
-  is_nullable: 1
+  size: 60
 
 =cut
 
@@ -49,12 +44,10 @@ __PACKAGE__->add_columns(
     data_type         => "integer",
     is_auto_increment => 1,
     is_nullable       => 0,
-    sequence          => "bioquestions_id_seq",
+    sequence          => "roles_id_seq",
   },
-  "question",
-  { data_type => "varchar", is_nullable => 1, size => 40 },
-  "weight",
-  { data_type => "integer", is_nullable => 1 },
+  "name",
+  { data_type => "varchar", is_nullable => 1, size => 60 },
 );
 
 =head1 PRIMARY KEY
@@ -71,24 +64,24 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 bioanswers
+=head2 aroles
 
 Type: has_many
 
-Related object: L<DB::Schema::Result::Bioanswer>
+Related object: L<DB::Schema::Result::Arole>
 
 =cut
 
 __PACKAGE__->has_many(
-  "bioanswers",
-  "DB::Schema::Result::Bioanswer",
-  { "foreign.qid" => "self.id" },
+  "aroles",
+  "DB::Schema::Result::Arole",
+  { "foreign.rid" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-20 10:08:40
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zWtLY5vWDrrHOM+MmrMsJw
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-20 13:44:57
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3IyL9MN/DIrAtgnA+U09Gw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

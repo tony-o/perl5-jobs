@@ -144,7 +144,7 @@ sub employers {
       state    => $self->param('state'),
       jobclass => $self->param('jobclass'),
       startdt  => $self->param('startdt'),
-      enddt    => $self->param('enddt'),
+      enddt    => $self->param('enddt') || undef,
     });
   }
 
@@ -270,10 +270,76 @@ sub bio {
   my $self = shift;
   my $user = $self->current_user;
 
-  my $bio = $DB::PKG::db->result_set('Bio');
+  my $bioq = $DB::PKG::db->resultset('Bioquestion');
+  my $bioa = $DB::PKG::db->resultset('Bioanswer');
+
+  my @questions = $bioq->search(undef, {order_by => { -asc => [qw{weight}] }})->all;
+  my @messages;
+  my %answers;
+  my @q;
+
+  for (@questions) {
+    push @q, $_->id;  
+  }
+
+  if (defined($self->param('q' . $q[0]))) {
+    for (@q) {
+      $bioa->update_or_create({
+        uid => $user->id,
+        qid => $_,
+        val => $self->param('q' . $_),
+      },{
+        key => 'p_bioanswers_uid_qid',
+      });
+    }
+    push @messages, 'SUCCESSFULUPDATE';
+  }
+
+  my @answera = $bioa->search({uid => $user->uid, qid => [@q]})->all;
+  for (@answera) {
+    $answers{$_->qid->question} = $_->val;
+  }
 
   $self->stash(container => {
-    
+    questions => [@questions],
+    messages  => [@messages],
+    answers   => \%answers, 
+    uid       => $user->uid,
+    path     => 'client/bio',
+  });
+}
+
+sub biopreview {
+  my $self = shift;
+  my $user = $self->current_user;
+
+  my $bioq = $DB::PKG::db->resultset('Bioquestion');
+  my $bioa = $DB::PKG::db->resultset('Bioanswer');
+  my $emp  = $DB::PKG::db->resultset('Employer');
+  my $edu  = $DB::PKG::db->resultset('Education');
+
+  my @questions = $bioq->search(undef, {order_by => { -asc => [qw{weight}] }})->all;
+  my @q;
+  my %answers;
+  for (@questions) {
+    push @q, $_->id;  
+    $answers{$_->question} = '';
+  }
+  
+  my @answera = $bioa->search({uid => $user->uid, qid => [@q]})->all;
+  for (@answera) {
+    $answers{$_->qid->question} = $_->val;
+  }
+
+  my @employers = $emp->search({uid => $self->param('uid')}, { order_by => { -asc => [qw{startdt}] }})->all;
+  my @education = $edu->search({uid => $self->param('uid')}, { order_by => { -asc => [qw{degdt}] }})->all;
+
+  $self->stash(container => {
+    questions => [@questions],
+    answers   => \%answers, 
+    education => [@education],
+    employers => [@employers],
+    path     => 'client/biopreview',
   });
 }
 

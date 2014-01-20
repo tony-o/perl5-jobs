@@ -43,3 +43,22 @@ svg {
   color: #6F6F6F;
   font-weight: 200;
 }
+
+.emphasis {
+  border-left: 12px solid #FBB735; 
+  margin-left: -12px; 
+  padding-left: 12px; 
+  margin-bottom: 10px; 
+}
+.emphasis h3, .emphasis h4 { line-height: 0; }
+.emphasis1{ border-left-color: #E98931; }
+.emphasis2{ border-left-color: #EB4034; }
+.emphasis3{ border-left-color: #B32E37; }
+.emphasis4{ border-left-color: #6C2A6A; }
+.emphasis5{ border-left-color: #5C4399; }
+.emphasis6{ border-left-color: #274389; }
+.emphasis7{ border-left-color: #1F5EA8; }
+.emphasis8{ border-left-color: #227FB0; }
+.emphasis9{ border-left-color: #2AB0C5; }
+.emphasis10{ border-left-color: #39C0B3; }
+

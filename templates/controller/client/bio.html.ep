@@ -8,7 +8,28 @@
       </div>
       <div class="col-md-9">
         <h2>Your Bio</h2>
-        <h3>Employers can see this information</h3>
+        <h3>Check out how employers view your profile <a href="/jobseeker/biopreview?uid=<%= $stash->{uid} %>">here</a></h3>
+
+        % for my $m (@{$stash->{messages}}) {
+          % given ($m) {
+            % when ('SUCCESSFULUPDATE') {
+              <div class="alert alert-success">
+                Your profile was updated successfully!
+              </div>
+            % }
+          % }
+
+        % }
+
+        <form method="POST" action="/jobseeker/bio"> 
+          % for my $q (@{$stash->{questions}}) {
+            <div class="form-group">
+              <label for="q<%=$q->id%>"><%= $q->question %></label>
+              <input type="text" placeholder="<%= $q->question %>" class="form-control" name="q<%=$q->id%>" value="<%= $stash->{answers}->{$q->question} || '' %>" />
+            </div>
+          % }
+          <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
+        </form>
       </div>
     </div>
   </div>

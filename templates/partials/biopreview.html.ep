@@ -1,0 +1,70 @@
+  <h1>
+    % if ($stash->{answers}->{'First Name'} || $stash->{answers}->{'Last Name'}) {
+      %= $stash->{answers}->{'First Name'}
+      %= $stash->{answers}->{'Last Name'}
+    % } else {
+      %= $stash->{username}
+    % }
+  </h1>
+  <h3><b>Biography</b></h3>
+  <h4>Contact Number: <b><%= $stash->{answers}->{'Contact Number'} ? human_phones($stash->{answers}->{'Contact Number'}) : 'Not provided' %></b></h4>
+  <br/>
+  % if (scalar(@{$stash->{education}}) > 0) {
+    <h3><b>Education History</b></h3>
+  % } else {
+    <h3>This person has not filled out any Education History</h3>
+  % }
+  % my $count = 0;
+  % for my $e (@{$stash->{education}}) {
+    <div class="emphasis emphasis<%= $count++ % 11 %>">
+      <div class="row">
+        <div class="col-lg-4">
+          <h3><%= $e->institution %></h3>
+        </div>
+        <div class="col-lg-8">
+          <h3><%= $e->degreetype->name %></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <h4><%= $e->degree %></h4>
+        </div>
+        <div class="col-lg-8">
+          <h4>
+            %= human_date($e->degdt) 
+          </h4>
+        </div>
+      </div>
+    </div>
+  % }
+  % if (scalar(@{$stash->{employers}}) > 0) {
+    <h3><b>Employer History</b></h3>
+  % } else {
+    <h3>This person has not filled out any Employer History</h3>
+  % }
+  % for my $e (@{$stash->{employers}}) {
+    <div class="emphasis emphasis<%= $count++ % 11 %>">
+      <div class="row">
+        <div class="col-lg-4">
+          <h3><%= $e->employer %></h3>
+        </div>
+        <div class="col-lg-8">
+          <h3><%= $e->jobtitle %></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <h4><%= $e->state->name %></h4>
+        </div>
+        <div class="col-lg-8">
+          <h4>
+            %= human_date($e->startdt) 
+            % if ($e->enddt) { 
+              - 
+              %= human_date($e->enddt) 
+            % }
+          </h4>
+        </div>
+      </div>
+    </div>
+  % }

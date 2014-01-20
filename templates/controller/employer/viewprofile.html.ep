@@ -1,0 +1,19 @@
+% my $stash = $self->stash->{container};
+% layout 'basic', stash => $stash;
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        %= include 'partials/clientmenu', stash => $stash;
+      </div>
+      <div class="col-md-9">
+        % if ($stash->{denied}) {
+          <h3>Permission denied</h3>
+          <h4>You do not have the necessary authorization to view user profiles</h4>
+        % } else {
+          %= include 'partials/biopreview', stash => $stash;
+        % }
+      </div>
+    </div>
+  </div>
+
