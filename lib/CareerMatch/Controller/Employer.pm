@@ -152,7 +152,7 @@ sub viewprofile {
     answers   => \%answers, 
     education => [@education],
     employers => [@employers],
-    path      => 'client/biopreview',
+    path      => 'employer/viewprofile',
     denied    => $denied,
     username  => $username,
   });

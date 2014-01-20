@@ -4,7 +4,7 @@
       <a href="/employer/dashboard" class="list-group-item <% if ($stash->{path} eq 'employer'        ) { %>active<% } %>">Dashboard</a>
     </li>
     <li>
-      <a href="/employer/joblist"   class="list-group-item <% if ($stash->{path} eq 'employer/joblist') { %>active<% } %>">Our Listings</a>
+      <a href="/employer/joblist"   class="list-group-item <% if ($stash->{path} eq 'employer/joblist' || $stash->{path} eq 'employer/jobview' || $stash->{path} eq 'employer/viewprofile') { %>active<% } %>">Our Listings</a>
     </li>
     <li>
       <a href="/employer/jobpost"   class="list-group-item <% if ($stash->{path} eq 'employer/jobpost') { %>active<% } %>">Post an Opening</a>

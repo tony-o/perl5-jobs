@@ -50,7 +50,7 @@ svg {
   padding-left: 12px; 
   margin-bottom: 10px; 
 }
-.emphasis h3, .emphasis h4 { line-height: 0; }
+.emphasis h3, .emphasis h4 { line-height: 1; margin:0 inherit; }
 .emphasis1{ border-left-color: #E98931; }
 .emphasis2{ border-left-color: #EB4034; }
 .emphasis3{ border-left-color: #B32E37; }
