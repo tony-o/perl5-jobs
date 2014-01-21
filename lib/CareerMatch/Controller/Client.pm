@@ -63,7 +63,7 @@ sub education {
     order_by => { -asc => [qw<did>] },
   })->all;
   my $eds  = $emrs->search({uid => $user->uid},{
-    columns  => [qw<eid institution city state degreetype degdt>],
+    #columns  => [qw<eid institution city state degreetype degdt address1 address2 postalcode phone degree>],
     order_by => { -asc => [qw<degdt eid>], }
   });
   my @education;
@@ -71,7 +71,7 @@ sub education {
   my @degreetypes;
 
   if (defined($self->param('institution'))) {
-    $emrs->create({
+    my $hash_ref = {
       uid         => $user->uid,
       institution => $self->param('institution'),
       degree      => $self->param('jobtitle'),
@@ -79,20 +79,25 @@ sub education {
       state       => $self->param('state'),
       degreetype  => $self->param('jobclass'),
       degdt       => $self->param('dtobtained'),
-    });
+    };
+
+    if ($self->param('eid') =~ m<[0-9]+>) {
+      my $count = $emrs->search({eid => $self->param('eid'), uid => $user->uid})->count;
+      $hash_ref->{eid} = $self->param('eid') if $count;
+    }
+    my $v = $emrs->update_or_new($hash_ref);
+    $v->insert if !$v->in_storage;
   }
 
-  while (my $e = $eds->next) {
-    push @education, {
-      eid         => $e->eid,
-      institution => $e->institution,
-      city        => $e->city,
-      state       => $e->state->name,
-      degreetype  => $e->degreetype->name,
-      degree      => $e->degree,
-      degdt       => $e->degdt,
-    };
+  if (defined($self->param('delete'))) {
+    $emrs->search({
+      uid => $user->uid,
+      eid => $self->param('delete'),
+    })->delete;
   }
+
+  @education = $eds->all;
+
   foreach my $s (@dtyp) {
     push @degreetypes, {
       did => $s->did,
@@ -128,7 +133,6 @@ sub employers {
     order_by => { -asc => [qw<jid>] },    
   })->all;
   my $ems  = $emrs->search({uid => $user->uid},{
-    columns  => [qw<eid employer jobtitle city state jobclass startdt enddt>],
     order_by => { -asc => [qw<startdt>], },
   });
   my @employers;
@@ -136,7 +140,7 @@ sub employers {
   my @jobclasses;
 
   if (defined($self->param('employer'))) {
-    $emrs->create({
+    my $hash_ref = {
       uid         => $user->uid,
       employer    => $self->param('employer'),
       jobtitle    => $self->param('jobtitle'),
@@ -147,21 +151,21 @@ sub employers {
       enddt       => $self->param('enddt') || undef,
       contactok   => $self->param('contactok') || 0,
       phonenumber => $self->param('phonenumber') || undef,
-    });
+    };
+    if ($self->param('eid') =~ m<[0-9]+>) {
+      my $count = $emrs->search({eid => $self->param('eid'), uid => $user->uid})->count;
+      $hash_ref->{eid} = $self->param('eid') if $count;
+    }
+    my $v = $emrs->update_or_new($hash_ref);
+    $v->insert if !$v->in_storage;
   }
 
-  while (my $e = $ems->next) {
-    push @employers, {
-      eid      => $e->eid,
-      employer => $e->employer,
-      jobtitle => $e->jobtitle,
-      city     => $e->city,
-      state    => $e->state->name,
-      jobclass => $e->jobclass->name,
-      startdt  => $e->startdt,
-      enddt    => $e->enddt, 
-    };
+  if (defined($self->param('delete'))) {
+    $emrs->search({uid => $user->uid, eid => $self->param('delete')})->delete;
   }
+
+  @employers = $ems->all;
+
   foreach my $s (@jcs) {
     push @jobclasses, {
       jid => $s->jid,
