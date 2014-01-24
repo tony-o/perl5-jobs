@@ -2,3 +2,4 @@ lib/DB/db.cnf
 .htaccess
 log/*.*
 .*.swp
+script/*.pid

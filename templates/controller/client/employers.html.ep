@@ -7,7 +7,7 @@
     var delicious = {
     % use JSON::Tiny qw{j};
     % my $count = 0;
-    % for my $e (@{$stash->{employers}}) {
+    % foreach my $e (@{$stash->{employers}}) {
       % my $hash = {};
       % for (keys $e->{_result_source}->{_columns}) { 
       %   $hash->{$_} = $e->{_column_data}->{$_} || undef; 

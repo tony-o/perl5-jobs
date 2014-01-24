@@ -12,5 +12,4 @@ create table if not exists education (
   degree      varchar(128),
   degdt       timestamp default now(),
   constraint p_education primary key (eid),
-  constraint p_education_eid unique (eid)
 );

@@ -40,7 +40,7 @@ sub traits {
 
   my @questions = $tqs->search({testname => 'personality'})->all;
   my @qids;
-  for (@questions) { push @qids, $_->id; };
+  foreach (@questions) { push @qids, $_->id; };
   my $answered = $trr->search({uid => $user->id, qid => [@qids]})->count;
 
 
@@ -238,7 +238,7 @@ sub question {
 
   {
     my @q = $questions->search({testname => $self->param('test')}, {order_by => { -asc => [qw{weight}]}})->all;
-    for (@q) {
+    foreach (@q) {
       if ($traits->search({ uid => $user->uid, qid => $_->id })->count > 0) {
         $qno++;
       } else {
@@ -256,7 +256,7 @@ sub question {
 
   my @questions = $questions->search({testname => 'personality'})->all;
   my @qids;
-  for (@questions) { push @qids, $_->id; };
+  foreach (@questions) { push @qids, $_->id; };
   my $answered = $traits->search({uid => $user->id, qid => [@qids]})->count;
  
   $self->stash(container => {
@@ -284,12 +284,12 @@ sub bio {
   my %answers;
   my @q;
 
-  for (@questions) {
+  foreach (@questions) {
     push @q, $_->id;  
   }
 
   if (defined($self->param('q' . $q[0]))) {
-    for (@q) {
+    foreach (@q) {
       $bioa->update_or_create({
         uid => $user->id,
         qid => $_,
@@ -302,7 +302,7 @@ sub bio {
   }
 
   my @answera = $bioa->search({uid => $user->uid, qid => [@q]})->all;
-  for (@answera) {
+  foreach (@answera) {
     $answers{$_->qid->question} = $_->val;
   }
 
@@ -327,13 +327,13 @@ sub biopreview {
   my @questions = $bioq->search(undef, {order_by => { -asc => [qw{weight}] }})->all;
   my @q;
   my %answers;
-  for (@questions) {
+  foreach (@questions) {
     push @q, $_->id;  
     $answers{$_->question} = '';
   }
   
   my @answera = $bioa->search({uid => $user->uid, qid => [@q]})->all;
-  for (@answera) {
+  foreach (@answera) {
     $answers{$_->qid->question} = $_->val;
   }
 

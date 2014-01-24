@@ -83,13 +83,13 @@ sub jobview {
     my @keyids;
     my @uids;
     my @trs = $bioqrs->search({ question => ['First Name','Last Name'] })->all;
-    for (@trs) { $keylookup{$_->question} = $_->id; push @keyids, $_->id; }
-    for my $m (@match) {
+    foreach (@trs) { $keylookup{$_->question} = $_->id; push @keyids, $_->id; }
+    foreach my $m (@match) {
       push @uids, $m->uid->uid;
     }
 
     my @bioarr = $biors->search({ uid => [@uids] })->all;
-    for (@bioarr) {
+    foreach (@bioarr) {
       $bios{ $_->uid->username } = { } if !defined($bios{ $_->uid->username });
       $bios{ $_->uid->username }->{'First Name'} = $_->val if $_->qid->id eq $keylookup{'First Name'};
       $bios{ $_->uid->username }->{'Last Name'} = $_->val if $_->qid->id eq $keylookup{'Last Name'};
@@ -133,13 +133,13 @@ sub viewprofile {
     my $uid = $self->stash->{id};
     @questions = $bioq->search(undef, {order_by => { -asc => [qw{weight}] }})->all;
     my @q;
-    for (@questions) {
+    foreach (@questions) {
       push @q, $_->id;  
       $answers{$_->question} = '';
     }
     
     my @answera = $bioa->search({uid => $uid, qid => [@q]})->all;
-    for (@answera) {
+    foreach (@answera) {
       $answers{$_->qid->question} = $_->val;
     }
     $username  = $usr->search({uid => $uid})->next->username;
