@@ -1,8 +1,10 @@
 package CareerMatch::Plugins;
+use Mojolicious::Plugin::Config;
 use DB::PKG;
 
 sub setup {
   my (undef,$self) = @_;
+  my $config = $self->plugin('Config', file => 'conf.conf');
   $self->secrets(['secr3t']);
   $self->plugin('authentication' => {
     'session_key'   => 'wtf',
