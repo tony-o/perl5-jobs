@@ -36,7 +36,7 @@
               <button class="btn btn-default btn-block btn-lg" onclick="$('#response').val('<%=$r->fval%>');$('form')[0].submit();"><%=$r->response%></button>
             % }
           </form>
-        % } else { #end of the test!!!
+        % } elsif (scalar(@{$stash->{errors}}) == 0) { #end of the test!!!
           <div class="alert alert-success">
             % my $title = $stash->{test}; $title =~ s/(\w+)/\u\L$1/g;
             <h2>You have successfully completed the <b><%= $title %></b> test!</h2>
