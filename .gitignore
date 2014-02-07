@@ -3,3 +3,4 @@ lib/DB/db.cnf
 log/*.*
 .*.swp
 script/*.pid
+jobs/runner.sh
