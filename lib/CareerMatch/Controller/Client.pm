@@ -215,7 +215,6 @@ sub question {
   my $responses = $DB::PKG::db->resultset('Personalityresponse');
   my $traits    = $DB::PKG::db->resultset('Personalitytrait');
 
-  my $qno = 0;
 
   my @errors;
   if (defined($self->param('response')) && defined($self->param('q'))) {
@@ -238,15 +237,15 @@ sub question {
 
   my @answered;
   my $qu;
+  my @qids;
   {
     my @q = $questions->search({testname => $self->param('test')})->all;
     foreach my $qq (@q) {
+      push @qids, $qq->id;
       if ($traits->search({ uid => $user->uid, qid => $qq->id })->count > 0) {
         push @answered, $qq->id;
-        $qno++;
       } else {
         $qu = $qq;
-        last;
       }
     }
   }
@@ -259,9 +258,7 @@ sub question {
   }
 
 
-  my @questions = $questions->search({testname => 'personality'})->all;
-  my @qids;
-  foreach (@questions) { push @qids, $_->id; };
+  my $questionsc = $questions->search({testname => 'personality'})->count;
   my $answered = $traits->search({uid => $user->id, qid => [@qids]})->count;
  
   $self->stash(container => {
@@ -270,10 +267,9 @@ sub question {
     path => 'client/question',
     question  => $q,
     responses => [@r],
-    q => $qno,
     test => $self->param('test'),
     answered => $answered,
-    tquestions => scalar(@questions),
+    tquestions => $questionsc,
   });
 }
 
