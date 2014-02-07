@@ -1,88 +1,78 @@
-
-COPY personalityquestions (id, question, weight, testname, flags, set) FROM stdin;
-238	It is OK to break the law as long as nobody knows about it	1	personality	\N	2
-239	I believe stealing is wrong	2	personality	\N	1
-240	I have stolen small amounts of money in my last job	3	personality	\N	2
-241	I am trusted to keep secrets	4	personality	\N	1
-242	If I were sent an extra item with an order by mistake, I would  send it back.	5	personality	\N	1
-243	I believe that honesty is the basis for trust	6	personality	\N	1
-244	I keep my promises	7	personality	\N	1
-245	I am true to my own values	8	personality	\N	1
-246	I would lie to get myself out of trouble	9	personality	\N	2
-247	I am hard to understand	10	personality	\N	2
-248	I feel like an imposter	11	personality	\N	2
-250	I always behave in a way that is socially appropriate.	13	personality	\N	1
-251	I have never hurt anyone's feelings.	14	personality	\N	1
-252	I read the  newspapers every single day.	15	personality	\N	1
-253	I have never been late to a work meeting.	16	personality	\N	1
-254	I have never thought about taking money at work when I had the chance.	17	personality	\N	1
-255	I am the life of the party	18	personality	\N	1
-256	I don't talk a lot	19	personality	\N	2
-257	I keep in the background	20	personality	\N	2
-258	I talk to a lot of different people at parties	21	personality	\N	1
-259	I feel comfortable around people	22	personality	\N	1
-260	I make friends easily	23	personality	\N	1
-261	I am skilled at handling social situations	24	personality	\N	1
-262	I am hard to get to know	25	personality	\N	2
-263	I find it difficult to appropach others.	26	personality	\N	2
-264	I have frequent mood swings	27	personality	\N	1
-265	I am relaxed most of the time	28	personality	\N	2
-266	I get upset easily	29	personality	\N	1
-267	I seldom feel blue	30	personality	\N	2
-268	I am not easily bothered by things	31	personality	\N	2
-269	I panic easily	32	personality	\N	1
-270	I feel threatened easily	33	personality	\N	1
-271	I fear for the worst	34	personality	\N	1
-272	I rarely get irritated	35	personality	\N	2
-273	I sympathize with others' feelings.	36	personality	\N	1
-274	I feel others' emotions	37	personality	\N	1
-275	I am not really interested in others	38	personality	\N	2
-276	I am not interested in other people's problems	39	personality	\N	2
-277	I insult people	40	personality	\N	2
-278	I feel little concern for others.	41	personality	\N	2
-279	I make people feel at ease.	42	personality	\N	1
-280	I inquire about others' well-being	43	personality	\N	1
-281	I get chores done right away.	44	personality	\N	1
-282	I often forget to put things back in their proper place	45	personality	\N	2
-283	I like order	46	personality	\N	1
-284	I make a mess of things	47	personality	\N	2
-285	I am always prepared	48	personality	\N	1
-286	I am exacting in my work	49	personality	\N	1
-287	Find it difficult to get down to work	50	personality	\N	2
-288	I neglect my duties.	51	personality	\N	2
-289	I have a vivid imagination	52	personality	\N	1
-290	I am not interested in abstract ideas	53	personality	\N	2
-291	I have difficulty understanding abstract ideas	54	personality	\N	1
-292	I do not have a good imagination	55	personality	\N	2
-293	I enjoy hearing new ideas	56	personality	\N	1
-294	I can carry the conversation to a higher level	57	personality	\N	1
-295	I avoid philosophical discussions	58	personality	\N	2
-249	I like to exaggerate my troubles	12	personality	\N	2
-\.
-
-SELECT pg_catalog.setval('personalityquestions_id_seq', 295, true);
-
-ALTER TABLE ONLY personalityquestions
-    ADD CONSTRAINT p_personalityquestions PRIMARY KEY (id);
-
-COPY personalityresponses (id, response, weight, testname, set, fval) FROM stdin;
-23	Disagree Strongly	1	personality	1	1
-24	Disagree Moderately	2	personality	1	2
-25	Disagree a Little	3	personality	1	3
-26	Neither Agree nor Disagree	4	personality	1	4
-27	Agree a Little	5	personality	1	5
-28	Agree Moderately	6	personality	1	6
-29	Agree Strongly	7	personality	1	7
-30	Disagree Strongly	1	personality	2	7
-31	Disagree Moderately	2	personality	2	6
-32	Disagree a Little	3	personality	2	5
-33	Neither Agree nor Disagree	4	personality	2	4
-34	Agree a Little	5	personality	2	3
-35	Agree Moderately	6	personality	2	2
-36	Agree Strongly	7	personality	2	1
-\.
-
-SELECT pg_catalog.setval('personalityresponses_id_seq', 36, true);
-ALTER TABLE ONLY personalityresponses
-    ADD CONSTRAINT p_personalityresponses PRIMARY KEY (id);
-
+insert into personalityquestions (question,weight,testname,flags,set) values ('I am trusted to keep secrets',1,'personality','Int',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I am the life of the party',2,'personality','Extr',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I have frequent mood swings',3,'personality','Neu',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I sympathize with others'' feelings',4,'personality','Agr',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I get chores done right away',5,'personality','Con',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I have a vivid imagination',6,'personality','Op',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Don''t miss group meetings or team practices ',7,'personality','To',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Have difficulty starting tasks',8,'personality','Pro',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Don''t approach things halfheartedly ',9,'personality','Mot',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Feel that I''m unable to deal with things',10,'personality','Conf',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I believe that honesty is the basis for trust',11,'personality','Int',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I don''t talk a lot',12,'personality','Extr',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I am relaxed most of the time',13,'personality','Neu',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I am not really interested in others',14,'personality','Agr',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I often forget to put things back in their proper place',15,'personality','Con',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I am not interested in abstract ideas',16,'personality','Op',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Enjoy being part of a group ',17,'personality','To',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Get things done right away',18,'personality','Pro',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Love what I do ',19,'personality','Mot',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Feel comfortable with myself',20,'personality','Conf',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I have never hurt anyone''s feelings',21,'personality','Fg',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I keep my promises',22,'personality','Int',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I keep in the background',23,'personality','Extr',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I seldom feel depressed',24,'personality','Neu',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I make people feel at ease',25,'personality','Agr',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I like order',26,'personality','Con',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Prefer to do everything alone',27,'personality','To',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Get tasks done quickly',28,'personality','Pro',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Look forward to each new day',29,'personality','Mot',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Dislike myself',30,'personality','Conf',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('True to my own values',31,'personality','Int',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Have never thought about taking money at work when I had the chance',32,'personality','Fg',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Just know that I will be a success',33,'personality','Conf',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Talk to a lot of different people at parties',34,'personality','Extr',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Am not easily bothered by things',35,'personality','Neu',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Am not interested in other people''s problems',36,'personality','Agr',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Make a mess of things',37,'personality','Con',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Do not have a good imagination',38,'personality','Op',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Support my teammates or fellow group members ',39,'personality','To',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Plunge into tasks with all my heart',40,'personality','Pro',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Dread getting up in the morning',41,'personality','Mot',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Am less capable than most people',42,'personality','Conf',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('I have difficulty understanding abstract ideas',43,'personality','Op',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Would lie to get myself out of trouble',44,'personality','Int',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Feel comfortable around people',45,'personality','Extr',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Panic easily',46,'personality','Neu',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Inquire about others'' well-being',47,'personality','Agr',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Am always prepared',48,'personality','Con',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Enjoy hearing new ideas',49,'personality','Op',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Am not good at working with a group ',50,'personality','To',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Need a push to get started',51,'personality','Pro',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Can’t wait to get started on a project ',52,'personality','Mot',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Like to take responsibility for making decisions',53,'personality','Conf',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Put off unpleasant tasks',54,'personality','Pro',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Always behave in a way that is socially appropriate',55,'personality','Fg',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Make friends easily',56,'personality','Extr',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Feel threatened easily',57,'personality','Neu',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Insult people',58,'personality','Agr',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Am exacting in my work',59,'personality','Con',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Feel I must respect the decisions made by my group ',60,'personality','To',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Finish tasks quickly',61,'personality','Pro',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Feel like an imposter',62,'personality','Int',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Am hard to get to know',63,'personality','Extr',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Fear for the worst',64,'personality','Neu',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Can carry the conversation to a higher level',65,'personality','Op',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Work best when I am alone',66,'personality','To',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Awaken with a sense of excitement about the day''s possibilities',67,'personality','Mot',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Know my strengths',68,'personality','Conf',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Have never been late to a work meeting',69,'personality','Fg',1);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Find it difficult to appropach others',70,'personality','Extr',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Rarely get irritated',71,'personality','Neu',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Feel little concern for others',72,'personality','Agr',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Neglect my duties',73,'personality','Con',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Avoid philosophical discussions',74,'personality','Op',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Keep to myself',75,'personality','To',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Find it difficult to get down to work',76,'personality','Con',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Don''t have much energy',77,'personality','Mot',2);
+insert into personalityquestions (question,weight,testname,flags,set) values ('Feel that my life lacks direction',78,'personality','Conf',2);

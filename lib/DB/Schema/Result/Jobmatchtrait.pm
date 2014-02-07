@@ -36,6 +36,12 @@ __PACKAGE__->table("jobmatchtraits");
   is_nullable: 1
   size: 40
 
+=head2 flags
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 20
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -48,6 +54,8 @@ __PACKAGE__->add_columns(
   },
   "name",
   { data_type => "varchar", is_nullable => 1, size => 40 },
+  "flags",
+  { data_type => "varchar", is_nullable => 1, size => 20 },
 );
 
 =head1 PRIMARY KEY
@@ -95,8 +103,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-13 10:03:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RvN497qu4LM5NAL5hVPvqA
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-02-06 13:56:37
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1HDXN7lYftusbm76ktU/NQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

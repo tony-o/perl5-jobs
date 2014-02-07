@@ -29,7 +29,7 @@
         % }
         % if (scalar(@{$stash->{responses}}) > 0) { #we have another question
           <form method="GET" action="/jobseeker/question" class="form-horizontal">
-            <input type="hidden" name="q" value="<%=$stash->{q}%>" />
+            <input type="hidden" name="q" value="<%=$stash->{question}->id%>" />
             <input type="hidden" name="test" value="<%=$stash->{test}%>" />
             <input type="hidden" name="response" id="response" value="" />
             % for my $r (@{$stash->{responses}}) {

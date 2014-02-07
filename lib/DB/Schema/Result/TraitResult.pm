@@ -77,6 +77,22 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("id");
 
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<p_trait_results_uid_jmtid>
+
+=over 4
+
+=item * L</uid>
+
+=item * L</jmtid>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("p_trait_results_uid_jmtid", ["uid", "jmtid"]);
+
 =head1 RELATIONS
 
 =head2 jmtid
@@ -120,8 +136,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-13 10:03:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qnGVPgimWUZ3yPtLW5JIXA
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-02-06 14:17:15
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:KZAtsTHSH4SWSwwrQpkHCg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -1,6 +1,7 @@
 create table if not exists jobmatchtraits (
   id serial,
   name varchar(40),
+  flags varchar(20),
   constraint p_jobmatchtraits primary key (id)
 );
 
@@ -28,6 +29,7 @@ create table if not exists trait_results (
   uid   integer references users (uid),
   jmtid integer references jobmatchtraits (id),
   value float,
-  constraint p_trait_results primary key (id)
+  constraint p_trait_results primary key (id),
+  constraint p_trait_results_uid_jmtid unique (uid,jmtid)
 );
 

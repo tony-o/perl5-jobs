@@ -220,34 +220,41 @@ sub question {
   my @errors;
   if (defined($self->param('response')) && defined($self->param('q'))) {
     # save response - 
-    my ($q)    = $questions->search({testname => $self->param('test')}, {order_by => { -asc => [qw{weight}] } })->slice($self->param('q'));
-    my ($rid)  = $responses->search({testname => $self->param('test'), set => $q->set, fval => $self->param('response')})->all;
-    push @errors, 'INVALIDRESPONSE' if not(defined($user->uid) && defined($q) && defined($rid));
-    try { 
-      $traits->create({
-        uid => $user->uid,
-        qid => $q->id,
-        rid => $rid->id, 
-      }) if scalar(@errors) == 0;
-    } catch {
-      push @errors, 'ALREADYANSWERED';
+    my ($q)    = $questions->search({testname => $self->param('test'), id => $self->param('q')}, {order_by => { -asc => [qw{weight}] } })->first;
+    try {
+      my ($rid)  = $responses->search({testname => $self->param('test'), set => $q->set, fval => $self->param('response')})->all;
+      push @errors, 'INVALIDRESPONSE' if not(defined($user->uid) && defined($q) && defined($rid));
+      try { 
+        $traits->create({
+          uid => $user->uid,
+          qid => $q->id,
+          rid => $rid->id, 
+        }) if scalar(@errors) == 0;
+      } catch {
+        push @errors, 'ALREADYANSWERED';
+      };
     };
-    $qno = $self->param('q') + 1 if scalar(@errors) == 0;
-    say $qno;
   }
 
+  my @answered;
+  my $qu;
   {
-    my @q = $questions->search({testname => $self->param('test')}, {order_by => { -asc => [qw{weight}]}})->all;
+    my @q = $questions->search({testname => $self->param('test')})->all;
     foreach (@q) {
       if ($traits->search({ uid => $user->uid, qid => $_->id })->count > 0) {
+        #say Dumper $_->id;
+        push @answered, $_->id;
         $qno++;
       } else {
+        $qu = $_;
         last;
       }
     }
   }
   
-  my ($q) = $questions->search({testname => $self->param('test')}, {order_by => { -asc => [qw{weight}] } })->slice($qno);
+  say Dumper \@answered;
+  my $q = $qu;
+  say Dumper $q;
   my @r;
   if (defined($q) && scalar(@errors) == 0) {
     @r   = $responses->search({testname => $self->param('test'), set => $q->set}, {order_by => { -asc => [qw{weight}] }})->all; 
