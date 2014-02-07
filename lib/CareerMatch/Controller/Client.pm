@@ -240,21 +240,19 @@ sub question {
   my $qu;
   {
     my @q = $questions->search({testname => $self->param('test')})->all;
-    foreach (@q) {
-      if ($traits->search({ uid => $user->uid, qid => $_->id })->count > 0) {
-        #say Dumper $_->id;
-        push @answered, $_->id;
+    foreach my $qq (@q) {
+      if ($traits->search({ uid => $user->uid, qid => $qq->id })->count > 0) {
+        push @answered, $qq->id;
         $qno++;
       } else {
-        $qu = $_;
+        $qu = $qq;
         last;
       }
     }
   }
   
-  say Dumper \@answered;
   my $q = $qu;
-  say Dumper $q;
+  $q = $questions->search({testname => $self->param('test'), -not => { id => [@answered] } })->first if !defined $q;
   my @r;
   if (defined($q) && scalar(@errors) == 0) {
     @r   = $responses->search({testname => $self->param('test'), set => $q->set}, {order_by => { -asc => [qw{weight}] }})->all; 
