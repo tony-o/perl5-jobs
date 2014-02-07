@@ -44,21 +44,42 @@ sub jobpost {
 #NEED TO ADD AUTHORIZATION STUFF HERE
   if (defined($self->param('title')) && defined($self->param('description'))) {
     my $jobset = $db->resultset('Job');
+    my $jobreq = $db->resultset('JobReqsPrecanned');
+    my $ajreq  = $db->resultset('JobReq');
     my $post   = $jobset->new({
       title       => $self->param('title'),
       description => $self->param('description'),
       domain      => $user->domain,
+      jobclass    => $self->param('jobclass'),
     });
     $post->insert;
     $id = $post->jid;
+
+    # generate the job requirements;
+    my @jobreqs = $jobreq->search({
+      jid => $self->param('jobclass'),
+    })->all;
+
+    map {
+      $ajreq->create({
+        jmtid => $_->jmtid,
+        jobid => $id,
+        value => $_->value,
+      });
+    } @jobreqs;
+
     $self->redirect_to('/employer/joblist');
   }
 
+  my @jcs  = $DB::PKG::db->resultset('Jobclass')->search(undef, { 
+    order_by => { -asc => [qw<jid>] },    
+  })->all;
   $self->stash(
     container => {
-      uid  => $user->uid,
-      path => 'employer/jobpost',
-      jid  => $id,
+      uid        => $user->uid,
+      path       => 'employer/jobpost',
+      jid        => $id,
+      jobclasses => [@jcs],
     }
   );
 }
@@ -73,7 +94,7 @@ sub jobview {
   my $jobmt  = $db->resultset('Jobmatch');
   my $biors  = $db->resultset('Bioanswer');
   my $bioqrs = $db->resultset('Bioquestion');
-  my $post   = $jobset->search({jid => $self->stash->{id}, domain => $user->domain});
+  my $post   = $jobset->search({jid => $self->stash->{id}, domain => $user->domain})->first;
   my @match  = $jobmt->search({jid => $self->stash->{id}}, { order_by => { -asc => 'fval' } })->all;
   my %bios;
   
@@ -96,8 +117,6 @@ sub jobview {
     }
 
   }
-
-  $post      = $post->next;
 
   $self->stash(
     container => {

@@ -9,6 +9,7 @@
       <div class="col-md-9">
           <h3>
             %= $stash->{job}->title
+            <small><%= $stash->{job}->jobclass ? $stash->{job}->jobclass->name : 'Unclassified' %></small>
           </h3>
           <h4>
             Posted on: <b>

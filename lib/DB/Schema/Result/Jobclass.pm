@@ -87,9 +87,39 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 job_reqs_precanneds
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2013-12-23 15:14:40
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1W/WyOZ31Xg2ezuFcXDRHA
+Type: has_many
+
+Related object: L<DB::Schema::Result::JobReqsPrecanned>
+
+=cut
+
+__PACKAGE__->has_many(
+  "job_reqs_precanneds",
+  "DB::Schema::Result::JobReqsPrecanned",
+  { "foreign.jid" => "self.jid" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 jobs
+
+Type: has_many
+
+Related object: L<DB::Schema::Result::Job>
+
+=cut
+
+__PACKAGE__->has_many(
+  "jobs",
+  "DB::Schema::Result::Job",
+  { "foreign.jobclass" => "self.jid" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-02-06 18:54:45
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2kbzTiZKU9It5NT7iuT1gA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

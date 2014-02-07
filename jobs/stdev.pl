@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
 
-BEGIN { push @INC, './lib'; }
+BEGIN { chdir '..'; push @INC, './lib'; }
 
 use DB::PKG;
 use Data::Dumper;
@@ -41,47 +41,54 @@ sub stdev{
   return $std;
 }
 
+
 $jobmt_rs->search({version => 'STDDEV'})->delete;
 my $last;
-for my $jobreq (@jobrqres) {
-  if ($jobreq->jobid->id ne $last && defined $last) {
-#find best matches
-    my @bestfit;
-    my $avg;
-    my $jid;
-    my $highest = { i => 0, v => 0 };
-    for my $k (keys %wa) {
-      $jid = $wa{$k}->{jobid};
-      $avg = average( [@{$wa{$k}->{stddev}}] );
-      if (scalar(@bestfit) < 10) {
-        my %d = (uid => $k, avg => $avg);
-        my $index = push(@bestfit, \%d) - 1;
-        $highest->{i} = $index if $avg > $highest->{v};
-        $highest->{v} = $avg   if $avg > $highest->{v};
-      } else {
-        if ($highest->{v} > $avg) {
-          $bestfit[$highest->{i}]->{uid} = $k;
-          $bestfit[$highest->{i}]->{avg} = $avg;
-          $highest->{v} = $avg;
-          for my $i (0 .. scalar(@bestfit) - 1) {
-            if ($bestfit[$i]->{avg} > $highest->{v}) {
-              $highest->{v} = $bestfit[$i]->{avg};
-              $highest->{i} = $i;
-            }
+
+sub perf {
+  #find best matches
+  my @bestfit;
+  my $avg;
+  my $jid;
+  my $highest = { i => 0, v => 0 };
+  for my $k (keys %wa) {
+    $jid = $wa{$k}->{jobid};
+    say 'analyzing: ' . $jid;
+    $avg = average( [@{$wa{$k}->{stddev}}] );
+    if (scalar(@bestfit) < 10) {
+      my %d = (uid => $k, avg => $avg);
+      my $index = push(@bestfit, \%d) - 1;
+      $highest->{i} = $index if $avg > $highest->{v};
+      $highest->{v} = $avg   if $avg > $highest->{v};
+    } else {
+      if ($highest->{v} > $avg) {
+        $bestfit[$highest->{i}]->{uid} = $k;
+        $bestfit[$highest->{i}]->{avg} = $avg;
+        $highest->{v} = $avg;
+        for my $i (0 .. scalar(@bestfit) - 1) {
+          if ($bestfit[$i]->{avg} > $highest->{v}) {
+            $highest->{v} = $bestfit[$i]->{avg};
+            $highest->{i} = $i;
           }
         }
       }
     }
-    foreach my $bf (@bestfit) {
-      say "jid $jid";
-      $jobmt_rs->create({
-        uid     => $bf->{uid},
-        fval    => $bf->{avg},
-        jid     => $jid,
-        version => 'STDDEV',
-      });
-    }
   }
+  foreach my $bf (@bestfit) {
+    say "jid $jid";
+    $jobmt_rs->create({
+      uid     => $bf->{uid},
+      fval    => $bf->{avg},
+      jid     => $jid,
+      version => 'STDDEV',
+    });
+  }
+}
+
+for my $jobreq (@jobrqres) {
+  if ($jobreq->jobid->id ne $last && defined $last) {
+    perf;
+ }
   undef %wa if $last ne $jobreq->jobid->id; #only do matching for this job;
   $last = $jobreq->jobid->id;
   for my $traitres (@traitres) {
@@ -91,3 +98,5 @@ for my $jobreq (@jobrqres) {
     push @{$wa{$traitres->uid->uid}->{stddev}}, $stddev;
   }
 }
+
+perf;

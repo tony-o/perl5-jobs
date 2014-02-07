@@ -54,6 +54,12 @@ __PACKAGE__->table("jobs");
   is_nullable: 1
   original: {default_value => \"now()"}
 
+=head2 jobclass
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -77,6 +83,8 @@ __PACKAGE__->add_columns(
     is_nullable   => 1,
     original      => { default_value => \"now()" },
   },
+  "jobclass",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -108,6 +116,26 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 jobclass
+
+Type: belongs_to
+
+Related object: L<DB::Schema::Result::Jobclass>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "jobclass",
+  "DB::Schema::Result::Jobclass",
+  { jid => "jobclass" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
 =head2 jobmatches
 
 Type: has_many
@@ -124,8 +152,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-13 14:09:03
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nhEHZU89bKD/2CCLorihwQ
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-02-06 18:54:45
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vBYRHXWajKF0nKHo2ABVXw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -13,6 +13,23 @@
         <form class="form-signin" role="form" method="POST" action="/employer/jobpost">
           <h2 class="form-signin-heading">Create a Job Listing</h2>
           <input type="text"     name="title" class="form-control" placeholder="Job Title" required autofocus>
+          <h2 for="city">Job Class</h2>
+          <select class="form-control" name="jobclass" id="jobclass">
+            %my $isingroup = 0;
+            %foreach my $s (@{$stash->{jobclasses}}) {
+              %if ($s->{hdr}) {
+                %if ($isingroup) {
+                  </optgroup>
+                %}
+                <optgroup label="<%=$s->name%>">
+                %$isingroup = 1;
+              %} else {
+              <option value="<%=$s->jid%>"><%=$s->name%></option>
+              %}
+            %}
+            </optgroup>
+          </select>
+ 
           <h3>Job Description</h3>
           <textarea class="form-control" name="description"></textarea>
           <br/>

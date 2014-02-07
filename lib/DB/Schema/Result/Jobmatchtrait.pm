@@ -87,6 +87,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 job_reqs_precanneds
+
+Type: has_many
+
+Related object: L<DB::Schema::Result::JobReqsPrecanned>
+
+=cut
+
+__PACKAGE__->has_many(
+  "job_reqs_precanneds",
+  "DB::Schema::Result::JobReqsPrecanned",
+  { "foreign.jmtid" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 trait_results
 
 Type: has_many
@@ -103,8 +118,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-02-06 13:56:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1HDXN7lYftusbm76ktU/NQ
+# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-02-06 18:54:45
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Mu9YpSfKRhJmOjbSf2cNFw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
