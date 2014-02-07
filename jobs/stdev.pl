@@ -1,6 +1,10 @@
 #!/usr/bin/env perl
 
-BEGIN { chdir '..'; push @INC, './lib'; }
+BEGIN { 
+  use Cwd qw<abs_path>;
+  chdir join('/', splice([split('/', abs_path($0))] , 0, -1)) . '/..';
+  push @INC, './lib'; 
+}
 
 use DB::PKG;
 use Data::Dumper;
