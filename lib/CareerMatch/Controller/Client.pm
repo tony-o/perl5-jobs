@@ -15,6 +15,36 @@ sub dashboard {
   );
 };
 
+sub jobmatches {
+  my $self = shift;
+  my $user = $self->current_user;
+  my @matches = $DB::PKG::db->resultset('Jobmatch')->search({ uid => $user->uid }, { order_by => { -asc => ['fval'] } })->all;
+
+  $self->stash(
+    container => {
+      uid  => $user->uid,
+      path => 'client/jobmatches',
+      matches => [@matches],
+    }
+  );
+};
+
+
+sub jobview {
+  my $self = shift;
+  my $user = $self->current_user;
+  my @matches = $DB::PKG::db->resultset('Job')->search({ jid => $self->param('id') })->all;
+  my $match = $matches[0];
+
+  $self->stash(
+    container => {
+      uid  => $user->uid,
+      path => 'client/jobmatches',
+      job => $match,
+    }
+  );
+};
+
 sub calcprofile {
   my $uid = shift;
   my $db  = $DB::PKG::db;

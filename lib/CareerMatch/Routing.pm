@@ -26,6 +26,8 @@ sub setup {
   $clients->route('/question')->to('Controller::Client#question');
   $clients->route('/bio')->to('Controller::Client#bio');
   $clients->route('/biopreview')->to('Controller::Client#biopreview');
+  $clients->route('/jobmatches')->to('Controller::Client#jobmatches');
+  $clients->route('/viewjob/:id')->to('Controller::Client#jobview');
 
   #MAIN ROUTES
   $r->route('/login')->to('Controller::Main#login');

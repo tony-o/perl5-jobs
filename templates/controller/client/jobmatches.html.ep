@@ -1,0 +1,25 @@
+% layout 'basic';
+% my $stash = $self->stash->{container};
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        %= include 'partials/clientmenu', stash => $stash;
+      </div>
+      <div class="col-md-9">
+        <h2>Your Job Matches</h2>
+        <table class="table table-striped table-bordered table-hover">
+          <tr><th>Name</th><th>Member Since</th><th>Match %</th></tr>
+          %for my $jm (@{$stash->{matches}}) {
+            % my $l = '/jobseeker/viewjob/' . $jm->jid->id;
+            <tr>
+              % my $title = $jm->jid->title;
+              <td><a href="<%=$l%>"><%= $title %></a></td>
+              <td><a href="<%=$l%>"><%= human_date($jm->jid->dateposted) %></a></td>
+              <td><a href="<%=$l%>"><%= sprintf("%.1f",100/$jm->fval) %> %</a></td>
+            </tr>
+          %}
+        </table>
+      </div>
+    </div>
+  </div> <!-- /container -->

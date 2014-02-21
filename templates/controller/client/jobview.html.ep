@@ -1,0 +1,31 @@
+% layout 'basic';
+% my $stash = $self->stash->{container};
+  
+% my $job = $stash->{job};
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        %= include 'partials/clientmenu', stash => $stash;
+      </div>
+      <div class="col-md-9">
+        %if (defined $job) {
+          <h3>
+            %= $job->title
+            <small><%= $job->jobclass ? $job->jobclass->name : 'Unclassified' %></small>
+          </h3>
+          <h4>
+            Posted on: <b>
+            %= human_date($stash->{job}->dateposted)
+            </b>
+          </h4>
+          <p>
+            %== $job->description
+          </p>
+        %} else {
+          <h3>Sorry, job id <%=$self->param('id')%> wasn't found.</h3>
+
+%= dumper $stash;
+        % }
+      </div>
+    </div>
+  </div> <!-- /container -->

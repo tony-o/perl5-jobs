@@ -31,9 +31,29 @@
           </select>
  
           <h3>Job Description</h3>
-          <textarea class="form-control" name="description"></textarea>
-          <br/>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Create Listing</button>
+          <div>
+            <textarea class="form-control" name="description"></textarea>
+          </div>
+          <h3><a href="#" onclick="$('#jmtr').toggle('slow');">Modify Matching Traits</a> <span class="label label-default">hidden by default</span></h3>
+          <div id="jmtr" style="display:none;">
+            %foreach my $t (@{$stash->{jobmatchtr}}) {
+              <div class="row">
+                <div class="col-md-4">
+                  %= $t->name
+                </div>
+                <div class="col-md-8">
+                  <div class="input-group">
+                    <span class="input-group-addon">±</span>
+                    <input class="form-control" type="number" name="jmt<%=$t->id%>" min="-10" max="10" value="0" onblur="$(this).val() > 10 || $(this).val() < -10 ? $(this).parent().addClass('has-error') : $(this).parent().removeClass('has-error');" />
+                    <span class="input-group-addon">%</span>
+                  </div>
+                </div>
+              </div>
+            %}
+          </div>
+          <div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Create Listing</button>
+          </div>
         </form>
       </div>
     </div>

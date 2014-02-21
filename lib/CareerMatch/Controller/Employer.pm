@@ -61,10 +61,12 @@ sub jobpost {
     })->all;
 
     map {
+      my $plusminus = $self->param('jmt' . $_->jmtid->id);
+      $plusminus = 0 if $plusminus !~ m{^\-?\d+$};
       $ajreq->create({
         jmtid => $_->jmtid,
         jobid => $id,
-        value => $_->value,
+        value => $_->value + $plusminus,
       });
     } @jobreqs;
 
@@ -74,12 +76,14 @@ sub jobpost {
   my @jcs  = $DB::PKG::db->resultset('Jobclass')->search(undef, { 
     order_by => { -asc => [qw<jid>] },    
   })->all;
+  my @jcm  = $DB::PKG::db->resultset('Jobmatchtrait')->all;
   $self->stash(
     container => {
       uid        => $user->uid,
       path       => 'employer/jobpost',
       jid        => $id,
       jobclasses => [@jcs],
+      jobmatchtr => [@jcm],
     }
   );
 }
@@ -88,7 +92,6 @@ sub jobview {
   my $self = shift;
   my $db   = $DB::PKG::db;
   my $user = $self->current_user;
-
 #NEED TO ADD AUTHORIZATION STUFF HERE
   my $jobset = $db->resultset('Job');
   my $jobmt  = $db->resultset('Jobmatch');
