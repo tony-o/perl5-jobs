@@ -18,7 +18,7 @@ sub dashboard {
 sub jobmatches {
   my $self = shift;
   my $user = $self->current_user;
-  my @matches = $DB::PKG::db->resultset('Jobmatch')->search({ uid => $user->uid }, { order_by => { -asc => ['fval'] } })->all;
+  my @matches = $DB::PKG::db->resultset('Jobmatch')->search({ uid => $user->uid }, { order_by => { -desc => ['fval'] } })->all;
 
   $self->stash(
     container => {

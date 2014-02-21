@@ -16,7 +16,7 @@
               % my $title = $jm->jid->title;
               <td><a href="<%=$l%>"><%= $title %></a></td>
               <td><a href="<%=$l%>"><%= human_date($jm->jid->dateposted) %></a></td>
-              <td><a href="<%=$l%>"><%= sprintf("%.1f",100/$jm->fval) %> %</a></td>
+              <td><a href="<%=$l%>"><%= sprintf("%.1f",$jm->fval) %> %</a></td>
             </tr>
           %}
         </table>

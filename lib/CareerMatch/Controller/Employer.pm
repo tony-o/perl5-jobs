@@ -98,7 +98,7 @@ sub jobview {
   my $biors  = $db->resultset('Bioanswer');
   my $bioqrs = $db->resultset('Bioquestion');
   my $post   = $jobset->search({jid => $self->stash->{id}, domain => $user->domain})->first;
-  my @match  = $jobmt->search({jid => $self->stash->{id}}, { order_by => { -asc => 'fval' } })->all;
+  my @match  = $jobmt->search({jid => $self->stash->{id}}, { order_by => { -desc => 'fval' } })->all;
   my %bios;
   
   {

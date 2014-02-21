@@ -32,7 +32,7 @@
                   % $username = $stash->{bios}->{$username}->{'First Name'} . ' ' . $stash->{bios}->{$username}->{'Last Name'} if defined $stash->{bios}->{$username};
                   <td><a href="<%=$l%>"><%= $username %></a></td>
                   <td><a href="<%=$l%>"><%= human_date($m->uid->datecreated) %></a></td>
-                  <td><a href="<%=$l%>"><%= sprintf("%.1f",100/$m->fval) %> %</a></td>
+                  <td><a href="<%=$l%>"><%= sprintf("%.1f",$m->fval) %> %</a></td>
                 </tr>
               %}
             </table>
