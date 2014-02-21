@@ -39,7 +39,7 @@ sub jobview {
   $self->stash(
     container => {
       uid  => $user->uid,
-      path => 'client/jobmatches',
+      path => 'client/viewjob',
       job => $match,
     }
   );
