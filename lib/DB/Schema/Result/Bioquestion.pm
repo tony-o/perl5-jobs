@@ -41,6 +41,13 @@ __PACKAGE__->table("bioquestions");
   data_type: 'integer'
   is_nullable: 1
 
+=head2 coltype
+
+  data_type: 'varchar'
+  default_value: 'T'
+  is_nullable: 1
+  size: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -55,6 +62,8 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 1, size => 40 },
   "weight",
   { data_type => "integer", is_nullable => 1 },
+  "coltype",
+  { data_type => "varchar", default_value => "T", is_nullable => 1, size => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -87,8 +96,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-20 10:08:40
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zWtLY5vWDrrHOM+MmrMsJw
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-02-28 14:43:49
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:p+Yui+bQIVtCwqzp8al5YQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
