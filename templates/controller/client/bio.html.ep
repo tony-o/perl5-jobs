@@ -25,14 +25,11 @@
           % for my $q (@{$stash->{questions}}) {
             <div class="form-group">
               <label for="q<%=$q->id%>"><%= $q->question %></label>
-              % given ($q->coltype) {
-              %   when ('A') {
-                    <textarea class="form-control rich" name="q<%=$q->id%>" value="<%= $stash->{answers}->{$q->question} || '' %>"></textarea>
-              %   }
-              %   default {
+              % if (uc $q->coltype eq 'A') {
+                  <textarea class="form-control rich" name="q<%=$q->id%>" value="<%= $stash->{answers}->{$q->question} || '' %>"></textarea>
+              % } else {
                     <input type="text" placeholder="<%= $q->question %>" class="form-control" name="q<%=$q->id%>" value="<%= $stash->{answers}->{$q->question} || '' %>" />
-              %   }
-              % };
+              % }
             </div>
           % }
           <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
