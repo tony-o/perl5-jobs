@@ -6,8 +6,12 @@
       %= $stash->{username}
     % }
   </h1>
-  <h3><b>Biography</b></h3>
+  <h3><b>Personal Info</b></h3>
   <h4>Contact Number: <b><%= $stash->{answers}->{'Contact Number'} ? human_phones($stash->{answers}->{'Contact Number'}) : 'Not provided' %></b></h4>
+  % if (defined $stash->{answers}->{'Sell yourself in 500 characters'}) {
+    <h4>Elevator Pitch:</h4>
+    <pre><%= $stash->{answers}->{'Sell yourself in 500 characters'}%></pre>
+  % }
   <br/>
   % if (scalar(@{$stash->{education}}) > 0) {
     <h3><b>Education History</b></h3>
