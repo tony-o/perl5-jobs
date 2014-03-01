@@ -3,6 +3,23 @@ use Mojo::Base qw<Mojolicious::Controller>;
 use Try::Tiny;
 use DB::PKG;
 
+sub skills {
+  my $self = shift;
+  my $user = $self->current_user;
+  my @skills = $DB::PKG::db->resultset('Skillslist')->search({ 
+    skill => { 
+      -like => '%' . $self->param('skill') . '%',
+    }, 
+  }, { rows => 10 })->all; 
+  $self->stash(
+    container => {
+      uid => $user->uid,
+      skills => [@skills], 
+    }
+  );
+
+};
+
 sub dashboard {
   my $self = shift;
   my $user = $self->current_user;
@@ -309,6 +326,8 @@ sub bio {
 
   my $bioq = $DB::PKG::db->resultset('Bioquestion');
   my $bioa = $DB::PKG::db->resultset('Bioanswer');
+  my $bios = $DB::PKG::db->resultset('Skillsuser');
+  my $skil = $DB::PKG::db->resultset('Skillslist');
 
   my @questions = $bioq->search(undef, {order_by => { -asc => [qw{weight}] }})->all;
   my @messages;
@@ -329,6 +348,28 @@ sub bio {
         key => 'p_bioanswers_uid_qid',
       });
     }
+
+    use Data::Dumper; say Dumper $self->param('skills');
+    my @skills = split ',', $self->param('skills');
+    foreach my $skill (@skills) {
+      $skill =~ s{^[\s"]+}{};
+      $skill =~ s{[\s"]+$}{};
+      continue if $skill eq '';
+      my $id = $skil->search({ skill => $skill })->first;
+      if (!defined $id || !defined $id->id) {
+        say 'new skill';
+        my $newskill = $skil->create({
+          skill => $skill,
+        });
+        $id = $newskill->id;
+      } else {
+        $id = $id->id;
+      }
+      say $id;
+      if($bios->search({ uid => $user->uid, sid => $id })->count == 0){
+        $bios->create({uid => $user->uid, sid => $id });
+      }
+    }
     push @messages, 'SUCCESSFULUPDATE';
   }
 
@@ -337,12 +378,15 @@ sub bio {
     $answers{$_->qid->question} = $_->val;
   }
 
+  my @skillls = $bios->search({ uid => $user->uid })->all;
+
   $self->stash(container => {
     questions => [@questions],
     messages  => [@messages],
     answers   => \%answers, 
     uid       => $user->uid,
     path     => 'client/bio',
+    skills   => [@skillls],
   });
 }
 

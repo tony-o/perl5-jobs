@@ -1,0 +1,4 @@
+% my $stash = $self->stash->{container};
+% foreach my $s (@{$stash->{skills}}) {
+  %= $s->id . ',' . $s->skill
+% }

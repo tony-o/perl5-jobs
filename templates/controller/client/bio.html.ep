@@ -1,4 +1,6 @@
 % my $stash = $self->stash->{container};
+% $stash->{scripts} = [] if !defined($stash->{scripts});
+% push $stash->{scripts}, '/js/bio.js';
 % layout 'basic', stash => $stash;
 
   <div class="container">
@@ -21,17 +23,32 @@
 
         % }
 
-        <form method="POST" action="/jobseeker/bio"> 
+        <form method="POST" action="/jobseeker/bio" id="bio"> 
           % for my $q (@{$stash->{questions}}) {
             <div class="form-group">
               <label for="q<%=$q->id%>"><%= $q->question %></label>
               % if (uc $q->coltype eq 'A') {
-                  <textarea class="form-control rich" name="q<%=$q->id%>" value="<%= $stash->{answers}->{$q->question} || '' %>"></textarea>
+                  <textarea class="form-control rich" name="q<%=$q->id%>" value="<%= $stash->{answers}->{$q->question} || '' %>"><%= $stash->{answers}->{$q->question}%></textarea>
               % } else {
-                    <input type="text" placeholder="<%= $q->question %>" class="form-control" name="q<%=$q->id%>" value="<%= $stash->{answers}->{$q->question} || '' %>" />
+                  <input type="text" placeholder="<%= $q->question %>" class="form-control" name="q<%=$q->id%>" value="<%= $stash->{answers}->{$q->question} || '' %>" />
               % }
             </div>
           % }
+          <h4>Skills</h4>
+          <div class="form-group">
+            <input type="text" id="peterpiper" class="form-control" placeholder="Add a skill" />
+            <div id="skillsuggestions">
+
+            </div>
+          </div>
+          <div id="skilllist">
+            % my $sk = '';
+            % foreach my $skill (@{$stash->{skills}}) {
+              <div><%= $skill->sid->skill %></div>
+              % $sk .= '"' . $skill->sid->skill . '",';
+            % }
+          </div>
+          <input type="hidden" id="skillinfo" name="skills" value="<%=$sk%>" />
           <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
         </form>
       </div>
