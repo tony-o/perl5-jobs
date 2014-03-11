@@ -1,4 +1,6 @@
 lib/DB/db.cnf
+tmp
+tmp/*
 .htaccess
 log/*.*
 .*.swp
