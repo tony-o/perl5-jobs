@@ -101,6 +101,20 @@ __PACKAGE__->add_columns(
 
 __PACKAGE__->set_primary_key("uid");
 
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<p_users_username>
+
+=over 4
+
+=item * L</username>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("p_users_username", ["username"]);
+
 =head1 RELATIONS
 
 =head2 aroles
@@ -239,8 +253,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-02-28 15:26:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vRq3/6sOUqIJMPKlqNZVDA
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-11 20:07:13
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:l72di4+0q15hF01gMGUwig
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

@@ -48,6 +48,11 @@ __PACKAGE__->table("bioquestions");
   is_nullable: 1
   size: 1
 
+=head2 linkedinmeta
+
+  data_type: 'text'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -64,6 +69,8 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_nullable => 1 },
   "coltype",
   { data_type => "varchar", default_value => "T", is_nullable => 1, size => 1 },
+  "linkedinmeta",
+  { data_type => "text", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -96,8 +103,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-02-28 14:43:49
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:p+Yui+bQIVtCwqzp8al5YQ
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-11 20:32:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8/AWYD2HvS2UT2clu7XqwQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

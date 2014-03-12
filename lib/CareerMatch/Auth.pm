@@ -1,8 +1,72 @@
 package CareerMatch::Auth;
 use Mojo::Base qw<Mojolicious::Controller>;
+use Mojo::UserAgent;
 use Email::Address;
 use DB::PKG;
 use Digest::SHA qw{sha256_hex};
+use JSON::Tiny qw<j>;
+use Try::Tiny;
+use XML::Simple;
+
+#linked in auth
+sub authli {
+  my ($self) = @_;
+  $self->render_later;
+
+  if (!defined($self->param('code'))) {
+    #get authorization
+    $self->redirect_to('https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=75f1aw5fq1yht9&scope=r_fullprofile%20r_emailaddress%20r_network&state=DEAAIR&redirect_uri=http://127.0.0.1:3000/auth/li');
+    return;
+  }
+
+  my $url = 'https://www.linkedin.com/uas/oauth2/accessToken?grant_type=authorization_code&code=' . $self->param('code') . '&redirect_uri=http://127.0.0.1:3000/auth/li&client_id=75f1aw5fq1yht9&client_secret=otI80taiNVeM1gKI';
+
+  my $delay = Mojo::IOLoop->delay(sub {
+    my ($delay,$tx) = @_;
+    my $j = j($tx->res->body);
+    my $url = 'https://api.linkedin.com/v1/people/~:(educations,certifications,skills,languages,first-name,last-name,summary,positions,email-address)?oauth2_access_token=' . $j->{access_token};
+    say $url;
+    my $ndel = Mojo::IOLoop->delay(sub {
+      my ($delay,$tx) = @_;
+      my $xs = XML::Simple->new;
+      my $xl = $xs->XMLin($tx->res->body);
+      my ($email) = Email::Address->parse($xl->{'email-address'});
+      my $urs   = $DB::PKG::db->resultset('User');
+      my $users = {
+        username => $xl->{'email-address'},
+        pass     => 'linkedin',
+        usertype => 'JS',
+        domain   => $email->host,
+      };
+      my $user = $urs->update_or_create($users, {
+        key => 'p_users_username',
+      });
+      my @bioqs = $DB::PKG::db->resultset('Bioquestion')->all;
+      my $bioqh = { };
+      foreach my $a (@bioqs){
+        $bioqh->{$a->linkedinmeta} = $a->id if defined $a->linkedinmeta;
+      }
+      use Data::Dumper; say Dumper($bioqh);
+      my @bioanswers;
+      for my $k (keys %{$bioqh}) {
+        push @bioanswers, {
+          uid => $user->id,
+          qid => $bioqh->{$k},
+          val => $xl->{$k},
+        } if defined $xl->{$k};
+      }
+      my $answ = $DB::PKG::db->resultset('Bioanswer');
+      map {
+        $answ->update_or_create($_, {
+          key => 'p_bioanswers_uid_qid',
+        });
+      } @bioanswers;
+      $self->redirect_to('/login');
+    });
+    $self->ua->get($url => $ndel->begin);
+  });
+  $self->ua->get($url => $delay->begin);
+};
 
 sub check {
   my ($self) = @_;
