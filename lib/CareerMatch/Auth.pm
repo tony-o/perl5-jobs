@@ -26,6 +26,7 @@ sub authli {
 
   my $delay = Mojo::IOLoop->delay(sub {
     my ($delay,$tx) = @_;
+    use Data::Dumper; say Dumper $tx->res->body;
     my $j = j($tx->res->body);
     my $url = 'https://api.linkedin.com/v1/people/~:(educations,certifications,skills,languages,first-name,last-name,summary,positions,email-address)?oauth2_access_token=' . $j->{access_token};
     my $ndel = Mojo::IOLoop->delay(sub {
