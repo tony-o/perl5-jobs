@@ -12,15 +12,17 @@ use XML::Simple;
 sub authli {
   my ($self) = @_;
   $self->render_later;
-  use Data::Dumper; say Dumper $self->req;
+  my $URL = $self->req->{url}->base->{scheme} . '://' . $self->req->{url}->base->{host};
+  $URL .= ':' . $self->req->{url}->base->{port} if defined $self->req->{url}->base->{port};
+
 
   if (!defined($self->param('code'))) {
     #get authorization
-    $self->redirect_to('https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=75f1aw5fq1yht9&scope=r_fullprofile%20r_emailaddress%20r_network&state=DEAAIR&redirect_uri=http://127.0.0.1:3000/auth/li');
+    $self->redirect_to('https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=75f1aw5fq1yht9&scope=r_fullprofile%20r_emailaddress%20r_network&state=DEAAIR&redirect_uri=' . $URL . '/auth/li');
     return;
   }
 
-  my $url = 'https://www.linkedin.com/uas/oauth2/accessToken?grant_type=authorization_code&code=' . $self->param('code') . '&redirect_uri=http://127.0.0.1:3000/auth/li&client_id=75f1aw5fq1yht9&client_secret=otI80taiNVeM1gKI';
+  my $url = 'https://www.linkedin.com/uas/oauth2/accessToken?grant_type=authorization_code&code=' . $self->param('code') . '&redirect_uri=' . $URL . '/auth/li&client_id=75f1aw5fq1yht9&client_secret=otI80taiNVeM1gKI';
 
   my $delay = Mojo::IOLoop->delay(sub {
     my ($delay,$tx) = @_;
