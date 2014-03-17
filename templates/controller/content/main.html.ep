@@ -1,0 +1,4 @@
+% my $stash = $self->stash->{container};
+% layout 'basic', stash => $stash;
+
+%== $stash->{static_content}

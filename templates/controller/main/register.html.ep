@@ -18,6 +18,9 @@
           % }
         % }
         <div class="form-group">
+          <a href="/auth/li" class="btn btn-lg btn-info btn-block">Sign in with LinkedIn</a>
+        </div>
+        <div class="form-group">
           <label for="username">Username</label>
           <input type="text"     name="username" class="form-control" placeholder="Email address" required autofocus>
         </div>

@@ -25,7 +25,6 @@ sub authli {
     my ($delay,$tx) = @_;
     my $j = j($tx->res->body);
     my $url = 'https://api.linkedin.com/v1/people/~:(educations,certifications,skills,languages,first-name,last-name,summary,positions,email-address)?oauth2_access_token=' . $j->{access_token};
-    say $url;
     my $ndel = Mojo::IOLoop->delay(sub {
       my ($delay,$tx) = @_;
       my $xs = XML::Simple->new;
@@ -37,6 +36,7 @@ sub authli {
         pass     => 'linkedin',
         usertype => 'JS',
         domain   => $email->host,
+        oauth    => $j->{'access_token'},
       };
       my $user = $urs->update_or_create($users, {
         key => 'p_users_username',
@@ -46,7 +46,6 @@ sub authli {
       foreach my $a (@bioqs){
         $bioqh->{$a->linkedinmeta} = $a->id if defined $a->linkedinmeta;
       }
-      use Data::Dumper; say Dumper($bioqh);
       my @bioanswers;
       for my $k (keys %{$bioqh}) {
         push @bioanswers, {
@@ -61,7 +60,51 @@ sub authli {
           key => 'p_bioanswers_uid_qid',
         });
       } @bioanswers;
-      $self->redirect_to('/login');
+
+      my @educations;
+      my $edu = $DB::PKG::db->resultset('Education');
+      foreach my $f (keys %{$xl->{educations}->{education}}) {
+        my $e = $xl->{educations}->{education}->{$f};
+        my $hash = {
+          institution => $e->{'school-name'},
+          degree => $e->{degree},
+          degdt => defined $e->{'end-date'} ? $e->{'end-date'}->{year} . '-01-01' : undef,
+          linkedinid => $f,
+          uid => $user->id,
+        };
+        push @educations, $hash;
+      }
+      
+      map {
+        $edu->update_or_create($_, {
+          key => 'p_education_linkedinid',
+        });
+      } @educations;
+
+      my @positions;
+      my $emp = $DB::PKG::db->resultset('Employer');
+      foreach my $f (keys %{$xl->{positions}->{position}}) {
+        my $e = $xl->{positions}->{position}->{$f};
+        my $h = {
+          employer => $e->{company}->{name},
+          jobtitle => $e->{title},
+          linkedinid => $f,
+          uid => $user->id,
+        };
+        $h->{enddt} = $e->{'end-date'}->{year} . '-' . $e->{'end-date'}->{month} . '-01' if defined ($e->{'end-date'});
+        $h->{startdt} = $e->{'start-date'}->{year} . '-' . $e->{'start-date'}->{month} . '-01' if defined ($e->{'start-date'}),
+        push @positions, $h;
+      }
+      
+      map {
+        $emp->update_or_create($_, {
+          key => 'p_employers_linkedinid',
+        });
+      } @positions;
+      $self->session->{uid} = $user->id;
+      $self->session->{oauthflag} = 'true';
+      $self->authenticate($user->username, 'linkedin');
+      $self->redirect_to('/');
     });
     $self->ua->get($url => $ndel->begin);
   });
@@ -78,12 +121,8 @@ sub check {
 sub load_user {
   my ($self, $uid) = @_;
   my $users = $DB::PKG::db->resultset('User');
-  my $ss    = $users->search({uid => $uid}, { columns => [qw<uid username usertype domain>] });
-  while (my $s = $ss->next) {
-    return $s;
-  }
-  return undef;
-
+  my $ss    = $users->search({uid => $uid}, { columns => [qw<uid username usertype domain>] })->first;
+  return $ss;
 };
 
 sub validate_user {
@@ -91,6 +130,7 @@ sub validate_user {
   my $users = $DB::PKG::db->resultset('User');
   my $ss    = $users->search({username => $user,}, { columns => [qw<uid pass>] });
   while (my $s = $ss->next) {
+    return $s->uid if $self->session->{oauthflag} eq 'true';
     my ($dpass, $salt) = split '\|', $s->pass;
     return $s->uid if chk_pass("$pass$salt") eq "$dpass";
   }

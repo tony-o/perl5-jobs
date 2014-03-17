@@ -97,6 +97,12 @@ __PACKAGE__->table("education");
   is_nullable: 1
   original: {default_value => \"now()"}
 
+=head2 linkedinid
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 20
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -134,6 +140,8 @@ __PACKAGE__->add_columns(
     is_nullable   => 1,
     original      => { default_value => \"now()" },
   },
+  "linkedinid",
+  { data_type => "varchar", is_nullable => 1, size => 20 },
 );
 
 =head1 PRIMARY KEY
@@ -147,6 +155,20 @@ __PACKAGE__->add_columns(
 =cut
 
 __PACKAGE__->set_primary_key("eid");
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<p_education_linkedinid>
+
+=over 4
+
+=item * L</linkedinid>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("p_education_linkedinid", ["linkedinid"]);
 
 =head1 RELATIONS
 
@@ -211,8 +233,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-13 10:03:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oxyo7VDfXKlWjA9mnywvhA
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-16 17:26:45
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pddYcOQm8K5kVkshobZUCQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

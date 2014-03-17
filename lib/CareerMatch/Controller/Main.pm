@@ -5,14 +5,17 @@ use CareerMatch::Auth;
 
 sub main {
   my $self = shift;
+  my $content = $DB::PKG::db->resultset('StaticContent')->search({ spath => '/' })->first;
   my $user = $self->current_user;
   $self->stash(
     container => {
       uid  => $user,
       utype => $user ? $user->usertype : '',
       path => 'home',
+      static_content => $content->scontent,
     }
   );
+  $self->render(template => 'controller/content/main');
 };
 
 sub login {

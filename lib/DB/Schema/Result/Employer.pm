@@ -88,6 +88,12 @@ __PACKAGE__->table("employers");
   is_nullable: 1
   size: 20
 
+=head2 linkedinid
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 20
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -118,6 +124,8 @@ __PACKAGE__->add_columns(
   { data_type => "boolean", default_value => \"false", is_nullable => 1 },
   "phonenumber",
   { data_type => "varchar", is_nullable => 1, size => 20 },
+  "linkedinid",
+  { data_type => "varchar", is_nullable => 1, size => 20 },
 );
 
 =head1 PRIMARY KEY
@@ -131,6 +139,20 @@ __PACKAGE__->add_columns(
 =cut
 
 __PACKAGE__->set_primary_key("eid");
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<p_employers_linkedinid>
+
+=over 4
+
+=item * L</linkedinid>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("p_employers_linkedinid", ["linkedinid"]);
 
 =head1 RELATIONS
 
@@ -195,8 +217,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-20 15:18:46
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ymUd077s6fiDQaV2HkxnNw
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-16 18:03:01
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:AmdW1k+pmRY6Qc5iQDs+cQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

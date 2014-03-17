@@ -36,6 +36,7 @@ sub setup {
   $r->route('/register')->to('Controller::Main#register');
   $r->route('/register_confirmation')->to('Controller::Main#register_confirmation');
   $r->route('/')->to('Controller::Main#main');
+  $r->route('/content/:path')->to('Controller::Content#main');
 };
 
 

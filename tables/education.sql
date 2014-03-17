@@ -11,5 +11,7 @@ create table if not exists education (
   degreetype  integer references degreetypes ( did ),
   degree      varchar(128),
   degdt       timestamp default now(),
+  linkedinid  varchar(20),
   constraint p_education primary key (eid),
+  constraint p_education_linkedinid unique (linkedinid)
 );
