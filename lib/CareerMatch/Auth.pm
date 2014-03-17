@@ -12,6 +12,7 @@ use XML::Simple;
 sub authli {
   my ($self) = @_;
   $self->render_later;
+  use Data::Dumper; say Dumper $self->req;
 
   if (!defined($self->param('code'))) {
     #get authorization
