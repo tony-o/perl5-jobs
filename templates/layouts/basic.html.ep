@@ -12,6 +12,7 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/hirenetics.css" rel="stylesheet">
+    <link href="/css/theme.css" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">

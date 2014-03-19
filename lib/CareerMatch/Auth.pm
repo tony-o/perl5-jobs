@@ -108,12 +108,22 @@ sub authli {
       $self->session->{uid} = $user->id;
       $self->session->{oauthflag} = 'true';
       $self->authenticate($user->username, 'linkedin');
-      $self->redirect_to('/');
+      &Auth::redirect_auth($self);
     });
     $self->ua->get($url => $ndel->begin);
   });
   $self->ua->get($url => $delay->begin);
 };
+
+sub redirect_auth {
+  my ($self) = @_;
+  my $user = $self->current_user;
+  $self->redirect_to($self->session->{eventually}) if defined($self->session->{eventually}) && $self->session->{eventually} ne '/login';
+  undef $self->session->{eventually};
+  $self->redirect_to('/employer') if $user->usertype eq 'EM';
+  $self->redirect_to('/jobseeker') if $user->usertype eq 'JS';
+  $self->redirect_to('/'); 
+}
 
 sub check {
   my ($self) = @_;

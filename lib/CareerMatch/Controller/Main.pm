@@ -6,7 +6,7 @@ use CareerMatch::Auth;
 sub main {
   my $self = shift;
   my $content = $DB::PKG::db->resultset('StaticContent')->search({ spath => '/' })->first;
-  my $user = $self->current_user;
+  my $user = $self->current_user
   $self->stash(
     container => {
       uid  => $user,
@@ -23,8 +23,7 @@ sub login {
   my @errors;
   $self->logout;
   my $return = $self->authenticate($self->param('username'), $self->param('password')) if $self->param('username') && $self->param('password');
-  $self->redirect_to('/') if $return && ($self->session->{'eventually'} eq '/login' || $self->session->{'eventually'} eq '');
-  $self->redirect_to($self->session->{'eventually'}) if $return;
+  &Auth::redirect_auth($self) if $return;
   push @errors, 'INVALIDUSERPASS' if defined($self->param('username'));
   $self->stash(
     container => {
