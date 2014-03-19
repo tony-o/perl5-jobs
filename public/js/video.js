@@ -1,4 +1,11 @@
 (function(){
   //detect video capabilities;
-  alert(window.orientation);
+  var mobile = (window.orientation == undefined) ? 0 : 1;
+
+  if(mobile){
+    //use input type=camcorder
+    $("#mobile").show();
+  }else{
+    //use some flash crap
+  }
 })();
