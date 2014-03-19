@@ -6,7 +6,7 @@ use CareerMatch::Auth;
 sub main {
   my $self = shift;
   my $content = $DB::PKG::db->resultset('StaticContent')->search({ spath => '/' })->first;
-  my $user = $self->current_user
+  my $user = $self->current_user;
   $self->stash(
     container => {
       uid  => $user,
