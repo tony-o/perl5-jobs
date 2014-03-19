@@ -1,9 +1,52 @@
 
+<style>
+  #mobile, #startop { display: none; }
 
-<div id="mobile" stle="display:none;">
-  <input type="file" accept="video/*" capture="camcorder" />
+  body {
+      padding: 0;
+      margin: 0;
+  }
+
+#mobile > div { position: relative; }
+
+#mobile > div { 
+      width: 100%;
+      height: 100%;
+  }
+
+#mobile > div > input {
+      z-index: 10;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+  }
+
+#mobile > div > div {
+      z-index: 5;
+      position: absolute;
+      background: #EEE;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }
+
+</style>
+
+<div id="mobile">
+  <div>
+    <input type="file" accept="video/*" capture="camcorder" style="color:#000;background:#000;" />
+    <div>
+      Upload your video!
+    </div>
+  </div>
 </div>
-<div id="startop" stle="display:none;">
+<div id="startop">
+  put flash obj here
 </div>
 
-<script src="/js/video.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="js/video.js"></script>
