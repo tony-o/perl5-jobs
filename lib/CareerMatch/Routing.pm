@@ -14,6 +14,7 @@ sub setup {
   $employers->route('/jobpost')->to('Controller::Employer#jobpost');
   $employers->route('/jobview/:id')->to('Controller::Employer#jobview');
   $employers->route('/viewprofile/:id')->to('Controller::Employer#viewprofile');
+  $employers->route('/videoinvite/:jid/:uid')->to('Controller::Employer#videoinvite');
 
   #CLIENT ROUTING
   my $clients = $r->bridge('/jobseeker')->to('Auth#check');
@@ -32,11 +33,12 @@ sub setup {
 
   #MAIN ROUTES
   $r->route('/login')->to('Controller::Main#login');
-  $r->post('/submit-video')->to('Controller::Main#submit_video');
   $r->route('/auth/li')->to('Auth#authli');
   $r->route('/register')->to('Controller::Main#register');
   $r->route('/register_confirmation')->to('Controller::Main#register_confirmation');
   $r->route('/')->to('Controller::Main#main');
+  $r->route('/content/record-video/:rid')->to('Controller::Content#recordvideo');
+  $r->post('/content/submit-video')->to('Controller::Content#submitvideo');
   $r->route('/content/:path')->to('Controller::Content#main');
 };
 

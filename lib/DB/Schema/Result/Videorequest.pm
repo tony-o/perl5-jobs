@@ -42,6 +42,12 @@ __PACKAGE__->table("videorequests");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 rid
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 64
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -56,6 +62,8 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "jid",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "rid",
+  { data_type => "varchar", is_nullable => 1, size => 64 },
 );
 
 =head1 PRIMARY KEY
@@ -69,6 +77,22 @@ __PACKAGE__->add_columns(
 =cut
 
 __PACKAGE__->set_primary_key("id");
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<p_videorequests_uid_jid>
+
+=over 4
+
+=item * L</jid>
+
+=item * L</uid>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("p_videorequests_uid_jid", ["jid", "uid"]);
 
 =head1 RELATIONS
 
@@ -113,8 +137,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-20 10:30:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:0WeXe42WoJw3eR1U+MQsjw
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-20 13:54:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+VBBVRg4rQZ+J9nz2azypA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

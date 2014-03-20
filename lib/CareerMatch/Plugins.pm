@@ -11,6 +11,10 @@ sub setup {
     'load_user'     => \&CareerMatch::Auth::load_user,
     'validate_user' => \&CareerMatch::Auth::validate_user, 
   });
+  $self->plugin(mail => {
+    from => 'no-reply@hirenetics.com',
+    type => 'text/html',
+  });
 
   $self->plugin('Human', {
     # Set money parameters if you need

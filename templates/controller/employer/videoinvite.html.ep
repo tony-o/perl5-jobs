@@ -1,0 +1,15 @@
+% layout 'basic';
+% my $stash = $self->stash->{container};
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        %= include 'partials/employermenu', stash => $stash;
+      </div>
+      <div class="col-md-9">
+        Invite for video.
+ 
+        <p><%= dumper $stash->{errors} %></p>
+      </div>
+    </div>
+  </div> <!-- /container -->

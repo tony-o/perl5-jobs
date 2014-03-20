@@ -26,6 +26,7 @@
                 <tr>
                   % my $username = $m->uid->username;
                   % $username = $stash->{bios}->{$username}->{'First Name'} . ' ' . $stash->{bios}->{$username}->{'Last Name'} if defined $stash->{bios}->{$username};
+                  <td><a href="/employer/videoinvite/<%= $stash->{job}->jid %>/<%= $m->uid->uid %>">Invite for Video</a></td>
                   <td><a href="<%=$l%>"><%= $username %></a></td>
                   <td><a href="<%=$l%>"><%= human_date($m->uid->datecreated) %></a></td>
                   <td><a href="<%=$l%>"><%= sprintf("%.1f",$m->fval) %> %</a></td>

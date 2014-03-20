@@ -2,6 +2,8 @@ package CareerMatch::Controller::Employer;
 use Mojo::Base qw<Mojolicious::Controller>;
 use DB::PKG;
 use CareerMatch::Auth;
+use Try::Tiny;
+use Digest::SHA qw{sha256_hex};
 
 sub dashboard {
   my $self = shift;
@@ -15,6 +17,52 @@ sub dashboard {
     }
   );
 };
+
+sub videoinvite {
+  my $self = shift;
+  my $db = $DB::PKG::db;
+  my $user = $self->current_user;
+  
+  my $vr  = $db->resultset('Videorequest');
+  my @errors;
+  my $req;
+  push @errors, 'ENOAUTH' if ! CareerMatch::Auth::role($user->uid, 'VIDEOREQ');
+  try {
+    my $job = $db->resultset('Job')->search({ jid => $self->param('jid'), domain => $user->domain })->first;
+    die 'ENOAUTH' if !defined $job;
+    my $sha = sha256_hex(time);
+    $req = $vr->update_or_create({
+      uid => $self->param('uid'),
+      jid => $self->param('jid'),
+      rid => $sha,
+    }, {
+      key => 'p_videorequests_uid_jid'
+    });
+
+    my $URL = $self->req->{url}->base->{scheme} . '://' . $self->req->{url}->base->{host};
+    $self->mail(
+      to => $req->uid->username,
+      subject => 'You\'ve been invited to record a video for: ' . $req->jid->title,
+      data => "<a href=\"$URL/content/record-video/$sha\">Click here to do just that!</a>",
+    );
+
+  } catch {
+    when (/^ENOAUTH/) {
+      push @errors, 'ENOAUTH';
+      $req = undef;
+    };
+    default {
+      push @errors, 'EINSERT';
+      say $_;
+      $req   = undef;
+    };
+  } if scalar @errors == 0;
+  $self->stash(container => {
+    uid => $user,
+    path => 'employer/joblist',
+    errors => \@errors,
+  });
+}
 
 sub joblist {
   my $self = shift;

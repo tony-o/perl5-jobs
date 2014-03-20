@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+% my $stash = $self->stash->{container};
+<html>
+  <head>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      body {
+          padding: 0;
+          margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/content/submit-video" method="POST" enctype="multipart/form-data">
+      <input type="hidden" value="<%= $stash->{request}->{rid} %>" />
+      <div id="mobile">
+        <div>
+          <input type="file" accept="video/*" capture="camcorder" style="color:#000;background:#000;" name="file" />
+          <div>
+            Upload your video!
+          </div>
+        </div>
+        <div>
+          <input type="submit" />
+          <div>
+            Submit your video
+          </div>
+        </div>
+      </div>
+    </form>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/js/video.js"></script>
+  </body>
+</html>
