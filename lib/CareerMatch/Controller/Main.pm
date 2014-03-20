@@ -27,7 +27,7 @@ sub login {
   my @errors;
   $self->logout;
   my $return = $self->authenticate($self->param('username'), $self->param('password')) if $self->param('username') && $self->param('password');
-  Auth::redirect_auth($self) if $return;
+  CareerMatch::Auth::redirect_auth($self) if $return;
   push @errors, 'INVALIDUSERPASS' if defined($self->param('username'));
   $self->stash(
     container => {
