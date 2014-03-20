@@ -25,7 +25,7 @@
                 % my $l = '/employer/viewprofile/' . $m->uid->uid;
                 <tr>
                   % my $username = $m->uid->username;
-                  % $username = $stash->{bios}->{$username}->{'First Name'} . ' ' . $stash->{bios}->{$username}->{'Last Name'} if defined $stash->{bios}->{$username};
+                  % $username = $stash->{bios}->{$username}->{'First Name'} . ' ' . $stash->{bios}->{$username}->{'Last Name'} if defined $stash->{bios}->{$username} && defined $stash->{bios}->{$username}->{'First Name'};
                   % if ( defined $stash->{bios}->{$m->uid->username}->{'Video Count'} && $stash->{bios}->{$m->uid->username}->{'Video Count'} > 0 ) {
                     <td><a target="_video" href="/employer/viewvideo/<%= $stash->{bios}->{$m->uid->username}->{'Video ID'} %>">View Video</a></td>
                   % } else {
