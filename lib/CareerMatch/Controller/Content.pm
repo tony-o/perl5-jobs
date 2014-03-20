@@ -28,7 +28,6 @@ sub recordvideo {
 
   push @errors, 'ENOREQ' if !defined $validreq;
 
-  say $validreq->rid;
   $self->stash(container => {
     errors  => \@errors,
     request => $validreq,

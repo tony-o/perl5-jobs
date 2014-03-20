@@ -349,7 +349,6 @@ sub bio {
       });
     }
 
-    use Data::Dumper; say Dumper $self->param('skills');
     my @skills = split ',', $self->param('skills');
     foreach my $skill (@skills) {
       $skill =~ s{^[\s"]+}{};
@@ -357,7 +356,6 @@ sub bio {
       continue if $skill eq '';
       my $id = $skil->search({ skill => $skill })->first;
       if (!defined $id || !defined $id->id) {
-        say 'new skill';
         my $newskill = $skil->create({
           skill => $skill,
         });
@@ -365,7 +363,6 @@ sub bio {
       } else {
         $id = $id->id;
       }
-      say $id;
       if($bios->search({ uid => $user->uid, sid => $id })->count == 0){
         $bios->create({uid => $user->uid, sid => $id });
       }

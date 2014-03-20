@@ -54,7 +54,6 @@ sub videoinvite {
     };
     default {
       push @errors, 'EINSERT';
-      say $_;
       $req   = undef;
     };
   } if scalar @errors == 0;
