@@ -20,13 +20,17 @@
             <div class="panel-heading">Matches for Job: <b><%= $stash->{job}->title %></b></div>
 
             <table class="table table-striped table-bordered table-hover">
-              <tr><th>Name</th><th>Member Since</th><th>Match %</th></tr>
+              <tr><th>Request</th><th>Name</th><th>Member Since</th><th>Match %</th></tr>
               %for my $m (@{$stash->{matches}}) {
                 % my $l = '/employer/viewprofile/' . $m->uid->uid;
                 <tr>
                   % my $username = $m->uid->username;
                   % $username = $stash->{bios}->{$username}->{'First Name'} . ' ' . $stash->{bios}->{$username}->{'Last Name'} if defined $stash->{bios}->{$username};
-                  <td><a href="/employer/videoinvite/<%= $stash->{job}->jid %>/<%= $m->uid->uid %>">Invite for Video</a></td>
+                  % if ( defined $stash->{bios}->{$m->uid->username}->{'Video Count'} && $stash->{bios}->{$m->uid->username}->{'Video Count'} > 0 ) {
+                    <td><a target="_video" href="/employer/viewvideo/<%= $stash->{bios}->{$m->uid->username}->{'Video ID'} %>">View Video</a></td>
+                  % } else {
+                    <td><a href="/employer/videoinvite/<%= $stash->{job}->jid %>/<%= $m->uid->uid %>">Request Video</a></td>
+                  % }
                   <td><a href="<%=$l%>"><%= $username %></a></td>
                   <td><a href="<%=$l%>"><%= human_date($m->uid->datecreated) %></a></td>
                   <td><a href="<%=$l%>"><%= sprintf("%.1f",$m->fval) %> %</a></td>

@@ -5,6 +5,7 @@ use CareerMatch::Auth;
 use Try::Tiny;
 use Digest::SHA qw{sha256_hex};
 
+
 sub dashboard {
   my $self = shift;
   my $db = $DB::PKG::db;
@@ -136,6 +137,20 @@ sub jobpost {
   );
 }
 
+sub viewvideo {
+  my $self = shift;
+  my $db   = $DB::PKG::db;
+  my $user = $self->current_user;
+  my $fpath = $db->resultset('Videorequest')->search({ id => $self->param('id') })->first;
+  if (defined $fpath && $fpath->jid->domain eq $user->domain) {
+    $self->render_file(
+      'filepath' => $fpath->vidpath,
+      'format'   => 'mp4',                 # will change Content-Type "application/x-download" to "application/pdf"
+      'content_disposition' => 'inline',   # will change Content-Disposition from "attachment" to "inline"
+    );
+  }
+}
+
 sub jobview {
   my $self = shift;
   my $db   = $DB::PKG::db;
@@ -162,9 +177,14 @@ sub jobview {
 
     my @bioarr = $biors->search({ uid => [@uids] })->all;
     foreach (@bioarr) {
+      my $rs = $db->resultset('Videorequest')->search({ jid => $self->stash->{id}, uid => $_->uid->uid, vidpath => { '!=' => '' }});
+      my $count = $rs->count;
+      my $videoid = $rs->first->id;
       $bios{ $_->uid->username } = { } if !defined($bios{ $_->uid->username });
       $bios{ $_->uid->username }->{'First Name'} = $_->val if $_->qid->id eq $keylookup{'First Name'};
       $bios{ $_->uid->username }->{'Last Name'} = $_->val if $_->qid->id eq $keylookup{'Last Name'};
+      $bios{ $_->uid->username }->{'Video Count'} = $count;
+      $bios{ $_->uid->username }->{'Video ID'} = $videoid;
     }
 
   }

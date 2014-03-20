@@ -39,7 +39,6 @@ sub recordvideo {
 sub submitvideo {
   my ($self) = @_;
   my $request = $DB::PKG::db->resultset('Videorequest')->search({ rid => $self->param('rid') })->first;
-  say 'here';
   if (defined $request) {
     my $user = $request->uid;
     my $config = $self->app->config('videodir');
@@ -50,7 +49,22 @@ sub submitvideo {
     close $star;
     my $newdir = $config . '/' . $user->uid . '/';
     File::Path::make_path($newdir);
-    $upload->move_to("$newdir" . $adler->hexdigest);
+    my $fpath = "$newdir" . $adler->hexdigest;
+    $upload->move_to($fpath);
+    $request->update({
+      vidpath => $fpath,
+    });
+    
+    #SEND EMPLOYER EMAIL!!!!!!!!
+    my @emails = $DB::PKG::db->resultset('User')->search({ domain => $user->domain })->all;
+    my $URL = $self->req->{url}->base->{scheme} . '://' . $self->req->{url}->base->{host};
+    my $emailstr;
+    map { $emailstr .= $_->username . ';' } @emails;
+    $self->mail(
+      to => $emailstr,
+      subject => 'A video was submitted for: ' . $request->jid->title,
+      data => "<a href=\"$URL/employers/jobview/" . $request->jid->jid . "\">Click here to review videos for this job!</a>",
+    );
   }
   $self->stash(
     container => {

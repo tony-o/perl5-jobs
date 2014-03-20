@@ -15,6 +15,7 @@ sub setup {
   $employers->route('/jobview/:id')->to('Controller::Employer#jobview');
   $employers->route('/viewprofile/:id')->to('Controller::Employer#viewprofile');
   $employers->route('/videoinvite/:jid/:uid')->to('Controller::Employer#videoinvite');
+  $employers->route('/viewvideo/:id')->to('Controller::Employer#viewvideo');
 
   #CLIENT ROUTING
   my $clients = $r->bridge('/jobseeker')->to('Auth#check');
