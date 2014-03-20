@@ -37,7 +37,7 @@ sub recordvideo {
 sub submitvideo {
   my ($self) = @_;
   my $reqid = 2;
-  my $request = $DB::PKG::db->resultset('Videorequest')->search({ id => $reqid })->first;
+  my $request = $DB::PKG::db->resultset('Videorequest')->search({ rid => $reqid })->first;
   if (defined $request) {
     my $user = $request->uid;
     my $config = $self->app->config('videodir');

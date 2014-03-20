@@ -38,7 +38,7 @@ sub setup {
   $r->route('/register_confirmation')->to('Controller::Main#register_confirmation');
   $r->route('/')->to('Controller::Main#main');
   $r->route('/content/record-video/:rid')->to('Controller::Content#recordvideo');
-  $r->post('/content/submit-video')->to('Controller::Content#submitvideo');
+  $r->post('/content/submit-video/:rid')->to('Controller::Content#submitvideo');
   $r->route('/content/:path')->to('Controller::Content#main');
 };
 
