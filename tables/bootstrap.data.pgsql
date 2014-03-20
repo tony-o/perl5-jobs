@@ -248,6 +248,52 @@ SET client_min_messages = warning;
 SET search_path = public, pg_catalog;
 
 --
+-- Data for Name: personalityresponses; Type: TABLE DATA; Schema: public; Owner: tony
+--
+
+COPY personalityresponses (id, response, weight, testname, set, fval) FROM stdin;
+23	Disagree Strongly	1	personality	1	1
+24	Disagree Moderately	2	personality	1	2
+25	Disagree a Little	3	personality	1	3
+26	Neither Agree nor Disagree	4	personality	1	4
+27	Agree a Little	5	personality	1	5
+28	Agree Moderately	6	personality	1	6
+29	Agree Strongly	7	personality	1	7
+30	Disagree Strongly	1	personality	2	7
+31	Disagree Moderately	2	personality	2	6
+32	Disagree a Little	3	personality	2	5
+33	Neither Agree nor Disagree	4	personality	2	4
+34	Agree a Little	5	personality	2	3
+35	Agree Moderately	6	personality	2	2
+36	Agree Strongly	7	personality	2	1
+\.
+
+
+--
+-- Name: personalityresponses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tony
+--
+
+SELECT pg_catalog.setval('personalityresponses_id_seq', 36, true);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
 -- Data for Name: bioquestions; Type: TABLE DATA; Schema: public; Owner: tony
 --
 
