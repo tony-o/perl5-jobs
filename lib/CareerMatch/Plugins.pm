@@ -14,6 +14,8 @@ sub setup {
   $self->plugin(mail => {
     from => 'no-reply@hirenetics.com',
     type => 'text/html',
+    how  => 'sendmail',
+    howargs => ['/usr/sbin/sendmail -t'],
   });
 
   $self->plugin('Human', {

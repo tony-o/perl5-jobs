@@ -6,3 +6,5 @@ log/*.*
 .*.swp
 script/*.pid
 jobs/runner.sh
+data/*
+
