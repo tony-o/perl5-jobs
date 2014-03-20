@@ -108,7 +108,7 @@ sub authli {
       $self->session->{uid} = $user->id;
       $self->session->{oauthflag} = 'true';
       $self->authenticate($user->username, 'linkedin');
-      Auth::redirect_auth($self);
+      redirect_auth($self);
     });
     $self->ua->get($url => $ndel->begin);
   });
