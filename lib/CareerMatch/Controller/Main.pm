@@ -1,7 +1,34 @@
 package CareerMatch::Controller::Main;
 use Mojo::Base qw<Mojolicious::Controller>;
+use Mojo::Upload;
+use File::Path;
 use DB::PKG;
 use CareerMatch::Auth;
+use Digest::SHA qw{sha256_hex};
+use Digest::Adler32::XS;
+
+sub submit_video {
+  my ($self) = @_;
+  my $reqid = 2;
+  my $request = $DB::PKG::db->resultset('Videorequest')->search({ id => $reqid })->first;
+  if (defined $request) {
+    my $user = $request->uid;
+    my $config = $self->app->config('videodir');
+    my $adler  = Digest::Adler32::XS->new;
+    my $upload = $self->req->upload('file');
+    open my $star, '<', $upload->asset->path;
+    $adler->addfile($star);
+    close $star;
+    my $newdir = $config . '/' . $user->uid . '/';
+    File::Path::make_path($newdir);
+    $upload->move_to("$newdir" . $adler->hexdigest);
+  }
+  $self->stash(
+    container => {
+
+    }
+  );
+};
 
 sub main {
   my $self = shift;

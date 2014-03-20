@@ -151,9 +151,24 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 videorequests
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-02-06 18:54:45
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vBYRHXWajKF0nKHo2ABVXw
+Type: has_many
+
+Related object: L<DB::Schema::Result::Videorequest>
+
+=cut
+
+__PACKAGE__->has_many(
+  "videorequests",
+  "DB::Schema::Result::Videorequest",
+  { "foreign.jid" => "self.jid" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-20 10:30:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:TaU2BruUG5KZs4Vfyd6aDQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

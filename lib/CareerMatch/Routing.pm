@@ -32,6 +32,7 @@ sub setup {
 
   #MAIN ROUTES
   $r->route('/login')->to('Controller::Main#login');
+  $r->post('/submit-video')->to('Controller::Main#submit_video');
   $r->route('/auth/li')->to('Auth#authli');
   $r->route('/register')->to('Controller::Main#register');
   $r->route('/register_confirmation')->to('Controller::Main#register_confirmation');
