@@ -179,8 +179,6 @@ sub jobview {
       $bios{ $_->uid->username } = { } if !defined($bios{ $_->uid->username });
       $bios{ $_->uid->username }->{'First Name'} = $_->val if $_->qid->id eq $keylookup{'First Name'};
       $bios{ $_->uid->username }->{'Last Name'} = $_->val if $_->qid->id eq $keylookup{'Last Name'};
-      $bios{ $_->uid->username }->{'Video Count'} = $count;
-      $bios{ $_->uid->username }->{'Video ID'} = $videoid;
     }
     my @biovids = $db->resultset('Videorequest')->search({ jid => $self->stash->{id} })->all;
     foreach (@biovids) {
