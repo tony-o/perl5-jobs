@@ -94,8 +94,8 @@ sub authli {
           linkedinid => $f,
           uid => $user->id,
         };
-        $h->{enddt} = $e->{'end-date'}->{year} . '-' . $e->{'end-date'}->{month} . '-01' if defined ($e->{'end-date'});
-        $h->{startdt} = $e->{'start-date'}->{year} . '-' . $e->{'start-date'}->{month} . '-01' if defined ($e->{'start-date'}),
+        $h->{enddt} = $e->{'end-date'}->{year} . '-' . $e->{'end-date'}->{month} . '-01' if defined($e->{'end-date'});
+        $h->{startdt} = $e->{'start-date'}->{year} . '-' . $e->{'start-date'}->{month} . '-01' if defined($e->{'start-date'});
         push @positions, $h;
       }
       
