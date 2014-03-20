@@ -12,8 +12,7 @@
     </style>
   </head>
   <body>
-    <form action="/content/submit-video/<%= $stash->{request}->{rid} %>" method="POST" enctype="multipart/form-data">
-      <input type="hidden" value="<%= $stash->{request}->{rid} %>" />
+    <form action="/content/submit-video/<%= $stash->{request}->rid %>" method="POST" enctype="multipart/form-data">
       <div id="mobile">
         <div>
           <input type="file" accept="video/*" capture="camcorder" style="color:#000;background:#000;" name="file" />

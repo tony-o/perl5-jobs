@@ -1,5 +1,6 @@
 package CareerMatch::Controller::Content;
 use Mojo::Base qw<Mojolicious::Controller>;
+use Digest::Adler32::XS;
 use DB::PKG;
 
 sub main {
@@ -27,6 +28,7 @@ sub recordvideo {
 
   push @errors, 'ENOREQ' if !defined $validreq;
 
+  say $validreq->rid;
   $self->stash(container => {
     errors  => \@errors,
     request => $validreq,
@@ -36,8 +38,8 @@ sub recordvideo {
 
 sub submitvideo {
   my ($self) = @_;
-  my $reqid = 2;
-  my $request = $DB::PKG::db->resultset('Videorequest')->search({ rid => $reqid })->first;
+  my $request = $DB::PKG::db->resultset('Videorequest')->search({ rid => $self->param('rid') })->first;
+  say 'here';
   if (defined $request) {
     my $user = $request->uid;
     my $config = $self->app->config('videodir');
