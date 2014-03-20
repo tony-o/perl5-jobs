@@ -182,7 +182,7 @@ sub jobview {
     }
     my @biovids = $db->resultset('Videorequest')->search({ jid => $self->stash->{id} })->all;
     foreach (@biovids) {
-      $bios{ $_->uid->username }->{'Video Count'} = $_->vidpath ne '' ? 0 : 1;
+      $bios{ $_->uid->username }->{'Video Count'} = $_->vidpath ne '' ? 1 : 0;
       $bios{ $_->uid->username }->{'Video ID'} = $_->vidpath;
     };
 
