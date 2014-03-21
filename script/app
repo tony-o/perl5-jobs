@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 
+no if $] >= 5.018, warnings => "experimental";
 use FindBin;
 BEGIN { unshift @INC, "$FindBin::Bin/../lib" }
 
