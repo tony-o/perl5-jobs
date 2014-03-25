@@ -132,94 +132,92 @@ SET search_path = public, pg_catalog;
 --
 
 COPY personalityquestions (id, question, weight, testname, flags, set) FROM stdin;
-303	I am trusted to keep secrets	1	personality	Int	1
-304	I am the life of the party	2	personality	Extr	1
-305	I have frequent mood swings	3	personality	Neu	1
-306	I sympathize with others' feelings	4	personality	Agr	1
-307	I get chores done right away	5	personality	Con	1
-308	I have a vivid imagination	6	personality	Op	1
-309	Don't miss group meetings or team practices 	7	personality	To	1
-310	Have difficulty starting tasks	8	personality	Pro	2
-311	Don't approach things halfheartedly 	9	personality	Mot	1
-312	Feel that I'm unable to deal with things	10	personality	Conf	2
-313	I am trusted to keep secrets	1	personality	Int	1
-314	I am the life of the party	2	personality	Extr	1
-315	I have frequent mood swings	3	personality	Neu	1
-316	I sympathize with others' feelings	4	personality	Agr	1
-317	I get chores done right away	5	personality	Con	1
-318	I have a vivid imagination	6	personality	Op	1
-319	Don't miss group meetings or team practices 	7	personality	To	1
-320	Have difficulty starting tasks	8	personality	Pro	2
-321	Don't approach things halfheartedly 	9	personality	Mot	1
-322	Feel that I'm unable to deal with things	10	personality	Conf	2
-323	I believe that honesty is the basis for trust	11	personality	Int	1
-324	I don't talk a lot	12	personality	Extr	2
-325	I am relaxed most of the time	13	personality	Neu	2
-326	I am not really interested in others	14	personality	Agr	2
-327	I often forget to put things back in their proper place	15	personality	Con	2
-328	I am not interested in abstract ideas	16	personality	Op	2
-329	Enjoy being part of a group 	17	personality	To	1
-330	Get things done right away	18	personality	Pro	1
-331	Love what I do 	19	personality	Mot	1
-332	Feel comfortable with myself	20	personality	Conf	1
-333	I have never hurt anyone's feelings	21	personality	Fg	1
-334	I keep my promises	22	personality	Int	1
-335	I keep in the background	23	personality	Extr	2
-336	I seldom feel depressed	24	personality	Neu	2
-337	I make people feel at ease	25	personality	Agr	1
-338	I like order	26	personality	Con	1
-339	Prefer to do everything alone	27	personality	To	2
-340	Get tasks done quickly	28	personality	Pro	1
-341	Look forward to each new day	29	personality	Mot	1
-342	Dislike myself	30	personality	Conf	2
-343	True to my own values	31	personality	Int	1
-344	Have never thought about taking money at work when I had the chance	32	personality	Fg	1
-345	Just know that I will be a success	33	personality	Conf	1
-346	Talk to a lot of different people at parties	34	personality	Extr	1
-347	Am not easily bothered by things	35	personality	Neu	2
-348	Am not interested in other people's problems	36	personality	Agr	2
-349	Make a mess of things	37	personality	Con	2
-350	Do not have a good imagination	38	personality	Op	2
-351	Support my teammates or fellow group members 	39	personality	To	1
-352	Plunge into tasks with all my heart	40	personality	Pro	1
-353	Dread getting up in the morning	41	personality	Mot	2
-354	Am less capable than most people	42	personality	Conf	2
-355	I have difficulty understanding abstract ideas	43	personality	Op	1
-356	Would lie to get myself out of trouble	44	personality	Int	2
-357	Feel comfortable around people	45	personality	Extr	1
-358	Panic easily	46	personality	Neu	1
-359	Inquire about others' well-being	47	personality	Agr	1
-360	Am always prepared	48	personality	Con	1
-361	Enjoy hearing new ideas	49	personality	Op	1
-362	Am not good at working with a group 	50	personality	To	2
-363	Need a push to get started	51	personality	Pro	2
-364	Can’t wait to get started on a project 	52	personality	Mot	1
-365	Like to take responsibility for making decisions	53	personality	Conf	1
-366	Put off unpleasant tasks	54	personality	Pro	2
-367	Always behave in a way that is socially appropriate	55	personality	Fg	1
-368	Make friends easily	56	personality	Extr	1
-369	Feel threatened easily	57	personality	Neu	1
-370	Insult people	58	personality	Agr	2
-371	Am exacting in my work	59	personality	Con	1
-372	Feel I must respect the decisions made by my group 	60	personality	To	1
-373	Finish tasks quickly	61	personality	Pro	1
-374	Feel like an imposter	62	personality	Int	2
-375	Am hard to get to know	63	personality	Extr	2
-376	Fear for the worst	64	personality	Neu	1
-377	Can carry the conversation to a higher level	65	personality	Op	1
-378	Work best when I am alone	66	personality	To	2
-379	Awaken with a sense of excitement about the day's possibilities	67	personality	Mot	1
-380	Know my strengths	68	personality	Conf	1
-381	Have never been late to a work meeting	69	personality	Fg	1
-382	Find it difficult to appropach others	70	personality	Extr	2
-383	Rarely get irritated	71	personality	Neu	2
-384	Feel little concern for others	72	personality	Agr	2
-385	Neglect my duties	73	personality	Con	2
-386	Avoid philosophical discussions	74	personality	Op	2
-387	Keep to myself	75	personality	To	2
-388	Find it difficult to get down to work	76	personality	Con	2
-389	Don't have much energy	77	personality	Mot	2
-390	Feel that my life lacks direction	78	personality	Conf	2
+391	I am trusted to keep secrets	1	personality	Int	1
+392	I am the life of the party	2	personality	Extr	1
+393	I have frequent mood swings	3	personality	Neu	1
+394	I sympathize with others' feelings	4	personality	Agr	1
+395	I get chores done right away	5	personality	Con	1
+396	I have a vivid imagination	6	personality	Op	1
+397	Don't miss group meetings or team practices 	7	personality	TO	1
+398	Have difficulty starting tasks	8	personality	Pro	2
+399	I am trusted to keep secrets	1	personality	Int	1
+400	I am the life of the party	2	personality	Extr	1
+401	I have frequent mood swings	3	personality	Neu	1
+402	I sympathize with others' feelings	4	personality	Agr	1
+403	I get chores done right away	5	personality	Con	1
+404	I have a vivid imagination	6	personality	Op	1
+405	Don't miss group meetings or team practices 	7	personality	TO	1
+406	Have difficulty starting tasks	8	personality	Pro	2
+407	Don't approach things halfheartedly 	9	personality	Mot	1
+408	Feel that I'm unable to deal with things	10	personality	Conf	2
+409	I believe that honesty is the basis for trust	11	personality	Int	1
+410	I don't talk a lot	12	personality	Extr	2
+411	I am relaxed most of the time	13	personality	Neu	2
+412	I am not really interested in others	14	personality	Agr	2
+413	I often forget to put things back in their proper place	15	personality	Con	2
+414	I am not interested in abstract ideas	16	personality	Op	2
+415	Enjoy being part of a group 	17	personality	TO	1
+416	Get things done right away	18	personality	Pro	1
+417	Love what I do 	19	personality	Mot	1
+418	Feel comfortable with myself	20	personality	Conf	1
+419	I have never made someone feel bad	21	personality	FG	1
+420	I keep my promises	22	personality	Int	1
+421	I keep in the background	23	personality	Extr	2
+422	I seldom feel depressed	24	personality	Neu	2
+423	I make people feel at ease	25	personality	Agr	1
+424	I like order	26	personality	Con	1
+425	Prefer to do everything alone	27	personality	TO	2
+426	Get tasks done quickly	28	personality	Pro	1
+427	Look forward to each new day	29	personality	Mot	1
+428	Dislike myself	30	personality	Conf	2
+429	True to my own values	31	personality	Int	1
+430	Have never considered taking money from work given the opportunity	32	personality	FG	1
+431	Just know that I will be a success	33	personality	Conf	1
+432	Talk to a lot of different people at parties	34	personality	Extr	1
+433	Am not easily bothered by things	35	personality	Neu	2
+434	Am not interested in other people's problems	36	personality	Agr	2
+435	Make a mess of things	37	personality	Con	2
+436	Do not have a good imagination	38	personality	Op	2
+437	Support my teammates or fellow group members 	39	personality	TO	1
+438	Plunge into tasks with all my heart	40	personality	Pro	1
+439	Dread getting up in the morning	41	personality	Mot	2
+440	Am less capable than most people	42	personality	Conf	2
+441	I have difficulty understanding abstract ideas	43	personality	Op	1
+442	Would lie to get myself out of trouble	44	personality	Int	2
+443	Feel comfortable around people	45	personality	Extr	1
+444	Panic easily	46	personality	Neu	1
+445	Inquire about others' well-being	47	personality	Agr	1
+446	Am always prepared	48	personality	Con	1
+447	Enjoy hearing new ideas	49	personality	Op	1
+448	Am not good at working with a group 	50	personality	TO	2
+449	Need a push to get started	51	personality	Pro	2
+450	Can’t wait to get started on a project 	52	personality	Mot	1
+451	Like to take responsibility for making decisions	53	personality	Conf	1
+452	Put off unpleasant tasks	54	personality	Pro	2
+453	Always act in a manner that is socially appropriate 	55	personality	FG	1
+454	Make friends easily	56	personality	Extr	1
+455	Feel threatened easily	57	personality	Neu	1
+456	Insult people	58	personality	Agr	2
+457	Am exacting in my work	59	personality	Con	1
+458	Feel I must respect the decisions made by my group 	60	personality	TO	1
+459	Finish tasks quickly	61	personality	Pro	1
+460	Feel like an imposter	62	personality	Int	2
+461	Am hard to get to know	63	personality	Extr	2
+462	Fear for the worst	64	personality	Neu	1
+463	Can carry the conversation to a higher level	65	personality	Op	1
+464	Work best when I am alone	66	personality	TO	2
+465	Awaken with a sense of excitement about the day's possibilities	67	personality	Mot	1
+466	Know my strengths	68	personality	Conf	1
+467	Have never been late to an appointment 	69	personality	FG	1
+468	Find it difficult to approach others	70	personality	Extr	2
+469	Rarely get irritated	71	personality	Neu	2
+470	Feel little concern for others	72	personality	Agr	2
+471	Neglect my duties	73	personality	Con	2
+472	Avoid philosophical discussions	74	personality	Op	2
+473	Keep to myself	75	personality	TO	2
+474	Find it difficult to get down to work	76	personality	Con	2
+475	Don't have much energy	77	personality	Mot	2
+476	Feel that my life lacks direction	78	personality	Conf	2
 \.
 
 
@@ -227,7 +225,7 @@ COPY personalityquestions (id, question, weight, testname, flags, set) FROM stdi
 -- Name: personalityquestions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tony
 --
 
-SELECT pg_catalog.setval('personalityquestions_id_seq', 390, true);
+SELECT pg_catalog.setval('personalityquestions_id_seq', 476, true);
 
 
 --
