@@ -54,10 +54,10 @@
                   %= $e->jobtitle
                 </td>
                 <td>
-                  %= $e->city . ', ' . $e->state->name
+                  %= defined $e->state ? $e->city . ', ' . $e->state->name : 'Not specified'
                 </td>
                 <td>
-                  %= $e->jobclass->name
+                  %= defined $e->jobclass ? $e->jobclass->name : 'Not specified'
                 </td>
                 <td>
                   %= human_date($e->startdt) . ' - ' . ($e->enddt ? human_date($e->enddt) : 'Now')

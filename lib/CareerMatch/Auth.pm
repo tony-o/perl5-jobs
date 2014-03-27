@@ -74,10 +74,8 @@ sub authli {
           my $hash = {
             institution => $e->{'school-name'},
             degree => $e->{degree},
-            degreetype => -1,
             degdt => defined $e->{'end-date'} ? $e->{'end-date'}->{year} . '-01-01' : undef,
             linkedinid => $f,
-            state => -1,
             uid => $user->id,
           };
           push @educations, $hash;

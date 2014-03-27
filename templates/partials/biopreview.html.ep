@@ -26,7 +26,7 @@
           <h3><%= $e->institution %></h3>
         </div>
         <div class="col-lg-8">
-          <h3><%= $e->degreetype->name %></h3>
+          <h3><%= defined $e->degreetype ? $e->degreetype->name : 'N/A' %></h3>
         </div>
       </div>
       <div class="row">
@@ -58,7 +58,7 @@
       </div>
       <div class="row">
         <div class="col-lg-4">
-          <h4><%= $e->state->name %></h4>
+          <h4><%= $e->state ? $e->state->name : 'Not specified' %></h4>
         </div>
         <div class="col-lg-8">
           <h4>
