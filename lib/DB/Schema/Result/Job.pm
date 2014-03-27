@@ -60,6 +60,17 @@ __PACKAGE__->table("jobs");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 degreereq
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
+=head2 expreq
+
+  data_type: 'numeric'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -85,6 +96,10 @@ __PACKAGE__->add_columns(
   },
   "jobclass",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "degreereq",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "expreq",
+  { data_type => "numeric", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -100,6 +115,26 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("jid");
 
 =head1 RELATIONS
+
+=head2 degreereq
+
+Type: belongs_to
+
+Related object: L<DB::Schema::Result::Degreetype>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "degreereq",
+  "DB::Schema::Result::Degreetype",
+  { did => "degreereq" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
 
 =head2 job_reqs
 
@@ -167,8 +202,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-20 10:30:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:TaU2BruUG5KZs4Vfyd6aDQ
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-27 11:44:59
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4axhKwR736/8baPAQKc1Nw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

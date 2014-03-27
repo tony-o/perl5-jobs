@@ -29,11 +29,23 @@
             %}
             </optgroup>
           </select>
- 
+          <h2 for="education">Min. Education Requirement</h2>
+          <select class="form-control" name="education" id="education">
+            %foreach my $s (@{$stash->{educations}}) {
+              <option value="<%=$s->did%>"><%=$s->name%></option>
+            %}
+            </optgroup>
+          </select>
+          <h2 for="education">Minimum Experience</h2>
+          <div class="input-group">
+            <input type="text" name="experience" class="form-control" placeholder="Years Experience" required />
+            <span class="input-group-addon">years</span>
+          </div>
           <h3>Job Description</h3>
           <div>
             <textarea class="form-control" name="description"></textarea>
           </div>
+          <div class="hidden">
           <h3><a href="#" onclick="$('#jmtr').toggle('slow');">Modify Matching Traits</a> <span class="label label-default">hidden by default</span></h3>
           <div id="jmtr" style="display:none;">
             %foreach my $t (@{$stash->{jobmatchtr}}) {
@@ -51,6 +63,8 @@
               </div>
             %}
           </div>
+          </div>
+          <div>&nbsp;</div>
           <div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Create Listing</button>
           </div>

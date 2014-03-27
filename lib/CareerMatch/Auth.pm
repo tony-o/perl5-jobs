@@ -44,66 +44,73 @@ sub authli {
       my $user = $urs->update_or_create($users, {
         key => 'p_users_username',
       });
-      my @bioqs = $DB::PKG::db->resultset('Bioquestion')->all;
-      my $bioqh = { };
-      foreach my $a (@bioqs){
-        $bioqh->{$a->linkedinmeta} = $a->id if defined $a->linkedinmeta;
-      }
-      my @bioanswers;
-      for my $k (keys %{$bioqh}) {
-        push @bioanswers, {
-          uid => $user->id,
-          qid => $bioqh->{$k},
-          val => $xl->{$k},
-        } if defined $xl->{$k};
-      }
-      my $answ = $DB::PKG::db->resultset('Bioanswer');
-      map {
-        $answ->update_or_create($_, {
-          key => 'p_bioanswers_uid_qid',
-        });
-      } @bioanswers;
-
-      my @educations;
-      my $edu = $DB::PKG::db->resultset('Education');
-      foreach my $f (keys %{$xl->{educations}->{education}}) {
-        my $e = $xl->{educations}->{education}->{$f};
-        my $hash = {
-          institution => $e->{'school-name'},
-          degree => $e->{degree},
-          degdt => defined $e->{'end-date'} ? $e->{'end-date'}->{year} . '-01-01' : undef,
-          linkedinid => $f,
-          uid => $user->id,
-        };
-        push @educations, $hash;
-      }
-      
-      map {
-        $edu->update_or_create($_, {
-          key => 'p_education_linkedinid',
-        });
-      } @educations;
-
-      my @positions;
-      my $emp = $DB::PKG::db->resultset('Employer');
-      foreach my $f (keys %{$xl->{positions}->{position}}) {
-        my $e = $xl->{positions}->{position}->{$f};
-        my $h = {
-          employer => $e->{company}->{name},
-          jobtitle => $e->{title},
-          linkedinid => $f,
-          uid => $user->id,
-        };
-        $h->{enddt}   = $e->{'end-date'}->{year} . '-' . $e->{'end-date'}->{month} . '-01' if defined($e->{'end-date'});
-        $h->{startdt} = $e->{'start-date'}->{year} . '-' . $e->{'start-date'}->{month} . '-01' if defined($e->{'start-date'});
-        push @positions, $h;
-      }
-      
-      map {
-        $emp->update_or_create($_, {
-          key => 'p_employers_linkedinid',
-        });
-      } @positions;
+      try {
+        my @bioqs = $DB::PKG::db->resultset('Bioquestion')->all;
+        my $bioqh = { };
+        foreach my $a (@bioqs){
+          $bioqh->{$a->linkedinmeta} = $a->id if defined $a->linkedinmeta;
+        }
+        my @bioanswers;
+        for my $k (keys %{$bioqh}) {
+          push @bioanswers, {
+            uid => $user->id,
+            qid => $bioqh->{$k},
+            val => $xl->{$k},
+          } if defined $xl->{$k};
+        }
+        my $answ = $DB::PKG::db->resultset('Bioanswer');
+        map {
+          $answ->update_or_create($_, {
+            key => 'p_bioanswers_uid_qid',
+          });
+        } @bioanswers;
+      };
+      try {
+        my @educations;
+        my $edu = $DB::PKG::db->resultset('Education');
+        foreach my $f (keys %{$xl->{educations}->{education}}) {
+          my $e = $xl->{educations}->{education}->{$f};
+          use Data::Dumper; say Dumper $e;
+          my $hash = {
+            institution => $e->{'school-name'},
+            degree => $e->{degree},
+            degreetype => -1,
+            degdt => defined $e->{'end-date'} ? $e->{'end-date'}->{year} . '-01-01' : undef,
+            linkedinid => $f,
+            state => -1,
+            uid => $user->id,
+          };
+          push @educations, $hash;
+        }
+        
+        map {
+          $edu->update_or_create($_, {
+            key => 'p_education_linkedinid',
+          });
+        } @educations;
+      };
+      try {
+        my @positions;
+        my $emp = $DB::PKG::db->resultset('Employer');
+        foreach my $f (keys %{$xl->{positions}->{position}}) {
+          my $e = $xl->{positions}->{position}->{$f};
+          my $h = {
+            employer => $e->{company}->{name},
+            jobtitle => $e->{title},
+            linkedinid => $f,
+            uid => $user->id,
+          };
+          $h->{enddt}   = $e->{'end-date'}->{year} . '-' . $e->{'end-date'}->{month} . '-01' if defined($e->{'end-date'});
+          $h->{startdt} = $e->{'start-date'}->{year} . '-' . $e->{'start-date'}->{month} . '-01' if defined($e->{'start-date'});
+          push @positions, $h;
+        }
+        
+        map {
+          $emp->update_or_create($_, {
+            key => 'p_employers_linkedinid',
+          });
+        } @positions;
+      } catch { };
       $self->session->{uid} = $user->id;
       $self->session->{oauthflag} = 'true';
       $self->authenticate($user->username, 'linkedin');

@@ -332,17 +332,12 @@ SET search_path = public, pg_catalog;
 --
 
 COPY degreetypes (did, name) FROM stdin;
-1	Professional Certification
-2	Associate Degree
-3	Bachelor of Arts
-4	Bachelor of Science
-5	Bachelor of Business Administration
-6	Master of Arts
-7	Master of Science
-8	Master of Business Administration
-9	Doctor of Philosophy
-10	Doctor of Education
-11	Juris Doctor
+12	Professional Certification
+13	Associates Degree
+14	Bachelor's Degree
+15	Master's Degree
+16	Doctorate's Degree
+17	Juris Doctor
 \.
 
 
@@ -350,7 +345,7 @@ COPY degreetypes (did, name) FROM stdin;
 -- Name: degreetypes_did_seq; Type: SEQUENCE SET; Schema: public; Owner: tony
 --
 
-SELECT pg_catalog.setval('degreetypes_did_seq', 11, true);
+SELECT pg_catalog.setval('degreetypes_did_seq', 17, true);
 
 
 --

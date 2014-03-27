@@ -125,11 +125,13 @@ sub jobpost {
     order_by => { -asc => [qw<jid>] },    
   })->all;
   my @jcm  = $DB::PKG::db->resultset('Jobmatchtrait')->all;
+  my @educations = $DB::PKG::db->resultset('Degreetype')->all;
   $self->stash(
     container => {
       uid        => $user->uid,
       path       => 'employer/jobpost',
       jid        => $id,
+      educations => [@educations],
       jobclasses => [@jcs],
       jobmatchtr => [@jcm],
     }

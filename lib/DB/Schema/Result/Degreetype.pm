@@ -79,9 +79,24 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 jobs
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-02 10:52:37
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:LMLNj8ch1kuYqIlM06QBPA
+Type: has_many
+
+Related object: L<DB::Schema::Result::Job>
+
+=cut
+
+__PACKAGE__->has_many(
+  "jobs",
+  "DB::Schema::Result::Job",
+  { "foreign.degreereq" => "self.did" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-27 11:44:59
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xQJV8Wyly6JJ9DLfYglg1w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

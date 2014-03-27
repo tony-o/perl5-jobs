@@ -19,13 +19,13 @@ my $trait_map   = $db->resultset('Jobmatchtrait');
 my $scores;
 my $lastid;
 map {
-  $scores->{$_->uid->uid}->{$_->qid->flags}->{score} += $_->rid->fval if $_->qid->set == 1;
+  $scores->{$_->uid->uid}->{uc $_->qid->flags}->{score} += $_->rid->fval if $_->qid->set == 1;
   if ($_->qid->set == 2) {
     my $min = $trait_deets->search({ set => $_->qid->set })->get_column('fval')->min; 
     my $max = $trait_deets->search({ set => $_->qid->set })->get_column('fval')->max; 
-    $scores->{$_->uid->uid}->{$_->qid->flags}->{score} += ($max - $min + 1) - ($_->rid->fval + $min);
+    $scores->{$_->uid->uid}->{uc $_->qid->flags}->{score} += ($max - $min + 1) - ($_->rid->fval + $min);
   }
-  $scores->{$_->uid->uid}->{$_->qid->flags}->{questions}++;
+  $scores->{$_->uid->uid}->{uc $_->qid->flags}->{questions}++;
 
 } $trait_resp->search(undef, { order_by => { -asc => [qw<uid>] } })->all;
 
@@ -40,7 +40,7 @@ map {
     $trait_store->update_or_create({
       uid   => $update->{uid},
       jmtid => $_->id,
-      value => $cra->{$_->flags}->{score} / (7 * $cra->{$_->flags}->{questions}),
+      value => $cra->{uc $_->flags}->{score} / (7 * $cra->{uc $_->flags}->{questions}),
     }, {
       key => 'p_trait_results_uid_jmtid', 
     });

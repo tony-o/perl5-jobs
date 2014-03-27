@@ -57,29 +57,13 @@ sub perf {
   my $highest = { i => 0, v => 0 };
   for my $k (keys %wa) {
     $jid = $wa{$k}->{jobid};
-    say 'analyzing: ' . $jid;
     $avg = average( [@{$wa{$k}->{stddev}}] );
-    if (scalar(@bestfit) < 10) {
-      my %d = (uid => $k, avg => $avg);
-      my $index = push(@bestfit, \%d) - 1;
-      $highest->{i} = $index if $avg > $highest->{v};
-      $highest->{v} = $avg   if $avg > $highest->{v};
-    } else {
-      if ($highest->{v} > $avg) {
-        $bestfit[$highest->{i}]->{uid} = $k;
-        $bestfit[$highest->{i}]->{avg} = $avg;
-        $highest->{v} = $avg;
-        for my $i (0 .. scalar(@bestfit) - 1) {
-          if ($bestfit[$i]->{avg} > $highest->{v}) {
-            $highest->{v} = $bestfit[$i]->{avg};
-            $highest->{i} = $i;
-          }
-        }
-      }
-    }
+    my %d = (uid => $k, avg => $avg);
+    my $index = push(@bestfit, \%d) - 1;
+    $highest->{i} = $index if $avg > $highest->{v};
+    $highest->{v} = $avg   if $avg > $highest->{v};
   }
   foreach my $bf (@bestfit) {
-    say "jid $jid";
     $jobmt_rs->create({
       uid     => $bf->{uid},
       fval    => $bf->{avg},
@@ -99,7 +83,7 @@ for my $jobreq (@jobrqres) {
     next if $jobreq->jmtid->id ne $traitres->jmtid->id;
     $wa{$traitres->uid->uid} = { jobid=>$last, stddev=>() } if !defined($wa{$traitres->uid->uid}->{stddev});
     my $stddev = stdev([$traitres->value, $jobreq->value]);
-    push @{$wa{$traitres->uid->uid}->{stddev}}, $stddev;
+    push @{$wa{$traitres->uid->uid}->{stddev}}, (1+$stddev)/2;
   }
 }
 
