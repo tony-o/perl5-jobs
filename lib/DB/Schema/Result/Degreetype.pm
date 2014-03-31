@@ -36,6 +36,11 @@ __PACKAGE__->table("degreetypes");
   is_nullable: 1
   size: 40
 
+=head2 weighting
+
+  data_type: 'integer'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -48,6 +53,8 @@ __PACKAGE__->add_columns(
   },
   "name",
   { data_type => "varchar", is_nullable => 1, size => 40 },
+  "weighting",
+  { data_type => "integer", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -95,8 +102,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-27 11:44:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xQJV8Wyly6JJ9DLfYglg1w
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-03-31 09:28:23
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7WlfgQ9Z3xU9e1Sd5oGxSA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

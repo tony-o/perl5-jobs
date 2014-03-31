@@ -99,6 +99,8 @@ sub jobpost {
       description => $self->param('description'),
       domain      => $user->domain,
       jobclass    => $self->param('jobclass'),
+      degreereq   => $self->param('education'),
+      expreq      => $self->param('experience'),
     });
     $post->insert;
     $id = $post->jid;
