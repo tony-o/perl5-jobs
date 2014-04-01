@@ -72,30 +72,38 @@ while (my $uidjid = $matches->next) {
 
   $score = (.4 * $std_score) + (.3 * $exp_score) + (.3 * $edu_score);
 
-  $jobmt_rs->create({
+  $jobmt_rs->update_or_create({
     jid => $uidjid->jid->jid,
     uid => $uidjid->uid->uid, 
     fval => $score,
     cval => "$std_score|$exp_score|$edu_score",
     version => 'SCORE',
+  }, {
+    key => 'jobmatches_uid_jid_version_key',
   });
-  $jobmt_rs->create({
+  $jobmt_rs->update_or_create({
     jid => $uidjid->jid->jid,
     uid => $uidjid->uid->uid, 
     fval => $std_score,
     version => 'SCOREPERS',
+  }, {
+    key => 'jobmatches_uid_jid_version_key', 
   });
-  $jobmt_rs->create({
+  $jobmt_rs->update_or_create({
     jid => $uidjid->jid->jid,
     uid => $uidjid->uid->uid, 
     fval => $exp_score,
     version => 'SCOREEXP',
+  }, {
+    key => 'jobmatches_uid_jid_version_key', 
   });
-  $jobmt_rs->create({
+  $jobmt_rs->update_or_create({
     jid => $uidjid->jid->jid,
     uid => $uidjid->uid->uid, 
     fval => $edu_score,
     version => 'SCOREEDU',
+  }, {
+    key => 'jobmatches_uid_jid_version_key', 
   });
 
   say join "\t", $uidjid->uid->uid, $uidjid->jid->jid, $act_edu, sprintf('%.2f',$act_exp), $min_edu, $min_exp, sprintf('%.2f', $edu_score), sprintf('%.2f', $exp_score), sprintf('%.2f', $std_score), sprintf('%.2f', $score);

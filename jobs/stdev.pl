@@ -64,11 +64,13 @@ sub perf {
     $highest->{v} = $avg   if $avg > $highest->{v};
   }
   foreach my $bf (@bestfit) {
-    $jobmt_rs->create({
+    $jobmt_rs->update_or_create({
       uid     => $bf->{uid},
       fval    => $bf->{avg},
       jid     => $jid,
       version => 'STDDEV',
+    }, {
+      key => 'jobmatches_uid_jid_version_key', 
     });
   }
 }

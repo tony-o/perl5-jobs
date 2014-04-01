@@ -31,7 +31,7 @@ for my $jobreq (@jobrqres) {
     #insert;
     foreach my $rid (keys %wa) {
       $wa{$rid}->{fval} = $wa{$rid}->{fval} / 365;
-      $jobmt_rs->create($wa{$rid});
+      $jobmt_rs->update_or_create($wa{$rid}, { key => 'jobmatches_uid_jid_version_key', });
     }
     undef %wa;
   }

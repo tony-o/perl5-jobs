@@ -23,11 +23,14 @@ for my $jobreq (@jobrqres) {
   foreach my $e (@edus) {
     next if !defined($e->degreetype) && defined($jobreq->degreereq);
     next if defined($jobreq->degreereq) && $jobreq->degreereq <= $e->degreetype->weighting;
-    $jobmt_rs->create({
+    $jobmt_rs->update_or_create({
       uid  => $e->uid->uid,
       fval => defined $e->degreetype ? $e->degreetype->weighting : -1,
       jid  => $jobreq->id,
       version => 'EDUCTN',
+    }, {
+      key => 'jobmatches_uid_jid_version_key',
+       
     });
   }
 }

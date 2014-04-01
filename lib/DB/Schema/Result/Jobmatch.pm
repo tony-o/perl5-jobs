@@ -49,9 +49,8 @@ __PACKAGE__->table("jobmatches");
 
 =head2 cval
 
-  data_type: 'varchar'
+  data_type: 'text'
   is_nullable: 1
-  size: 32
 
 =head2 version
 
@@ -76,7 +75,7 @@ __PACKAGE__->add_columns(
   "fval",
   { data_type => "double precision", is_nullable => 1 },
   "cval",
-  { data_type => "varchar", is_nullable => 1, size => 32 },
+  { data_type => "text", is_nullable => 1 },
   "version",
   { data_type => "varchar", is_nullable => 1, size => 10 },
 );
@@ -92,6 +91,24 @@ __PACKAGE__->add_columns(
 =cut
 
 __PACKAGE__->set_primary_key("id");
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<jobmatches_uid_jid_version_key>
+
+=over 4
+
+=item * L</uid>
+
+=item * L</jid>
+
+=item * L</version>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("jobmatches_uid_jid_version_key", ["uid", "jid", "version"]);
 
 =head1 RELATIONS
 
@@ -136,8 +153,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07038 @ 2014-01-13 14:09:03
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:t1NrQTXmolCfZNBWzb5UTg
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-04-01 14:52:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L5eahA8HuPQ9phxQHrMEBA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
