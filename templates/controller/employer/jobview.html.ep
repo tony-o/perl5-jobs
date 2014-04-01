@@ -33,7 +33,7 @@
                   % }
                   <td><a href="<%=$l%>"><%= $username %></a></td>
                   <td><a href="<%=$l%>"><%= human_date($m->uid->datecreated) %></a></td>
-                  % my @pdata = split('|', $m->cval);
+                  % my @pdata = split('\|', $m->cval);
                   <td><a href="<%=$l%>"><%= sprintf('%.1f',100*$pdata[0]) %> %</a></td>
                   <td><a href="<%=$l%>"><%= sprintf('%.1f',100*$pdata[1]) %> %</a></td>
                   <td><a href="<%=$l%>"><%= sprintf('%.1f',100*$pdata[2]) %> %</a></td>
