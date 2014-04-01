@@ -76,6 +76,7 @@ while (my $uidjid = $matches->next) {
     jid => $uidjid->jid->jid,
     uid => $uidjid->uid->uid, 
     fval => $score,
+    cval => "$std_score|$exp_score|$edu_score",
     version => 'SCORE',
   });
   $jobmt_rs->create({

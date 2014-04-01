@@ -20,7 +20,7 @@
             <div class="panel-heading">Matches for Job: <b><%= $stash->{job}->title %></b></div>
 
             <table class="table table-striped table-bordered table-hover">
-              <tr><th>Request</th><th>Name</th><th>Member Since</th><th>Match %</th></tr>
+              <tr><th>Request</th><th>Name</th><th>Member Since</th><th>Pers %</th><th>Edu %</th><th>Exp %</th><th>Match %</th></tr>
               %for my $m (@{$stash->{matches}}) {
                 % my $l = '/employer/viewprofile/' . $m->uid->uid;
                 <tr>
@@ -33,7 +33,11 @@
                   % }
                   <td><a href="<%=$l%>"><%= $username %></a></td>
                   <td><a href="<%=$l%>"><%= human_date($m->uid->datecreated) %></a></td>
-                  <td><a href="<%=$l%>"><%= sprintf("%.1f",$m->fval) %> %</a></td>
+                  % my @pdata = split '|', $m->cval;
+                  <td><a href="<%=$l%>"><%= sprintf('%.1f',100*$pdata[0]) %> %</a></td>
+                  <td><a href="<%=$l%>"><%= sprintf('%.1f',100*$pdata[1]) %> %</a></td>
+                  <td><a href="<%=$l%>"><%= sprintf('%.1f',100*$pdata[2]) %> %</a></td>
+                  <td><a href="<%=$l%>"><%= sprintf('%.1f',100*$m->fval) %> %</a></td>
                 </tr>
               %}
             </table>
