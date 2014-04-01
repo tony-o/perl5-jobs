@@ -58,14 +58,14 @@ while (my $uidjid = $matches->next) {
   $min_exp = $uidjid->jid->expreq               if defined $uidjid->jid->expreq;
   $min_edu = $uidjid->jid->degreereq->weighting if defined $uidjid->jid->degreereq;
   
-  my $edu_score;
+  my $edu_score = 0;
   $edu_score = $act_edu / $min_edu if defined $min_edu && $min_edu > -1;
-  $edu_score = 1 if !defined $edu_score || $edu_score > 1;
+  $edu_score = 1 if $edu_score > 1;
   $edu_score = 0 if $edu_score < 0;
 
-  my $exp_score;
+  my $exp_score = 0;
   $exp_score = $act_exp / $min_exp if defined $min_exp && $min_exp > 0;
-  $exp_score = 1 if !defined $exp_score || $exp_score > 1;
+  $exp_score = 1 if $exp_score > 1;
   $exp_score = 0 if $exp_score < 0;
   
   my $score;
