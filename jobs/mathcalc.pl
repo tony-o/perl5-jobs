@@ -59,8 +59,8 @@ while (my $uidjid = $matches->next) {
   $min_edu = $uidjid->jid->degreereq->weighting if defined $uidjid->jid->degreereq;
   
   my $edu_score = 0;
-  $edu_score = $act_edu / $min_edu if defined $min_edu && $min_edu > -1;
-  $edu_score = 1 if $edu_score > 1 || (defined $min_edu && $min_edu == -1);
+  $edu_score = $act_edu / $min_edu if defined($min_edu) && $min_edu > -1;
+  $edu_score = 1 if $edu_score > 1 || (defined($min_edu) && $min_edu == -1);
   $edu_score = 0 if $edu_score < 0;
 
   my $exp_score = 0;
