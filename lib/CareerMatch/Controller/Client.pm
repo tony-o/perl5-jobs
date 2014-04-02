@@ -2,6 +2,7 @@ package CareerMatch::Controller::Client;
 use Mojo::Base qw<Mojolicious::Controller>;
 use Try::Tiny;
 use DB::PKG;
+use CareerMatch::Auth;
 
 sub skills {
   my $self = shift;
@@ -46,6 +47,42 @@ sub jobmatches {
   );
 };
 
+sub linkedin {
+  my $self  = shift;
+  my $user  = $self->current_user;
+  my $db    = $DB::PKG::db;
+  my @ucedu = $db->resultset('Education')->search({ uid => $user->uid, degreetype => undef })->all;
+  my @ucemp = $db->resultset('Employer')->search({ uid => $user->uid, jobclass => undef })->all;
+  my @degreetypes = $db->resultset('Degreetype')->search(undef, { order_by => { -asc => [qw<weighting>] } })->all;
+  my @jobclasses = $db->resultset('Jobclass')->all;
+
+
+  if (defined $self->param('update') && $self->param('update') == 1) {
+    foreach my $e (@ucedu) {
+      try {
+        $e->update({ degreetype => $self->param('educator_' . $e->eid) });
+      };
+    }
+    foreach my $e (@ucemp) {
+      try {
+        $e->update({ jobclass => $self->param('employer_' . $e->eid) });
+      };
+    }
+    &CareerMatch::Auth::redirect_auth($self); 
+  }
+
+  @ucedu = $db->resultset('Education')->search({ uid => $user->uid, degreetype => undef })->all;
+  @ucemp = $db->resultset('Employer')->search({ uid => $user->uid, jobclass => undef })->all;
+  
+  $self->stash(container => {
+    uid => $user->uid,
+    path => 'client/linkedin',
+    edus => \@ucedu,
+    emps => \@ucemp,
+    degreetypes => \@degreetypes,
+    jobclasses  => \@jobclasses,
+  });
+}
 
 sub jobview {
   my $self = shift;
@@ -354,7 +391,7 @@ sub bio {
       $skill =~ s{^[\s"]+}{};
       $skill =~ s{[\s"]+$}{};
       continue if $skill eq '';
-      my $id = $skil->search({ skill => $skill })->first;
+      my $id = $skil->search({ \'lc(skill)' => lc $skill })->first;
       if (!defined $id || !defined $id->id) {
         my $newskill = $skil->create({
           skill => $skill,

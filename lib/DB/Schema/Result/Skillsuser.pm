@@ -42,6 +42,12 @@ __PACKAGE__->table("skillsuser");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 linkedinid
+
+  data_type: 'varchar'
+  is_nullable: 1
+  size: 16
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -56,6 +62,8 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "uid",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "linkedinid",
+  { data_type => "varchar", is_nullable => 1, size => 16 },
 );
 
 =head1 PRIMARY KEY
@@ -69,6 +77,20 @@ __PACKAGE__->add_columns(
 =cut
 
 __PACKAGE__->set_primary_key("id");
+
+=head1 UNIQUE CONSTRAINTS
+
+=head2 C<skillsuser_linkedinid_key>
+
+=over 4
+
+=item * L</linkedinid>
+
+=back
+
+=cut
+
+__PACKAGE__->add_unique_constraint("skillsuser_linkedinid_key", ["linkedinid"]);
 
 =head1 RELATIONS
 
@@ -113,8 +135,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-02-28 15:26:33
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WW7Te4exg2qQ2+VJ/ZIQhg
+# Created by DBIx::Class::Schema::Loader v0.07039 @ 2014-04-01 17:26:43
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:a8ZgISjX7hTV/PF1vtjWKQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

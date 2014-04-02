@@ -70,7 +70,7 @@ sub authli {
         my $edu = $DB::PKG::db->resultset('Education');
         foreach my $f (keys %{$xl->{educations}->{education}}) {
           my $e = $xl->{educations}->{education}->{$f};
-          use Data::Dumper; say Dumper $e;
+          #use Data::Dumper; #say Dumper $e;
           my $hash = {
             institution => $e->{'school-name'},
             degree => $e->{degree},
@@ -109,6 +109,29 @@ sub authli {
           });
         } @positions;
       } catch { };
+      try {
+        my @skills;
+        my $skill = $DB::PKG::db->resultset('Skillslist');
+        my $skilu = $DB::PKG::db->resultset('Skillsuser');
+        foreach my $s (keys %{$xl->{skills}->{skill}}) {
+          try {
+            my $e = $xl->{skills}->{skill}->{$s}->{skill}->{name};
+            my $id = $skill->search({ skill => $skill })->first;
+            $id = $skill->create({
+              skill => $e,
+            }) unless defined $id;
+            my $gg = $skilu->update_or_create({
+              sid        => $id->id,
+              uid        => $user->id,
+              linkedinid => $user->id . '_' . $s,
+            }, {
+              key => 'skillsuser_linkedinid_key', 
+            });
+          } catch {
+              say 'error' . $_;
+          };
+        }
+      } catch { };
       $self->session->{uid} = $user->id;
       $self->session->{oauthflag} = 'true';
       $self->authenticate($user->username, 'linkedin');
@@ -122,9 +145,18 @@ sub authli {
 sub redirect_auth {
   my ($self) = @_;
   my $user = $self->current_user;
+  my $emp = $DB::PKG::db->resultset('Employer');
+  my $edu = $DB::PKG::db->resultset('Education');
+  my $count = 0;
+
+  $count += $emp->search({ uid => $user->id, jobclass => undef })->count;
+  $count += $edu->search({ uid => $user->id, degreetype => undef })->count;
+
+  $self->redirect_to('/jobseeker/linkedin') if $count > 0 && !defined($self->param('update'));
   $self->redirect_to($self->session->{eventually}) if defined($self->session->{eventually}) && $self->session->{eventually} ne '/login';
   undef $self->session->{eventually};
   $self->redirect_to('/employer') if $user->usertype eq 'EM';
+
   $self->redirect_to('/jobseeker') if $user->usertype eq 'JS';
   $self->redirect_to('/'); 
 }
