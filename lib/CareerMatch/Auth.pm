@@ -128,7 +128,6 @@ sub authli {
               key => 'skillsuser_linkedinid_key', 
             });
           } catch {
-              say 'error' . $_;
           };
         }
       } catch { };
