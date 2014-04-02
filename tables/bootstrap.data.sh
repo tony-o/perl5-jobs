@@ -1,5 +1,6 @@
 #!/bin/sh
 
+pg_dump -s -d jobs > initialize.db.pgsql
 pg_dump -a -d jobs -t "roles" > bootstrap.data.pgsql
 pg_dump -a -d jobs -t "states" >> bootstrap.data.pgsql
 pg_dump -a -d jobs -t "personalityquestions" >> bootstrap.data.pgsql

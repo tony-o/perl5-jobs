@@ -217,7 +217,7 @@ sub employers {
     order_by => { -asc => [qw<jid>] },    
   })->all;
   my $ems  = $emrs->search({uid => $user->uid},{
-    order_by => { -asc => [qw<startdt>], },
+    order_by => { -desc => [qw<startdt>], },
   });
   my @employers;
   my @states;
