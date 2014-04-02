@@ -97,9 +97,11 @@ COPY states (id, name) FROM stdin;
 45	Vermont
 46	Virginia
 47	Washington
-48	West Virginia
-49	Wisconsin
-50	Wyoming
+-1	Not specified
+51	Wyoming
+50	Wisconsin
+49	West Virginia
+48	Washington DC
 \.
 
 
@@ -107,7 +109,7 @@ COPY states (id, name) FROM stdin;
 -- Name: states_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tony
 --
 
-SELECT pg_catalog.setval('states_id_seq', 50, true);
+SELECT pg_catalog.setval('states_id_seq', 51, true);
 
 
 --
@@ -331,13 +333,14 @@ SET search_path = public, pg_catalog;
 -- Data for Name: degreetypes; Type: TABLE DATA; Schema: public; Owner: tony
 --
 
-COPY degreetypes (did, name) FROM stdin;
-12	Professional Certification
-13	Associates Degree
-14	Bachelor's Degree
-15	Master's Degree
-16	Doctorate's Degree
-17	Juris Doctor
+COPY degreetypes (did, name, weighting) FROM stdin;
+12	Professional Certification	12
+13	Associates Degree	13
+14	Bachelor's Degree	14
+15	Master's Degree	15
+16	Doctorate's Degree	16
+17	Juris Doctor	17
+-1	Not specified	-1
 \.
 
 
