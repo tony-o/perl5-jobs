@@ -51,7 +51,7 @@
                   %= $e->degreetype->name
                 </td>
                 <td>
-                  %= $e->city . ', ' . $e->state->name
+                  %= defined $e->state ? $e->city . ', ' . $e->state->name : '-'
                 </td>
                 <td>
                   %= human_date($e->degdt)
