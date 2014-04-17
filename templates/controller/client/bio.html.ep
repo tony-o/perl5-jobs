@@ -3,13 +3,11 @@
 % push $stash->{scripts}, '/js/bio.js';
 % layout 'basic', stash => $stash;
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        %= include 'partials/clientmenu', stash => $stash;
-      </div>
-      <div class="col-md-9">
-        <h2>Your Bio</h2>
+%= include 'partials/clientmenu', stash => $stash;
+
+
+    <div class="container">
+        <h2>Bio for: <%= $stash->{answers}->{'First Name'} . ' ' . $stash->{answers}->{'Last Name'} %></h2>
         <h3>Check out how employers view your profile <a href="/jobseeker/biopreview">here</a></h3>
 
         % for my $m (@{$stash->{messages}}) {
@@ -23,6 +21,7 @@
 
         % }
 
+ 
         <form method="POST" action="/jobseeker/bio" id="bio"> 
           % for my $q (@{$stash->{questions}}) {
             <div class="form-group">
@@ -34,6 +33,7 @@
               % }
             </div>
           % }
+ 
           <h4>Skills</h4>
           <div class="form-group">
             <input type="text" id="peterpiper" class="form-control" placeholder="Add a skill" />
@@ -52,6 +52,3 @@
           <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
         </form>
       </div>
-    </div>
-  </div>
-

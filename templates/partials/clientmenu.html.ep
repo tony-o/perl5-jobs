@@ -1,26 +1,40 @@
-<div class="bs-sidebar hidden-print affix-top" role="complementary">
-  <ul class="nav bs-sidenav">
-    <li>
-      <a href="/jobseeker/dashboard"  class="list-group-item  <% if ($stash->{path} eq 'client'           ) { %>active<% } %>">Dashboard</a>
-    </li>
-    <li>
-      <a href="/jobseeker/jobmatches" class="list-group-item  <% if ($stash->{path} eq 'client/jobmatches' || $stash->{path} eq 'client/viewjob') { %>active<% } %>">My Job Matches</a>
-    </li>
-    <li>
-      <a href="/jobseeker/profile"    class="list-group-item  <% if ($stash->{path} eq 'client/profile'   ) { %>active<% } %>">View my Profile</a>
-    </li>
-    <li>
-      <a href="/jobseeker/bio"    class="list-group-item  <% if ($stash->{path} eq 'client/bio' || $stash->{path} eq 'client/biopreview'   ) { %>active<% } %>">My Bio</a>
-    </li>
-    <li>
-      <a href="/jobseeker/traits"    class="list-group-item  <% if ($stash->{path} eq 'client/traits'   ) { %>active<% } %>">Personality Traits</a>
-    </li>
-    <li>
-      <a href="/jobseeker/employers"    class="list-group-item  <% if ($stash->{path} eq 'client/employers'   ) { %>active<% } %>">Add/View Employers</a>
-    </li>
-    <li>
-      <a href="/jobseeker/education"    class="list-group-item  <% if ($stash->{path} eq 'client/education'   ) { %>active<% } %>">Add/View Education</a>
-    </li>
-  </ul>
-</div><!--/span-->
- 
+<!-- sub navigation -->
+<nav class="navbar navbar-default secondary-nav" role="navigation">
+        <div class="container">
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Edit Profile <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/jobseeker/biopreview">View My Profile</a>
+                            </li>
+                            <li><a href="/jobseeker/bio">My Bio</a>
+                            </li>
+                            <li><a href="/jobseeker/traits">Personality Traits</a>
+                            </li>
+                            <li><a href="/jobseeker/employers">Add/View Employers</a>
+                            </li>
+                            <li><a href="/jobseeker/education">Add/View Education</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li><a href="SavedJobAnalysis.html">Saved Job Analysis</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li><a href="/jobseeker/">Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+    <!-- end secondary navigation -->

@@ -24,11 +24,19 @@ sub skills {
 sub dashboard {
   my $self = shift;
   my $user = $self->current_user;
+  my @matches = $DB::PKG::db->resultset('Jobmatch')->search({ version => 'SCORE', uid => $user->uid }, { order_by => { -desc => ['fval'] } })->page->all;
+  my $jid  = { };
+  for my $m (@matches) {
+    my @matchcount = $DB::PKG::db->resultset('Jobmatch')->search({ version => 'SCORE', jid => $m->jid->jid, fval => { '>' => $m->fval } }, { order_by => { -desc => ['fval'] } })->all;
+    $jid->{$m->jid->jid} = scalar @matchcount; 
+  }
   $self->stash(
     container => {
       uid  => $user->uid,
       employers => [$user->uid, $user->domain, $user->username, $user->pass],
       path => 'client',
+      jobs => [@matches],
+      ranks => $jid,
     }
   );
 };
@@ -36,8 +44,12 @@ sub dashboard {
 sub jobmatches {
   my $self = shift;
   my $user = $self->current_user;
-  my @matches = $DB::PKG::db->resultset('Jobmatch')->search({ uid => $user->uid }, { order_by => { -desc => ['fval'] } })->all;
-
+  my @matches = $DB::PKG::db->resultset('Jobmatch')->search({ version => 'SCORE',  uid => $user->uid }, { order_by => { -desc => ['fval'] } })->page->all;
+  my $jid  = { };
+  for my $m (@matches) {
+    my @matchcount = $DB::PKG::db->resultset('Jobmatch')->search({ version => 'SCORE', jid => $m->jid->jid, fval => { -gt => $m->fval } }, { order_by => { -desc => ['fval'] } })->all;
+    $jid->{$m->jid->jid} = scalar @matchcount; 
+  }
   $self->stash(
     container => {
       uid  => $user->uid,
@@ -418,7 +430,7 @@ sub bio {
     questions => [@questions],
     messages  => [@messages],
     answers   => \%answers, 
-    uid       => $user->uid,
+    uid       => $user,
     path     => 'client/bio',
     skills   => [@skillls],
   });

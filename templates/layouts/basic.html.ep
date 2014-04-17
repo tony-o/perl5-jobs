@@ -12,7 +12,7 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/hirenetics.css" rel="stylesheet">
-    <link href="/css/theme.css" rel="stylesheet">
+    <link href="/css/hireneticsChanges.css" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -65,20 +65,21 @@
 %= content
 
 
+    <!-- footer -->
     <div class="footer">
         <footer class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <p>Customer Support &nbsp; &nbsp;
-                    <a href="/content/privacy-policy">Privacy</a> &nbsp; &nbsp;
+        	<div class="row">
+	        	<div class="col-lg-12">
+		        	<p>Customer Support &nbsp; &nbsp;
+                    <a href="/content/privacy_policy">Privacy</a> &nbsp; &nbsp;
                     <a href="/content/terms">Terms</a>&nbsp; &nbsp;
                     <a href="/content/team">Team</a>&nbsp; &nbsp;
                     Resources &nbsp; &nbsp;
                     Jobs@Hirenetics</p>
-            </div>
-          </div>
+	        	</div>
+        	</div>
             
-      <div class="row">
+			<div class="row">
               <div class="col-lg-12">
                     <p>Copyright &copy; Hirenetics 2014</p>
                 </div>
@@ -87,12 +88,14 @@
         </footer>
 
     </div>
+    <!-- /.container -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/modern-business.js"></script>
     %for my $script (@{$stash->{scripts}}) {
       <script src="<%= $script %>"></script>
     %}

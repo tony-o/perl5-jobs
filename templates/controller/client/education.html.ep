@@ -17,13 +17,9 @@
     };
   </script> 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        %= include 'partials/clientmenu', stash => $stash;
-      </div>
-      <div class="col-md-9">
-          <h3>Education History</h3>
+%= include 'partials/clientmenu', stash => $stash;
+    <div class="container">
+        <h3>Education History</h3>
           <table class="table table-striped">
             <tr>
               <th style="width:25%;">
@@ -42,6 +38,7 @@
                 Actions
               </th>
             </tr>
+
             %foreach my $e (@{$stash->{education}}) {
               <tr>
                 <td>
@@ -63,49 +60,90 @@
               </tr>
             %}
         </table>
+        </table>
         <h3>Add Education</h3>
         <div class="hidden alert alert-info" id="msg">
           You are currently editing an education, to clear this form and add a new entry click <a href="#" onclick="resetform();">here</a> 
         </div>
         <form method="POST" action="/jobseeker/education">
           <input type="hidden" name="eid" />
-          <div>
-            <div class="form-group">
-              <label for="employer">Institution Name</label>
-              <input type="text" name="institution" placeholder="Institution" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label for="jobtitle">Degree/Certification Title</label>
-              <input type="text" name="jobtitle" placeholder="Degree/Certification Title" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label for="city">City</label>
-              <input type="text" name="city" placeholder="City" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label for="state">State</label>
-              <select name="state" class="form-control">
-                %foreach my $t (@{$stash->{states}}) {
-                  <option value="<%=$t->{id}%>"><%=$t->{name}%></option>
-                %}
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="city">Degree Type
-              </label>
-              <select class="form-control" name="jobclass" id="jobclass">
-                %foreach my $s (@{$stash->{degreetypes}}) {
-                  <option value="<%=$s->{did}%>"><%=$s->{name}%></option>
-                %}
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="startdt">Date Obtained</label>
-              <input type="date" name="dtobtained" placeholder="Date Obtained" class="form-control" />
-            </div>
-            <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
-            <button type="button" id="clearform" onclick="resetform();" class="hidden btn btn-warning btn-block btn-lg">Clear Form</button>
-          </div>
+          
+          <table style="width:100%;">
+            <tbody>
+              <tr>
+                <td style="width:150px;"><b>Institution Name:</b></td>
+                <td>
+                  <div class="form-group">
+              
+                  <input type="text" name="institution" placeholder="Institution" class="form-control" />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+              <td><b>Degree Type:</b></td>
+              <td>
+                <div class="form-group">
+                  <select class="form-control" name="jobclass" id="jobclass">
+                    %foreach my $s (@{$stash->{degreetypes}}) {
+                      <option value="<%=$s->{did}%>"><%=$s->{name}%></option>
+                    %}
+                  </select>
+                </div>
+              </td>
+            </tr>
+              <tr>
+                <td><b>Degree/Certification Title:</b></td>
+                <td>
+                  <div class="form-group">
+                  <input type="text" name="jobtitle" placeholder="Degree/Certification Title" class="form-control" />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td><b>City:</b></td>
+                <td>
+                  <div class="form-group">
+                  <input type="text" name="city" placeholder="City" class="form-control" />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td><b>State:</b></td>
+                <td>
+                  <div class="form-group">
+                  <select name="state" class="form-control">
+
+                    %foreach my $t (@{$stash->{states}}) {
+                      <option value="<%=$t->{id}%>"><%=$t->{name}%></option>
+                    %}
+
+                  </select>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><b>Date Obtained:</b></td>
+              <td>
+                <div class="form-group">
+                <input type="date" name="dtobtained" placeholder="Date Obtained" class="form-control" />
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="2">
+                <button type="submit" class="btn btn-primary btn-lg">Submit Education</button>
+                <button type="button" id="clearform" onclick="resetform();" class="hidden btn btn-warning btn-lg">Clear Form</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
         </form>
       </div>
     </div>
@@ -130,3 +168,7 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+    </div>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    

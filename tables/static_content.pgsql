@@ -7,42 +7,41 @@ truncate table static_content;
 
 insert into static_content (spath, scontent) values ('/', '
 
-    <div id="myCarousel" class="carousel slide">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        </ol>
-
-        <div class="carousel-inner">
-            <div class="item active">
-                    <div class="fill"><img src="/imgs/NYBeachiPhone.jpg" style="width:100%;"></div>
-                </div>
-            </div>
-            <!--
-            <div class="item carousel-custom-background-color">
-                <div class="fill"></div>
-                <div class="carousel-caption">
-                    <h1>Great spot to put some selling points as to "why Hirenetics."
-                    </h1>
-                </div>
-            </div>
-            -->
-        </div>
+    <div class="jumbotron">
+        <br>
+        <img src="/imgs/NYBeachiPhone.jpg" style="width:100%;">
+        
     </div>
-
+    
+    
         
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-12">
+                    <h2>Key Features</h2>
                     <br>&nbsp;<br>
-                    <h2>Find Your Ideal Job</h2>
+                    <p><img src="/imgs/bullet40x37.png" style="padding-right:20px; vertical-align:middle; width:50px; height:auto;" /><big>Create a Profile and you''ll never have to look for another job again.</big><br><br></p>
+                    <p><img src="/imgs/bullet40x37.png" style="padding-right:20px; vertical-align:middle; width:50px; height:auto;" /><big>Use your Dashboard to track progress and discover your ranking for each matched job.</big><br><br></p>
+                    <p><img src="/imgs/bullet40x37.png" style="padding-right:20px; vertical-align:middle; width:50px; height:auto;" /><big>Your Profile is always presented <b>anonymously</b>.</big><br><br></p>
+                    <p><img src="/imgs/bullet40x37.png" style="padding-right:20px; vertical-align:middle; width:50px; height:auto;" /><big>Identify the missing skills you need to succeed from top-rated competitor Profiles.</big><br><br></p>
+
+
+                    <h2>Create Your Profile</h2>
                     <br>&nbsp;<br>
-                    
+
                     <p><img src="/imgs/bullet40x37.png" style="padding-right:20px; vertical-align:middle; width:50px; height:auto;" /><big>Personality Test:  In under 10 minutes let potential employers discover the real you.  </big><br><br></p>
-                    <p><img src="/imgs/bullet40x37.png" style="padding-right:20px; vertical-align:middle; width:50px; height:auto;" /><big>Experience/Skill/Education:  Copy/Paste your talents or import from LinkedIn.</big><br><br></p>
-                    <p><img src="/imgs/bullet40x37.png" style="padding-right:20px; vertical-align:middle; width:50px; height:auto;" /><big>Select Job Titles: Our automated system will match you to your dream job.  </big><br><br></p>
-                    <p><img src="/imgs/bullet40x37.png" style="padding-right:20px; vertical-align:middle; width:50px; height:auto;" /><big>Dashboard: Track your progress and analyze the competition.  Identify the skills you need to succeed. </big><br><br></p>
+                    <p><img src="/imgs/bullet40x37.png" style="padding-right:20px; vertical-align:middle; width:50px; height:auto;" /><big>Experience/Skills/Education:  Import from LinkedIn or use Copy/Paste.</big><br><br></p>
+                    <p><img src="/imgs/bullet40x37.png" style="padding-right:20px; vertical-align:middle; width:50px; height:auto;" /><big>Select Job Titles: Our automated system will match you to your ideal job.  </big><br><br></p>
                     <p><img src="/imgs/bullet40x37.png" style="padding-right:20px; vertical-align:middle; width:50px; height:auto;" /><big>Share with peers and social networks.  </big></p>
+
+                    <p>
+                        <br>
+                        <form action="register.html">
+                            <button class="btn btn-default navbar-btn register-button">Sign-Up Now to Get Started</button>
+                        </form>
+                    </p>
+
 
                     <!-- need some padding -->
                     <p>&nbsp;</p>
@@ -54,11 +53,9 @@ insert into static_content (spath, scontent) values ('/', '
 
         </div>
         <!-- /.container -->
-
-    
 ');
 
-insert into static_content (spath, scontent) values ('/privacy-policy', '
+insert into static_content (spath, scontent) values ('/privacy_policy', '
     <!-- header goes here -->
     
     <div class="container">
@@ -246,6 +243,38 @@ insert into static_content (spath, scontent) values ('/privacy-policy', '
     <!-- footer here -->
 
 ');
+
+insert into static_content (spath, scontent) values ('/about', '
+    <div class="container">
+
+
+            <div class="row">
+
+                        <div class="col-lg-12">
+                                        <div style="font-family: arial;">
+                                                            <p><big>Are you tired of wasting time looking for qualified candidates for your company’s job openings? Stop wasting time with stacks of resumes and dead-end phone calls. Get a quality list of pre-ranked candidates from our new online tool. Hirenetics is the new online job matching service that connects your current job openings to profiles from top talent.</big> </p>
+
+                                                                                <p><big>Hirenetics’ unique ranking algorithms sort candidates based on their personality and qualifications. Pre-screen your matches by requesting video responses to your pre-interview questions. All you’ve got left to do is to schedule face-to-face interviews with the top candidates.</big> </p>
+
+                                                                                                    <p><big>HR professionals will love this quick, and easy tool to streamline the hiring process, effectively shortlisting top talent.</big></p>
+
+                                                                                                                        <p><big>Job seekers will love our automated system. Matching you to your selected job titles as they are posted. Managing the dashboard is simple, and for the first time ever analyze your competition to see how you rank and discover missing skills.</big></p>
+
+                                                                                                                                            <p><big>Try out Hirenetics today. What are you waiting for?  Your ideal job is one click away from your smartphone, tablet, or computer!</big></p>
+
+                                                                                                                                                                <p><br></p>
+                                                                                                                                                                                    <p><br></p>
+                                                                                                                                                                                                        <p><br></p>
+
+
+                                                                                                                                                                                                                    </div>
+
+                                                                                                                                                                                                                            </div>
+
+                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                    <!-- /.container -->
+                                                                                                                                                                                                                                    ');
+
 
 insert into static_content (spath, scontent) values ('/team', '
     <!-- header goes here -->

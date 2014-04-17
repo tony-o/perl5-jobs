@@ -1,13 +1,12 @@
 % layout 'basic';
 % my $stash = $self->stash->{container};
   
+%= include 'partials/clientmenu', stash => $stash;
+
 % my $job = $stash->{job};
   <div class="container">
     <div class="row">
-      <div class="col-md-3">
-        %= include 'partials/clientmenu', stash => $stash;
-      </div>
-      <div class="col-md-9">
+      <div class="col-md-12">
         %if (defined $job) {
           <h3>
             %= $job->title
@@ -23,8 +22,6 @@
           </p>
         %} else {
           <h3>Sorry, job id <%=$self->param('id')%> wasn't found.</h3>
-
-%= dumper $stash;
         % }
       </div>
     </div>

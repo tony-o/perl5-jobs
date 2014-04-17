@@ -1,18 +1,15 @@
 % layout 'basic';
 % my $stash = $self->stash->{container};
-
+%= include 'partials/clientmenu', stash => $stash;
   <div class="container">
     <div class="row">
-      <div class="col-md-3">
-        %= include 'partials/clientmenu', stash => $stash;
-      </div>
-      <div class="col-md-9">
         % if ($stash->{answered} != scalar(@{$stash->{questions}})) {
           <h3>You need to <%= $stash->{answered} ? 'complete' : 'take' %> the test!</h3>
           <a href="/jobseeker/question?q=0&test=personality" class="btn btn-primary btn-block btn-lg"><%= $stash->{answered} ? 'Finish' : 'Take' %> the test</a>
         %} else {
           <h3>You've already taken the test, thank you!</h3>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
         %}
-      </div>
     </div>
   </div> <!-- /container -->
