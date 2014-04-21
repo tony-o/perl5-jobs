@@ -18,26 +18,26 @@
             <table class="table">
             <thead>
                 <tr>
-                    <!--<th style="width:50px;">Select</th>-->
+                    <th style="width:50px;">Select</th>
                     <th>Job Title</th>
                     <th>My Rank</th>
                     <th>Status</th>
-                    <!--<th>Hired Rank</th>-->
+                    <th>Hired Rank</th>
                     <th>Interview/Pre-Interview Requests</th>
-                    <!--<th>Offers</th>-->
+                    <th>Offers</th>
                 </tr>
             </thead>
         
           <tbody>
           %foreach my $job (@{$stash->{jobs}}) {
                 <tr>
-                    <!--<td align="center"><input name="checkboxes" id="checkboxes-0" value="jobid1" type="checkbox"></td>-->
+                    <td align="center"><input name="checkboxes" id="checkboxes-0" value="jobid1" type="checkbox"></td>
                     <td><a href="/jobseeker/viewjob/<%= $job->jid->jid %>"><%= $job->jid->title %></a></td>
                     <td align="center"><%= $stash->{ranks}->{$job->jid->jid} %></td>
                     <td>Open</td>
-                    <!--<td>&nbsp;</td>-->
+                    <td>&nbsp;</td>
                     <td><a href="empPositionInfo.html">Request for Pre-Interview/Interview</a></td>
-                    <!--<td><a href="JobSeekerOffer.html">You've Got an Offer!</a></td>-->
+                    <td><a href="JobSeekerOffer.html">You've Got an Offer!</a></td>
                 </tr>
           %}
 

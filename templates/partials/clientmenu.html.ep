@@ -21,11 +21,13 @@
                         </ul>
                     </li>
                 </ul>
+                <!--
                 <ul class="nav navbar-nav navbar-right">
                     
                     <li><a href="SavedJobAnalysis.html">Saved Job Analysis</a>
                     </li>
                 </ul>
+                -->
                 <ul class="nav navbar-nav navbar-right">
                     
                     <li><a href="/jobseeker/">Dashboard</a>
