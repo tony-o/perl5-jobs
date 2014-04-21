@@ -1,49 +1,43 @@
 % my $stash = $self->stash->{container};
 % layout 'basic', stash => $stash;
 
+%= include 'partials/employermenu', stash => $stash;
   <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        %= include 'partials/employermenu', stash => $stash;
+        <h2>Dashboard</h2>
+        <p><hr width="50%" align="left"></p>
+
+        <!-- NOTE: the following section for each chosen job category for the job seeker -->
+        <!-- NOTE: We may not be able to get the information back from the employer for Hired Rank -->
+        <h3>View/Modify Postings</h3>
+
+      <div class="form-group">
+            <table class="table">
+            <thead>
+                <tr>
+                    <!--<th style="width:50px;">Select</th>-->
+                    <th>Job Title</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            %foreach my $job (@{$stash->{jobs}}) {
+              <tr>
+                <!--
+                <td align="center"><input name="radios" id="radios-0" value="jobid2" type="radio"></td>
+                -->
+                <td><a href="/employer/jobview/<%= $job->jid %>"><%= $job->title %></a></td>
+                <td>Pre-Interviewing</td>
+              </tr>
+            %} 
+
+            </tbody>
+            </table>
       </div>
-      <div class="col-md-9">
-        <div class="jumbotron">
-          <h1>Employer Dashboard</h1>
-          <p>this is the employer dashboard for <b><%= $stash->{employers}->[1] %></b>!</p>
-        </div>
-        <div class="row">
-          <div class="col-6 col-sm-6 col-lg-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          </div><!--/span-->
-          <div class="col-6 col-sm-6 col-lg-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          </div><!--/span-->
-          <div class="col-6 col-sm-6 col-lg-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          </div><!--/span-->
-          <div class="col-6 col-sm-6 col-lg-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          </div><!--/span-->
-          <div class="col-6 col-sm-6 col-lg-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          </div><!--/span-->
-          <div class="col-6 col-sm-6 col-lg-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          </div><!--/span-->
-        </div><!--/row-->
-      </div><!--/span-->
-    </div><!--/row-->
-</div> <!-- /container -->
+
+
+
+
+  </div> <!-- /container -->
 

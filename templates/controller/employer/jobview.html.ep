@@ -1,16 +1,13 @@
-% layout 'basic';
 % my $stash = $self->stash->{container};
-  
+% layout 'basic', stash => $stash;
+
+
+%= include 'partials/employermenu', stash => $stash;
   <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        %= include 'partials/employermenu', stash => $stash;
-      </div>
-      <div class="col-md-9">
-          <h3>
-            %= $stash->{job}->title
-            <small><%= $stash->{job}->jobclass ? $stash->{job}->jobclass->name : 'Unclassified' %></small>
-          </h3>
+         %my $job = $stash->{job}; 
+
+          <h3><%= $job->title %></h3>
+
           <h4>
             Posted on: <b>
             %= human_date($stash->{job}->dateposted)
@@ -46,7 +43,8 @@
           <p>
             %== $stash->{job}->description
           </p>
- 
-      </div>
-    </div>
+
+        <p>&nbsp;</p> 
+        <p>&nbsp;</p> 
   </div> <!-- /container -->
+

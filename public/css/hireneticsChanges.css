@@ -1,0 +1,16 @@
+.jumbotron {
+  padding: 0px;
+  margin-bottom: 0px;
+  color: inherit;
+  background-color: #eeeeee;
+}
+
+.btn-success {
+  color: #ffffff;
+  background-color: #219E38;
+  border-color: #4cae4c;
+}
+
+footer {
+  margin: 0px 0;
+}

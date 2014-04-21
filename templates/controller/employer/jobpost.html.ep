@@ -4,71 +4,162 @@
 % push $stash->{scripts}, '/js/tinymce/tinymce.min.js';
 % push $stash->{scripts}, '/js/tinymce.jobpost.js';
 
+%= include 'partials/employermenu', stash => $stash;
   <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        %= include 'partials/employermenu', stash => $stash;
-      </div>
-      <div class="col-md-9">
         <form class="form-signin" role="form" method="POST" action="/employer/jobpost">
-          <h2 class="form-signin-heading">Create a Job Listing</h2>
-          <input type="text"     name="title" class="form-control" placeholder="Job Title" required autofocus>
-          <h2 for="city">Job Class</h2>
-          <select class="form-control" name="jobclass" id="jobclass">
-            %my $isingroup = 0;
-            %foreach my $s (@{$stash->{jobclasses}}) {
-              %if ($s->{hdr}) {
-                %if ($isingroup) {
-                  </optgroup>
-                %}
-                <optgroup label="<%=$s->name%>">
-                %$isingroup = 1;
-              %} else {
-              <option value="<%=$s->jid%>"><%=$s->name%></option>
-              %}
-            %}
-            </optgroup>
-          </select>
-          <h2 for="education">Min. Education Requirement</h2>
-          <select class="form-control" name="education" id="education">
-            %foreach my $s (@{$stash->{educations}}) {
-              <option value="<%=$s->did%>"><%=$s->name%></option>
-            %}
-            </optgroup>
-          </select>
-          <h2 for="education">Minimum Experience</h2>
-          <div class="input-group">
-            <input type="text" name="experience" class="form-control" placeholder="Years Experience" required />
-            <span class="input-group-addon">years</span>
-          </div>
-          <h3>Job Description</h3>
-          <div>
-            <textarea class="form-control" name="description"></textarea>
-          </div>
-          <div class="hidden">
-          <h3><a href="#" onclick="$('#jmtr').toggle('slow');">Modify Matching Traits</a> <span class="label label-default">hidden by default</span></h3>
-          <div id="jmtr" style="display:none;">
-            %foreach my $t (@{$stash->{jobmatchtr}}) {
-              <div class="row">
-                <div class="col-md-4">
-                  %= $t->name
-                </div>
-                <div class="col-md-8">
-                  <div class="input-group">
-                    <span class="input-group-addon">±</span>
-                    <input class="form-control" type="number" name="jmt<%=$t->id%>" min="-10" max="10" value="0" onblur="$(this).val() > 10 || $(this).val() < -10 ? $(this).parent().addClass('has-error') : $(this).parent().removeClass('has-error');" />
-                    <span class="input-group-addon">%</span>
-                  </div>
-                </div>
-              </div>
-            %}
-          </div>
-          </div>
-          <div>&nbsp;</div>
-          <div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Create Listing</button>
-          </div>
-        </form>
+                   <h3 class="form-signin-heading">Create a Job Listing</h3>
+
+          <form class="form-signin" role="form" method="POST" action="/employer/jobpost">
+          <table style="width:100%;">
+            <thead>
+                <tr>
+                <td style="width:150px;">&nbsp;</td>
+                  <td>&nbsp;</td>
+            </tr>
+
+          </thead>
+          <tbody>
+              <tr>
+                  <td style="height:45px;"><b>Job Title:</b></td>
+                  <td style="height:45px;">
+                    <input type="text" name="title" class="form-control" placeholder="Job Title" required autofocus>
+                  </td>
+              </tr>
+              <tr>
+                  <td style="height:45px;"><b>Job Location (zip):</b></td>
+                  <td style="height:45px;">
+                    <input type="text" name="location" class="form-control" placeholder="Job Location, Zip Code only" required autofocus>
+                  </td>
+              </tr>
+              <tr>
+                  <td style="height:50px;"><b>Job Class:</b></td>
+                  <td style="height:50px;"> 
+                    <select class="form-control" name="jobclass" id="jobclass">
+                      %my $isingroup = 0;
+                      %foreach my $s (@{$stash->{jobclasses}}) {
+                        %if ($s->{hdr}) {
+                          %if ($isingroup) {
+                            </optgroup>
+                          %}
+                          <optgroup label="<%=$s->name%>">
+                          %$isingroup = 1;
+                        %} else {
+                        <option value="<%=$s->jid%>"><%=$s->name%></option>
+                        %}
+                      %}
+                      </optgroup>
+                    </select>
+                  </td>
+                </tr>
+
+              <tr>
+                  <td style="height:50px;"><b>Salary:</b></td>
+                  <td style="height:50px;">from: <input type="text" name="SalaryFrom" required> to: <input type="text" name="SalaryTo" required></td>
+              </tr>
+
+              <tr>
+                  <td style="height:50px;"><b>Commission:</b></td>
+                  <td style="height:50px;"><input type="checkbox" name="Commission">&nbsp; Commission Amount: <input type="text" name="CommissionAmount"></td>
+              </tr>
+
+              <tr>
+                  <td style="height:50px;"><b>Skills Required:</b></td>
+                  <td style="height:50px;"><input type="text" name="skills" class="form-control" placeholder="Skills Required, list" required></td>
+              </tr>
+             <tr>
+                  <td style="height:50px;"><b>Education Required (Degree):</b></td>
+                  <td style="height:50px;">
+                    <select class="form-control" name="education" id="education">
+                      %foreach my $s (@{$stash->{educations}}) {
+                        <option value="<%=$s->did%>"><%=$s->name%></option>
+                      %}
+                      </optgroup>
+                    </select>
+                 </td>
+              </tr>
+              <tr>
+                  <td style="height:50px;"><b>Education Required (Field):</b></td>
+                  <td style="height:50px;"><input type="text" name="EducationRequiredDegree" class="form-control" placeholder="Education Required, Field" required></td>
+              </tr>
+              <tr>
+                  <td style="height:50px;"><b>Education Preferred (Degree):</b></td>
+                  <td style="height:50px;">
+                    <select class="form-control" name="education2" id="education2">
+                      %foreach my $s (@{$stash->{educations}}) {
+                        <option value="<%=$s->did%>"><%=$s->name%></option>
+                      %}
+                      </optgroup>
+                    </select>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td style="height:50px;"><b>Education Preferred (Field):</b></td>
+                    <td style="height:50px;"><input type="text" name="EducationPreferred" class="form-control" placeholder="Education Preferred, Field" required></td>
+                </tr>
+
+                <tr>
+                    <td style="height:50px;"><b>Experience Required:</b></td>
+                    <td style="height:50px;">
+                        <select class="form-control" name="ExperienceRequired" id="ExperienceRequired">
+                        <option value="201">0-2 years</option>
+                        <option value="202">3-5 years</option>
+                        <option value="203">6-10 years</option>
+                        <option value="204">11+ years</option>
+                        </optgroup>
+                      </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="height:50px;"><b>Relocation:</b></td>
+                    <td style="height:50px;">
+                        <select class="form-control" name="Relocation" id="Relocation">
+                        <option value="201">Local Only</option>
+                        <option value="202">Relocation - no expenses</option>
+                        <option value="203">Relocation - expenses covered</option>
+                        </optgroup>
+                      </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="height:50px;"><b>Hours:</b></td>
+                    <td style="height:50px;">
+                        <select class="form-control" name="Hours" id="Hours">
+                        <option value="201">Full Time</option>
+                        <option value="202">Part Time</option>
+                        <option value="203">Temporary</option>
+                        </optgroup>
+                      </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="height:50px;"><b>Telecommute:</b></td>
+                    <td style="height:50px;"><input type="checkbox" name="Telecommute">&nbsp; Check if telecommute is an option.</td>
+                </tr>
+
+                <tr>
+                    <td style="height:50px;"><b>Job Description:</b></td>
+                    <td style="height:50px;">
+                      <div>
+                        <textarea class="form-control" name="description"></textarea>
+                      </div>
+                    </td>
+                </tr>
+  
+                <tr>
+                    <td colspan="2" style="height:50px;">
+                        <br><button class="btn btn-lg btn-primary" type="submit">Create Listing</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>      
+
+</form>
+        </div>
       </div>
-    </div>
-  </div>
+    <p>&nbsp;</p>
+        <p>&nbsp;</p>
+</div>

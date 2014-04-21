@@ -1,28 +1,49 @@
 % my $stash = $self->stash->{container};
 % layout 'basic', stash => $stash;
 
+
+%= include 'partials/employermenu', stash => $stash;
   <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        %= include 'partials/employermenu', stash => $stash;
-      </div>
-      <div class="col-md-9">
-        <h3>Job listing for <%= $stash->{uid}->domain %></h3>
          %foreach my $job (@{$stash->{jobs}}) {
-          <div class="row">
-            <div class="col-md-8">
-              <a href="/employer/jobview/<%= $job->jid %>">
-              %= $job->title
-              </a>
-            </div>
-            <div class="col-md-4">
-              %use Data::Dumper; 
-              %= $job->dateposted
-            </div>
+
+          <h3><%= $job->title %></h3>
+
+          <h4>
+            Posted on: <b>
+            %= human_date($stash->{job}->dateposted)
+            </b>
+          </h4>
+         <div class="panel panel-default">
+            <div class="panel-heading">Matches for Job: <b><%= $stash->{job}->title %></b></div>
+
+            <table class="table table-striped table-bordered table-hover">
+              <tr><th>Request</th><th>Name</th><th>Member Since</th><th>Pers %</th><th>Edu %</th><th>Exp %</th><th>Match %</th></tr>
+              %for my $m (@{$stash->{matches}}) {
+                % my $l = '/employer/viewprofile/' . $m->uid->uid;
+                <tr>
+                  % my $username = $m->uid->username;
+                  % $username = $stash->{bios}->{$username}->{'First Name'} . ' ' . $stash->{bios}->{$username}->{'Last Name'} if defined $stash->{bios}->{$username} && defined $stash->{bios}->{$username}->{'First Name'};
+                  % if ( defined $stash->{bios}->{$m->uid->username}->{'Video Count'} && $stash->{bios}->{$m->uid->username}->{'Video Count'} > 0 ) {
+                    <td><a target="_video" href="/employer/viewvideo/<%= $stash->{bios}->{$m->uid->username}->{'Video ID'} %>">View Video</a></td>
+                  % } else {
+                    <td><a href="/employer/videoinvite/<%= $stash->{job}->jid %>/<%= $m->uid->uid %>">Request Video</a></td>
+                  % }
+                  <td><a href="<%=$l%>"><%= $username %></a></td>
+                  <td><a href="<%=$l%>"><%= human_date($m->uid->datecreated) %></a></td>
+                  % my @pdata = split('\|', $m->cval);
+                  <td><a href="<%=$l%>"><%= sprintf('%.1f',100*$pdata[0]) %> %</a></td>
+                  <td><a href="<%=$l%>"><%= sprintf('%.1f',100*$pdata[1]) %> %</a></td>
+                  <td><a href="<%=$l%>"><%= sprintf('%.1f',100*$pdata[2]) %> %</a></td>
+                  <td><a href="<%=$l%>"><%= sprintf('%.1f',100*$m->fval) %> %</a></td>
+                </tr>
+              %}
+            </table>
           </div>
+
+          <p>
+            %== $stash->{job}->description
+          </p>
+
          %}
-        </div>
-      </div>
-    </div>
   </div> <!-- /container -->
 

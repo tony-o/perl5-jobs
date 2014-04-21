@@ -10,11 +10,19 @@ sub dashboard {
   my $self = shift;
   my $db = $DB::PKG::db;
   my $user = $self->current_user;
+
+  my $jobset = $DB::PKG::db->resultset('Job');
+  my $jobs   = $jobset->search({domain => $user->domain});
+  my @jobs;
+  while (my $job = $jobs->next) {
+    push @jobs, $job;
+  }
   $self->stash(
     container => {
       uid       => $user->uid,
       employers => [$user->uid, $user->domain, $user->username, $user->pass],
       path      => 'employer',
+      jobs      => [@jobs],
     }
   );
 };
@@ -120,7 +128,7 @@ sub jobpost {
       });
     } @jobreqs;
 
-    $self->redirect_to('/employer/joblist');
+    $self->redirect_to('/employer');
   }
 
   my @jcs  = $DB::PKG::db->resultset('Jobclass')->search(undef, { 
