@@ -34,7 +34,7 @@
                     <td align="center"><input name="checkboxes" id="checkboxes-0" value="jobid1" type="checkbox"></td>
                     <td><a href="/jobseeker/viewjob/<%= $job->jid->jid %>"><%= $job->jid->title %></a></td>
                     <td align="center"><%= $stash->{ranks}->{$job->jid->jid} %></td>
-                    <td>Open</td>
+                    <td><select><option>Open</option><option>Pre-Interview</option><option>Interview</option><option>Declined</option></select></td>
                     <td>&nbsp;</td>
                     <td><a href="empPositionInfo.html">Request for Pre-Interview/Interview</a></td>
                     <td><a href="JobSeekerOffer.html">You've Got an Offer!</a></td>
