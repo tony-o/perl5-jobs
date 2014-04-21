@@ -46,8 +46,13 @@
           <ul class="nav navbar-nav navbar-right">
 % my $class = $stash->{path} || 'home';
             <li <% if ($class eq 'home') { %>class="active"<% } %>><a href="/">Home</a></li>
-            <li <% if ($class =~ qr{^employer}) { %>class="active"<% } %>><a href="/employer">Employers</a></li>
-            <li <% if ($class =~ qr{^client}) { %>class="active"<% } %>><a href="/jobseeker">Job Seekers</a></li>
+            <% if ( defined($stash) && defined($stash->{uid}) && $stash->{uid} > 0 ) { %>
+              <li <% if ($class =~ qr{^employer}) { %>class="active"<% } %>><a href="/employer">Employers</a></li>
+              <li <% if ($class =~ qr{^client}) { %>class="active"<% } %>><a href="/jobseeker">Job Seekers</a></li>
+            <% } else { %>
+              <li><a href="/employers.html">Employers</a></li>
+              <li><a href="/jobseekers.html">Job Seekers</a></li>
+            <% } %>
             <% if ( defined($stash) && defined($stash->{uid}) && $stash->{uid} > 0 ) { %>
               <li <% if ($class eq 'login') { %>class="active"<% } %>><a href="/login">Logout</a></li>
             <% } else { %>
@@ -68,23 +73,39 @@
     <!-- footer -->
     <div class="footer">
         <footer class="container">
-        	<div class="row">
-	        	<div class="col-lg-12">
-		        	<p>Customer Support &nbsp; &nbsp;
-                    <a href="/content/privacy_policy">Privacy</a> &nbsp; &nbsp;
-                    <a href="/content/terms">Terms</a>&nbsp; &nbsp;
-                    <a href="/content/team">Team</a>&nbsp; &nbsp;
-                    Resources &nbsp; &nbsp;
-                    Jobs@Hirenetics</p>
-	        	</div>
-        	</div>
-            
-			<div class="row">
-              <div class="col-lg-12">
-                    <p>Copyright &copy; Hirenetics 2014</p>
-                </div>
+          <div class="row">
+            <div class="col-md-12">
+              <a href=" https://www.facebook.com/hirenetics">
+                <img src="/imgs/SocialMediaImgs/fb32x32.png" />
+              </a>&nbsp; 
+              <a href="https://twitter.com/Hirenetics">
+                <img src="/imgs/SocialMediaImgs/Twitter_logo_blue.png" />
+              </a>&nbsp; 
+              <a href="http://www.linkedin.com/company/3652968?trk=tyah&trkInfo=tarId%3A1396285596480%2Ctas%3Ahirenetics%2Cidx%3A1-1-1">
+                <img src="/imgs/SocialMediaImgs/linkedin.png" />
+              </a>&nbsp; 
+              <a href="http://hirenetics.tumblr.com/">
+                <img src="/imgs/SocialMediaImgs/tumblr.png" />
+              </a>
+              <p>&nbsp;</p>
             </div>
-        </div>
+          </div> 
+          <div class="row">
+                      <div class="col-lg-12">
+                                    <p>Customer Support &nbsp; &nbsp;
+                                                        <a href="/content/privacy_policy">Privacy</a> &nbsp; &nbsp;
+                                                                            <a href="/content/terms">Terms</a>&nbsp; &nbsp;
+                                                                                                <a href="/content/team">Team</a>&nbsp; &nbsp;
+                                                                                                                    Resources &nbsp; &nbsp;
+                                                                                                                                        Jobs@Hirenetics</p>
+                                                                                                                                                    </div>
+                                                                                                                                                              </div>
+                                                                                                                                                                          
+                                                                                                                                                                                <div class="row">
+                                                                                                                                                                                              <div class="col-lg-12">
+                                                                                                                                                                                                                  <p>Copyright &copy; Hirenetics 2014</p>
+                                                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                                                              </div>
         </footer>
 
     </div>
