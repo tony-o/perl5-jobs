@@ -49,14 +49,4 @@
 
         <p><hr width="50%" align="left"></p>
 
-        <h4>Trending Skills</h4>
-        <p>List of those goes here, see notes below</p>
-
-        <p>
-            Note:<br>
-            - Job postings should be organized by the fields the job seeker selected during signup.<br>
-            - A section below the jobs list for "Trending Skills" in the fields that the job seeker has selected would
-            For example, if a number of recent Development jobs were posted requiring php and C++, those would be the
-            - I like the way the traits are laid out.  Just need to update the NAV to the menu bar at top instead of o
-        </p>
     </div>
